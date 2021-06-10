@@ -109,13 +109,15 @@ int sum(int integers[], int size)
 
  * int arr[] = {1,2,3};
    Here, (a) arr/&arr[0] and &arr represent the same address.
-         (b) arr/&arr[0] has the data type int * (i.e. pointer to an integer),
-             whereas &arr has the type int (*)[3].
+         (b) arr (in most cases) and &arr[0] have the data type int * (i.e.
+             pointer to an integer), whereas &arr has the type int (*)[3] (i.e.
+             pointer to a 3-element array of integers).
 
  * int arr[][3] = { {1,2,3}, {4,5,6}, {7,8,9} };
    Here, (a) arr/&arr[0], arr[0]/&arr[0][0] and &arr represent the same address.
-         (b) arr/&arr[0] has the data type int (*)[3], arr[0]/&arr[0][0] has the
-             data type int *, and &arr has the data type int (*)[2][3].
+         (b) arr (in most cases) and &arr[0] have the data type int (*)[3],
+             arr[0] (in most cases) and &arr[0][0] have the data type int *,
+             and &arr has the data type int (*)[2][3].
 
    Internal representation of this 2-D array:-
    +---+---+---+---+---+---+---+---+---+
@@ -164,7 +166,8 @@ int sum(int integers[], int size)
                  is a pointer to a short, therefore the second address will
                  always be 6 bytes behind the first address.]
 
- * For arrays, it means that arr == &arr[0], arr+1 == &arr[1], and so on.
+ * For arrays, in terms of addresses, it means that arr == &arr[0],
+   arr+1 == &arr[1], and so on.
    Also, *arr == arr[0], *(arr+1) == arr[1], and so on.
    Thus, in essence, we have two different notations (arrays and pointers) for
    the same thing. The C Standard also describes arrays in terms of pointers.
@@ -173,5 +176,31 @@ int sum(int integers[], int size)
  * For pointers, as in this program, p[1] == *(p+1), etc.
    [Note that the variable integers is no longer an array inside the sum
     function, and is now a pointer]
+
+ * In function prototypes and headers, int * arr is equivalent to int arr[]
+   because when an array expression appears in most contexts, the type of the
+   expression is implicitly converted from "n-element array of type t" to
+   "pointer to t", and its value is set to point to the first element in the
+   array.
+   This is why & is not used with scanf("%s", ...);
+   [The exceptions to this rule are when the array expression appears as an
+    operand of either the & or the sizeof operators, or when it is a string
+    literal being used as an initializer in a declaration.
+    For eg., as discussed before, in &arr, the data type isn't converted
+    implicitly]
+ * Thus, arrays and pointers aren't exactly the same thing, but are very closely
+   related.
+ * For eg., when the type of arr from int arr[5] isn't implicitly converted to
+   int * (i.e. when arr is just an array), then arr is simply the name of the
+   space set aside for 5 contiguous integers.
+   In this context, an array is different from a pointer.
+ * Another difference between arrays and pointers :-
+   When the compiler sees arr[3], it emits code to start at the location "arr",
+   move three past it, and fetch the item there.
+   When the compiler sees p[3], it emits code to start at the location "p",
+   fetch the pointer value there, add three to the pointer, and finally fetch
+   the item pointed to.
+   Although the net effect is the same in both the cases, the compiler gets
+   there differently.
 
  */
