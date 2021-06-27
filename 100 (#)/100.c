@@ -22,7 +22,7 @@ int main(void)
 }
 
 
-int sum(int integers[], int size)
+int sum(int * integers, int size)
 // or int sum(int integers[], int size)
 {
 
@@ -47,7 +47,7 @@ int sum(int integers[], int size)
    set to 0 (no warnings are given).
    [For eg., (a) int arr[4]; - all elements have garbage values
              (b) int arr[4] = {1,2}; - arr[2] and arr[3]'s values are 0]
- * Over-initialized arrays give a warning.
+ * Over-initialized arrays may give an error or simply a warning.
    For eg., int arr[2] = {1,2,3};
 
  * One way to get the size of an array is to divide sizeof arr by sizeof arr[0].
@@ -103,9 +103,15 @@ int sum(int integers[], int size)
 
  * An array name is also the address of the first element of the array.
    Thus, arr == &arr[0].
-   This rule applies only when talking about addresses. For eg.,
-   sizeof arr != sizeof &arr[0].
-   printf("%p %p\n", arr, &arr[0]); would print the same address twice.
+   Technically, it is said that an array name 'decays' to a pointer that points
+   to the first element of that array (implicit conversion).
+ * This rule applies in most cases, with a few exceptions.
+   One example of an exception - sizeof arr != sizeof &arr[0].
+   Thus, after an array decays to a pointer, sizeof can no longer be used to
+   know the total number of bytes used by the entire array, and sizeof in this
+   case would only report the number of bytes used by the pointer, which is 8 on
+   this system.
+ * printf("%p %p\n", arr, &arr[0]); would print the same address twice.
 
  * int arr[] = {1,2,3};
    Here, (a) arr/&arr[0] and &arr represent the same address.
@@ -139,9 +145,15 @@ int sum(int integers[], int size)
    |
    (&arr)[0]
 
-   Of course, arr[3], arr[4], etc. are out of bounds, but their addresses can
-   be used like &arr[3], &arr[4], etc. by the logic of pointers discussed below.
+   Of course, arr[3][0] is out of bounds, but its address can be used like
+   &arr[3][0] by the logic of pointers discussed below.
    As always, dealing with the values at invalid indexes is undefined behaviour.
+   Thus, the values at arr[3][0], arr[3][1], arr[3][2], arr[4][0], etc.
+   shouldn't be accessed.
+   [It is only guaranteed that the address one past the end element of an array
+    is valid.
+    C doesn't guarantee the validity of the addresses of arr[3][1], arr[3][2],
+    arr[4][0], etc.]
 
    [Similarly for higher dimensions]
 
@@ -158,16 +170,16 @@ int sum(int integers[], int size)
                  On this system, an int variable takes up 4 bytes. So, since p
                  is a pointer to an integer, therefore the second address will
                  always be 4 bytes ahead of the first address.
-                 So, p+1 essentially means the address of the 4th byte ahead of
-                 p.
+                 So, p+1 essentially means the address of the 4th byte ahead
+                 of p.
              (b) short a = -3; short * p = &a; printf("%p %p\n", p, p+a);
                  0x7ffcf51946ee 0x7ffcf51946e8
                  On this system, a short variable takes up 2 bytes. So, since p
                  is a pointer to a short, therefore the second address will
                  always be 6 bytes behind the first address.]
 
- * For arrays, in terms of addresses, it means that arr == &arr[0],
-   arr+1 == &arr[1], and so on.
+ * For arrays, in most cases, it means that arr == &arr[0], arr+1 == &arr[1],
+   and so on.
    Also, *arr == arr[0], *(arr+1) == arr[1], and so on.
    Thus, in essence, we have two different notations (arrays and pointers) for
    the same thing. The C Standard also describes arrays in terms of pointers.
@@ -181,8 +193,11 @@ int sum(int integers[], int size)
    because when an array expression appears in most contexts, the type of the
    expression is implicitly converted from "n-element array of type t" to
    "pointer to t", and its value is set to point to the first element in the
-   array.
-   This is why & is not used with scanf("%s", ...);
+   array. Also, this converted expression is not an lvalue, which means that it
+   can't be assigned values. So, int * p; p = &a; works, but int arr[5];
+   arr = &a; doesn't.
+   This implicit conversion is the reason why & is not used with
+   scanf("%s", str);
    [The exceptions to this rule are when the array expression appears as an
     operand of either the & or the sizeof operators, or when it is a string
     literal being used as an initializer in a declaration.
@@ -195,12 +210,39 @@ int sum(int integers[], int size)
    space set aside for 5 contiguous integers.
    In this context, an array is different from a pointer.
  * Another difference between arrays and pointers :-
-   When the compiler sees arr[3], it emits code to start at the location "arr",
-   move three past it, and fetch the item there.
-   When the compiler sees p[3], it emits code to start at the location "p",
-   fetch the pointer value there, add three to the pointer, and finally fetch
-   the item pointed to.
+   When the compiler sees arr[3] (no implicit conversion of array), it emits
+   code to start at the location "arr", move three past it, and fetch the item
+   there.
+   When the compiler sees p[3] (i.e. a pointer), it emits code to start at the
+   location "p", fetch the pointer value there, add three to the pointer, and
+   finally fetch the item pointed to.
    Although the net effect is the same in both the cases, the compiler gets
    there differently.
+
+ * In statements like arr[3] = 25;, arr[x] < y;, etc., there is no implicit
+   conversion as the data type of arr[3] is int (if arr is an array of
+   integers). Thus, arr is an array, but arr[3] is not.
+
+ * In most cases, a variable is an abstraction (a convenient name) for the
+   entire memory position allocated, i.e. it consists of the address of the
+   first byte alongwith the information about the number of the next contiguous
+   bytes to be considered a part of it.
+   [But sometimes, a variable is stored in a register instead of in memory. Then
+    it doesn't have an address, and pointers can't be created to it.]
+ * A pointer (which is a variable / data object) stores just the address of the
+   first byte, and doesn't bother with the number of next contiguous bytes to
+   consider a part of the object it's pointing to, as the data type of the
+   pointer (i.e. pointer to <data type>) automatically provides that
+   information.
+ * So, in int a; int * p = &a;, p is a convenient name for an entire memory
+   location (i.e. the first byte of p and the information that the next 7 (on
+   this system) contiguous bytes are also a part of p) and the value that is
+   stored in those 8 bytes of storage is just the address of the first byte
+   of a.
+
+ * A variable is not a pointer automatically dereferenced.
+   A variable just holds the value it is supposed to hold.
+   If it is a pointer, it will hold a memory address, if it is an integer, it
+   will hold an integer value, etc.
 
  */
