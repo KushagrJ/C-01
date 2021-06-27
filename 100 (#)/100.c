@@ -88,11 +88,8 @@ int sum(int * integers, int size)
  * Initializations for multidimensional arrays can be done like
    int arr[2][3] = { {1,2,3}, {4,5,6} }; or
    int arr[2][3] = {1,2,3,4,5,6}; (not preferred) or
-   int arr[2][3] =
-   {
-       {1,2,3},
-       {4,5,6}
-   };
+   int arr[2][3] = { {1,2,3},
+                     {4,5,6} };
  * In initializations, int arr[] and int arr[][3] work, but int arr[][] doesn't,
    as the initialization of a multidimensional array must have bounds for all
    dimensions except the first. Providing a bound for the first dimension is
@@ -118,44 +115,6 @@ int sum(int * integers, int size)
          (b) arr (in most cases) and &arr[0] have the data type int * (i.e.
              pointer to an integer), whereas &arr has the type int (*)[3] (i.e.
              pointer to a 3-element array of integers).
-
- * int arr[][3] = { {1,2,3}, {4,5,6}, {7,8,9} };
-   Here, (a) arr/&arr[0], arr[0]/&arr[0][0] and &arr represent the same address.
-         (b) arr (in most cases) and &arr[0] have the data type int (*)[3],
-             arr[0] (in most cases) and &arr[0][0] have the data type int *,
-             and &arr has the data type int (*)[2][3].
-
-   Internal representation of this 2-D array:-
-   +---+---+---+---+---+---+---+---+---+
-   | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
-   +---+---+---+---+---+---+---+---+---+
-   |   |       |           |           |
-   |   |       |           |           |
-   |   |       &arr[1]     &arr[2]     &arr[3]
-   |   |       |           |           |
-   |   |       &arr[1][0]  &arr[2][0]  &arr[3][0]
-   |   |                               |
-   |   &arr[0][1]                      (&arr)[1]
-   |
-   &arr
-   |
-   &arr[0]
-   |
-   &arr[0][0]
-   |
-   (&arr)[0]
-
-   Of course, arr[3][0] is out of bounds, but its address can be used like
-   &arr[3][0] by the logic of pointers discussed below.
-   As always, dealing with the values at invalid indexes is undefined behaviour.
-   Thus, the values at arr[3][0], arr[3][1], arr[3][2], arr[4][0], etc.
-   shouldn't be accessed.
-   [It is only guaranteed that the address one past the end element of an array
-    is valid.
-    C doesn't guarantee the validity of the addresses of arr[3][1], arr[3][2],
-    arr[4][0], etc.]
-
-   [Similarly for higher dimensions]
 
  * When an integer constant or an int variable is added to / subtracted from a
    pointer, then the resultant address is given according to the data type.

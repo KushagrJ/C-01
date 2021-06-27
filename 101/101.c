@@ -52,7 +52,8 @@ int sum(int * start, int * end)
     remember, as opposed to the ending pointer pointing to the last element of
     the array.
     This approach works because it is guaranteed that the address one past the
-    end element of an array is valid.]
+    end element of an array is valid. As always, the value at this address
+    should not be accessed.]
 
  * arr[i] and *(arr+i) are equivalent in meaning. Both work if arr is the name
    of an array, and both work if arr is a pointer variable.
@@ -143,12 +144,13 @@ int sum(int * start, int * end)
    pointers to constants.
    [For eg., int foo[2] = {1,2}; const int bar[2] = {3,4};
              const int * p = foo; p = bar; p = &foo[1]; - Valid]
-   Only the addresses of non-constant data can be assigned to regular pointers.
+   Only the addresses of non-constant data should be assigned to regular
+   pointers.
    [For eg., int foo[2] = {1,2}; const int bar[2] = {3,4};
              int * p = foo; - Valid
-             p = bar; - Warning/Error (any attempt to modify const data using a
-                                       non-const identifier results in undefined
-                                       behaviour)
+             p = bar; - Warning (any attempt to modify const data using a
+                                 non-const identifier results in undefined
+                                 behaviour)
              p = &foo[1]; - Valid]
  * Constant pointers can't be made to point elsewhere, but can be used to change
    values.
