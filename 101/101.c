@@ -131,7 +131,7 @@ int sum(int * start, int * end)
    [For eg., const int arr[] = {1,2,3,4,5}; arr[2] = 6; - Error]
  * const int * ptr; declares ptr to be a pointer to a const int (in other words,
    ptr is a pointer-to-constant).
-   int * const prt; declares ptr to be a constant pointer to an int (in other
+   int * const ptr; declares ptr to be a constant pointer to an int (in other
    words, ptr is a constant pointer).
    [const int * is the same as int const *, and const int * const is the same
     as int const * const]

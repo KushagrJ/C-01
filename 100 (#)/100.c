@@ -3,10 +3,10 @@
 #include <stdio.h>
 
 
-int sum(int * integers, int size);
-// or int sum(int *, int);
-// or int sum(int integers[], int n); - Any non-negative integer can be written
-// or int sum(int [], int);           - inside []. It will get ignored anyway.
+int sum(int *, int);
+// or int sum(int [], int);              - Any non-negative integer can be
+// or int sum(int * integers, int size);   written inside []. It will get
+// or int sum(int integers[], int size);   ignored anyway.
 
 
 int main(void)
@@ -74,6 +74,10 @@ int sum(int * integers, int size)
    or VLAs for short.
  * C11 made VLAs optional.
  * VLAs can't be initialized, and can only be declared.
+ * VLAs need to have automatic storage class (discussed later).
+ * The term variable in variable-length arrays does not mean that the size of
+   the array can be modified after it has been created. Once created, a VLA
+   keeps the same size.
 
  * float arr[5][12]; creates an array of 5 arrays of 12 floats each.
    This can be viewed as a two dimensional array having 5 rows and 12 columns,
@@ -162,6 +166,10 @@ int sum(int * integers, int size)
     literal being used as an initializer in a declaration.
     For eg., as discussed before, in &arr, the data type isn't converted
     implicitly]
+ * The [] notation can be used to declare a pointer only in function prototypes
+   and headers.
+   In other contexts regarding declarations and initializations, the [] notation
+   is used for arrays and the * notation is used for pointers.
  * Thus, arrays and pointers aren't exactly the same thing, but are very closely
    related.
  * For eg., when the type of arr from int arr[5] isn't implicitly converted to

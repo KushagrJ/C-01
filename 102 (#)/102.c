@@ -3,10 +3,40 @@
 #include <stdio.h>
 
 
+int sum(const int (*)[3], int);
+// or int sum(const int [][3], int);           - Any non-negative integer can be
+// or int sum(const int (* arr)[3], int rows);   written inside the first []. It
+// or int sum(const int arr[][3], int rows);     will get ignored anyway.
+
+
 int main(void)
 {
 
+    int arr[][3] = { {1,2,3},
+                     {4,5,6},
+                     {7,8,9},
+                     {1,2,3} };
+
+    int rows = (sizeof arr) / (sizeof arr[0]);
+
+    printf("The sum of all elements = %d\n", sum(arr, rows));
+
     return 0;
+
+}
+
+
+int sum(const int (* arr)[3], int rows)
+// or int sum(const int arr[][3], int rows)
+{
+
+    int sum = 0;
+
+    for (int i = 0; i < rows; i++)
+        for (int j = 0; j < 3; j++)
+            sum += arr[i][j];
+
+    return sum;
 
 }
 
@@ -63,10 +93,20 @@ int main(void)
 
    The pointer notation equivalent of arr[2][1] is *(*(arr+2)+1).
    As always, both the notations work even if arr is a pointer.
-
+   Similarly for higher dimensions.
 
    int (* p)[3]; declares p to be a pointer to an array of 3 ints.
-   p can now point to a 2-D array having 3 columns (not rows), for eg. by using
-   the statement p = arr;.
+   p can now point to a 2-D array having 3 columns and any number of rows,
+   for eg. by using the statement p = arr;.
+   [This is similar to int * p declaring p to be a pointer to an integer that
+    can point to a 1-D array having any number of elements]
+
+   In function prototypes and headers (where [] can be used to declare
+   pointers), to declare a pointer corresponding to an N-dimensional array,
+   bounds for all dimensions except the first must be provided.
+   If provided, the non-negative integer inside the first pair of brackets will
+   get ignored.
+   For eg., int (* p)[10][20][30] is the same as int p[][10][20][30] in function
+   prototypes and headers. p can now point to a 4-D array.
 
  */
