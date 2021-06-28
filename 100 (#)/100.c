@@ -172,6 +172,9 @@ int sum(int * integers, int size)
    is used for arrays and the * notation is used for pointers.
  * Thus, arrays and pointers aren't exactly the same thing, but are very closely
    related.
+   It is due to this close relation that array notation can be used inside
+   array-processing functions even though the parameters are pointers, and not
+   arrays.
  * For eg., when the type of arr from int arr[5] isn't implicitly converted to
    int * (i.e. when arr is just an array), then arr is simply the name of the
    space set aside for 5 contiguous integers.

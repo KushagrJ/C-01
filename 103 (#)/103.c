@@ -63,5 +63,8 @@ int sum(int rows, int cols, const int (* arr)[cols])
  * int sum(const int (* arr)[cols], int rows, int cols) is invalid, since the
    arr declaration uses rows and cols and thus, they have to be declared before
    arr in the parameter list.
+ * In int sum(int, int, const int (*)[*]), the asterisk inside the brackets,
+   i.e. [*], is simply a placeholder for dimensions in variable-length arrays.
+   It is not related to pointers in any way.
 
  */
