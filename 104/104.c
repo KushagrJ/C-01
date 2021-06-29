@@ -50,6 +50,7 @@ int sum(const int * integers, int size)
    the address of the first element, so it can be assigned to a pointer-to-int.
    Now, *p would be 10, p[1] would be 20, and so on.
    Also, the values can be changed like *(p+1) = 5;, and so on.
+   [Similar logic for string literals]
  * Another way to use compound literals could be to pass them as arguments to
    functions with matching parameters, just like normal literals.
    For eg., int sum(const int * arr, int size);

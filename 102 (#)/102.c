@@ -90,6 +90,7 @@ int sum(const int (* arr)[3], int rows)
    Also, *(arr[0]) represents the value stored in arr[0][0], i.e. an int.
    Similarly, **arr also represents the value stored in arr[0][0], as *arr
    reduces to arr[0].
+   [**arr should be understood as *(*(arr+0)+0)]
    [Thus, for 1-D arrays, arr decays to a pointer and for 2-D arrays, arr decays
     to a 'pointer to a pointer']
 
