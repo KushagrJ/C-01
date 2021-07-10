@@ -37,6 +37,13 @@ int main(void)
 
  * The puts() function, prototyped in stdio.h, displays strings, and unlike
    printf(), it automatically appends a newline at the end.
+ * The fputs() function, also prototyped in stdio.h, displays string and like
+   printf(), it doesn't automatically append a newline at the end.
+ * printf("%s", str), puts(str) and fputs(str, stdout) use the starting address
+   of the string as their argument and keep printing till they reach the null
+   character.
+   [If str is the name of a character array, then it would decay to the starting
+    address automatically]
 
  * The principal ways to define a string are by using string constants (i.e.
    string literals), char arrays and char pointers.
@@ -95,6 +102,65 @@ int main(void)
    With the array form, unless the array itself is declared as a constant array,
    the string can be modified, as it is esentially a copy of the original string
    literal.
+
+
+ * To read a string into a program using an input function, space to store the
+   string must be first set aside.
+   For eg., char * name; scanf("%s", name); will probably not give any errors,
+   but when a string is read, it might get written over something important,
+   causing the program to crash. This is because name is an uninitialised
+   pointer, pointing to a random memory location.
+
+ * The gets() function reads an entire line upto the newline character (without
+   skipping leading whitespaces) and discards the newline character after
+   consuming it.
+   scanf("%s", str), on the other hand, skips leading whitespaces, stops reading
+   at the first whitespace and doesn't consume the trailing newline character
+   (i.e. leaves the newline character in the input buffer).
+   Both gets() and scanf("%s", str) add a null character at the end.
+ * Using gets() is unsafe because it doesn't provide a way to check whether the
+   input line actually fits into the space allotted for it, as opposed to
+   scanf(), which provides a positiveInt modifier to limit the input.
+
+ * Similar to the output functions printf(), puts() and fputs(), the input
+   functions scanf(), gets() and fgets() also use the starting addresses as
+   arguments.
+
+ * One way to take an entire line as input using scanf(), other than taking
+   individual characters as input using a loop, is by using
+   scanf(" %positiveInt[^\n]", str);
+   This skips leading whitespaces (due to the space) and leaves the trailing
+   newline character in the input buffer.
+   To consume and discard the trailing newline character, one can use
+   scanf(" %9[^\n]%*c", str);
+ * The reason why this is not preferred is because fgets() provides the same
+   functionality and looks a lot cleaner.
+
+ * The fgets() function is preferred over scanf() and gets() for string input.
+ * fgets(str, positiveInt, stdin) :-
+   (a) str is the starting address of the space set aside for the input (which
+       is generally the name of a char array decayed to its starting address)
+   (b) The first positiveInt-1 characters will be read from the input (leaving
+       space for the null character which it adds automatically), or it will
+       stop reading at the newline character if it comes before the limit is
+       reached. It should be noted that the positiveInt in fgets() is one
+       greater than the number of characters to be read, whereas the positiveInt
+       modifier in scanf() is equal to the number of characters to be read.
+   (c) The newline character, if read, is stored as part of the string, unlike
+       gets() (which consumes and discards the newline character) and scanf()
+       (which leaves the newline character in the input buffer).
+   (d) Leading whitespaces aren't skipped, unlike scanf().
+   (e) stdin indicates the file to be read, which is the standard input in this
+       case.
+ * fgets() returns a pointer-to-char.
+   If all goes well, it returns the same address that was passed to it as the
+   first argument.
+   If fgets() encounters end of file or an error, then it returns a special
+   pointer called the null pointer, which is guaranteed to not point to valid
+   data so it can be used to indicate a special case. In code, a null pointer is
+   represented by the digit 0, or more commonly by NULL.
+
+ * There is an optional function for string input, i.e. the gets_s() function.
 
 
  * In this program, in some ways, subjects and days are much alike. Each
