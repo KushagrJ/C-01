@@ -93,6 +93,7 @@ int sum(const int (* arr)[3], int rows)
    [**arr should be understood as *(*(arr+0)+0)]
    [Thus, for 1-D arrays, arr decays to a pointer and for 2-D arrays, arr decays
     to a 'pointer to a pointer']
+   [arr also decays to a 'pointer to a pointer' for a 1-D array of pointers]
 
    The pointer notation equivalent of arr[2][1] is *(*(arr+2)+1).
    As always, both the notations work even if arr is a pointer.
