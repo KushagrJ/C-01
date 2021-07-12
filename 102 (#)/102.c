@@ -92,8 +92,13 @@ int sum(const int (* arr)[3], int rows)
    reduces to arr[0].
    [**arr should be understood as *(*(arr+0)+0)]
    [Thus, for 1-D arrays, arr decays to a pointer and for 2-D arrays, arr decays
-    to a 'pointer to a pointer']
-   [arr also decays to a 'pointer to a pointer' for a 1-D array of pointers]
+    to a 'pointer to an array']
+   [For 2-D arrays, arr doesn't decay to a 'pointer to a pointer' because the
+    rule by which an array name decays to a pointer doesn't apply more than once
+    to the same array. Once the rule has been applied, the result is a pointer
+    to which the rule no longer applies.
+    Similarly for higher dimensions.]
+   [arr decays to a 'pointer to a pointer' for a 1-D array of pointers]
 
    The pointer notation equivalent of arr[2][1] is *(*(arr+2)+1).
    As always, both the notations work even if arr is a pointer.
@@ -112,5 +117,15 @@ int sum(const int (* arr)[3], int rows)
    get ignored.
    For eg., int (* p)[10][20][30] is the same as int p[][10][20][30] in function
    prototypes and headers. p can now point to a 4-D array.
+
+   For a 1-D array, a pointer to the entire array can also be created, instead
+   of the normal pointer to <type>, i.e. instead of int arr[10]; int * p = arr;,
+   one can also use int arr[10]; int (* p)[10] = &arr; [notice the difference
+   between arr and &arr].
+   But, this method is generally not useful, as incrementing the pointer would
+   skip over the entire array, instead of pointing to the next element.
+   This also creates confusion regarding a pointer to a 2-D array, which is
+   also generally declared as int (* p)[10];, etc.
+   [Similarly for higher dimensions]
 
  */

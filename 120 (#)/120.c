@@ -5,9 +5,10 @@
 #include <string.h>
 
 
-// <type> ** / <type> *[] is for a 1-D array of pointers / pointers-to-pointers.
+// <type> *[] (which is equivalent to <type> ** in prototypes & headers) is for
+// a 1-D array of pointers / pointers-to-pointers.
 void sort_pointers_to_strings(char **, int);
-// or void sort_strings(char *[], int);
+// or void sort_pointers_to_strings(char *[], int);
 
 char * modified_fgets(char *, int);
 
@@ -42,6 +43,7 @@ int main(void)
 
 
 void sort_pointers_to_strings(char ** strings, int n)
+// or void sort_pointers_to_strings(char * strings[], int n);
 {
 
     // Similar to bubble sort.
@@ -89,14 +91,22 @@ char * modified_fgets(char * s, int n)
 
 /* Trivia
 
+ * A pointer such as char ** p can't be used for a 2-D array of chars (as
+   discussed before) and can only be used as a 'pointer to a pointer to char' or
+   for a '1-D array of pointers to char'.
+ * A pointer to a pointer (such as int ** p) and a pointer to an array (such as
+   int (* p)[10]) are very different from each other, even though they have many
+   similarities.
+
+
  * The strcat() function, prototyped in string.h, takes the addresses of two
    strings as arguments. A copy of the second string is attached to the end of
    the first string, and this combined version becomes the new first string.
    strcat() returns the address of the first string.
    [For eg., char * str3 = strcat(str1, str2); - str3 and str1 point to the same
     string]
- * The first string needs to be modifiable (a non-const char array), whereas
-   the second string can be a string literal or a char array.
+ * The first string needs to be modifiable (a non-const char array or a malloced
+   string), whereas the second string can be a string literal or a char array.
  * The first string's array needs to be large enough to accomodate the
    concatenation.
  * Basically, the second string (including its null character) is attached at
@@ -148,8 +158,8 @@ char * modified_fgets(char * s, int n)
    strcpy() returns the address of the first string.
    [For eg., char * str3 = strcpy(str1, str2); - str3 and str1 point to the same
     string]
- * The first string needs to be modifiable (a non-const char array), whereas
-   the second string can be a string literal or a char array.
+ * The first string needs to be modifiable (a non-const char array or a malloced
+   string), whereas the second string can be a string literal or a char array.
  * The first string's array needs to be large enough to accomodate the copying.
  * Also, the first string need not point to the beginning of an array.
    [For eg., char str[20] = "Kushagr Jaiswal";
@@ -167,10 +177,12 @@ char * modified_fgets(char * s, int n)
    string's array is not large enough for the copying.
    [For eg., char * str3 = strncpy(str1, str2, positiveInt); - str3 and str1
     point to the same string]
- * positiveInt specifies the maximum number of characters to copy to str1 from
-   str2 (including str2's null character).
-   [In strncat(), the maximum number of characters excludes str2's null
-    character, and in strncpy(), it includes str2's null character]
+ * positiveInt specifies the exact number of characters to copy to str1 from
+   str2 (including str2's null character), by truncating s2 or padding it with
+   extra null characters as necessary.
+   [In strncat(), positiveInt is the maximum number of characters and it
+    excludes str2's null character, whereas in strncpy(), positiveInt is the
+    exact number of characters and it includes str2's null character]
 
  * The strchr() function, also prototyped in string.h, returns a pointer to the
    first location in the string s that holds the character c. The terminating

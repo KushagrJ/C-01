@@ -102,10 +102,15 @@ int sum(int * start, int * end)
    For eg., int * p; *p = 5; is valid, but should never be done.
    Since p is uninitialized, it points to a random location in memory. Now,
    assigning 5 to that memory location may cause the program to crash.
+   [Undefined behaviour]
  * Before a pointer is used, it must be assigned a memory location that has
    already been allocated. For eg., a pointer can be assigned the address of an
    existing variable, or the malloc() function (discussed later) can be used to
    allocate memory.
+ * Thus, the addresses and values at non-allocated locations should never be
+   used.
+   [For eg., int a; int * p = &a; *(p+1) = 25; - undefined behaviour
+             int a; int * p = &a; p++; - undefined behaviour]
 
  * With functions that process a fundamental type, such as int, there is a
    choice of passing the int by value or by reference (i.e. a pointer-to-int).
