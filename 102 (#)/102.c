@@ -50,7 +50,7 @@ int sum(const int (* arr)[3], int rows)
    Here, (a) arr/&arr[0], arr[0]/&arr[0][0] and &arr represent the same address.
          (b) arr (in most cases) and &arr[0] have the data type int (*)[3],
              arr[0] (in most cases) and &arr[0][0] have the data type int *,
-             and &arr has the data type int (*)[2][3].
+             and &arr has the data type int (*)[3][3].
 
    Internal representation of this 2-D array:-
    +---+---+---+---+---+---+---+---+---+
