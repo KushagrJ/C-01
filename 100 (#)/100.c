@@ -55,7 +55,9 @@ int sum(int * integers, int size)
     gives the size of the first element (or, logically, the size of any element)
     of the array in bytes]
 
- * int arr[9] = {31, 28, [4] = 31, 30, 31, [1] = 29};
+ * Designated initializers :-
+
+   int arr[9] = {31, 28, [4] = 31, 30, 31, [1] = 29};
    [arr[0] has the value 31
     arr[1] has the value 29 (and not 28, as it gets overridden by [1] = 29)
     arr[2] has the value 0
