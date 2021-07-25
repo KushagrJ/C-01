@@ -16,7 +16,7 @@ char * modified_fgets(char *, int);
 int main(void)
 {
 
-    char inputArray[10][100];
+    char inputStrings[10][100];
     char * pointersToStrings[10];
 
     printf("Enter upto 10 lines to be sorted :-\n");
@@ -24,10 +24,10 @@ int main(void)
 
     int count = 0;
     while ((count < 10) &&
-           (modified_fgets(inputArray[count], 100) != NULL) &&
-           (inputArray[count][0] != '\0'))
+           (modified_fgets(inputStrings[count], 100) != NULL) &&
+           (inputStrings[count][0] != '\0'))
     {
-        pointersToStrings[count] = inputArray[count];
+        pointersToStrings[count] = inputStrings[count];
         count++;
     }
 
@@ -46,18 +46,14 @@ void sort_pointers_to_strings(char ** strings, int n)
 // or void sort_pointers_to_strings(char * strings[], int n);
 {
 
-    // Similar to bubble sort.
+    // Bubble sort.
 
     char * temp;
 
     for (int i = 1; i < n; i++)
         for (int j = 0; j < n-1; j++)
             if (strcmp(strings[j], strings[j+1]) > 0)
-            {
-                temp = strings[j];
-                strings[j] = strings[j+1];
-                strings[j+1] = temp;
-            }
+                temp=strings[j], strings[j]=strings[j+1], strings[j+1]=temp;
 
 }
 
@@ -97,6 +93,9 @@ char * modified_fgets(char * s, int n)
  * A pointer to a pointer (such as int ** p) and a pointer to an array (such as
    int (* p)[10]) are very different from each other, even though they have many
    similarities.
+
+ * Sorting the pointers to the strings instead of sorting the strings themselves
+   is a faster approach.
 
 
  * The strcat() function, prototyped in string.h, takes the addresses of two

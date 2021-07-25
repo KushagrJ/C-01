@@ -1,5 +1,7 @@
+// C17 Standard
+// Include input validation in version B of this program.
+
 #include <stdio.h>
-#include <string.h>
 
 
 char * modified_fgets(char *, int);
@@ -88,6 +90,10 @@ char * modified_fgets(char * s, int n)
    variable called library (using the book structure design) and allocate space
    for a char array of 40 elements, a char array of 30 elements and a double
    variable.
+ * On some systems, the size of a structure may be greater than the sum of its
+   parts. This is because a system's alignment requrirements for data may cause
+   gaps. Fe eg., a system may have to place each member at an even address that
+   is a multiple of four. Such structures might end up with unused space.
 
  * In declaring a structure variable, struct book (for eg.) plays the same role
    that int or double does in simpler declarations.
