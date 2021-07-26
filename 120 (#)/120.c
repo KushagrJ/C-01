@@ -51,7 +51,7 @@ void sort_pointers_to_strings(char ** strings, int n)
     char * temp;
 
     for (int i = 1; i < n; i++)
-        for (int j = 0; j < n-1; j++)
+        for (int j = 0; j < n-i; j++)
             if (strcmp(strings[j], strings[j+1]) > 0)
                 temp=strings[j], strings[j]=strings[j+1], strings[j+1]=temp;
 

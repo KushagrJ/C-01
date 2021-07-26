@@ -36,8 +36,9 @@ int main(void)
         printf("\n");
     }
 
-    struct book * p = library;
-    // or struct book * p = &library[0];
+    struct book * p = &library[0];
+    // or simply struct book * p = library, since library is a 1-D array and
+    // will decay to &library[0].
 
     printf("\nHere are the books you entered :-\n\n");
     for (int i = 0; i < 3; i++, p++)
