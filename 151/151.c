@@ -110,6 +110,10 @@ char * modified_fgets(char * s, int n)
        double price;
    }
        library;
+ * Declaring a structure variable alongwith declaring the structure doesn't
+   mean that the structure tag cannot be used anymore in the program.
+ * Omitting the tag would make the structure declaration unusable for other
+   variables, like in this example.
 
  * A structure variable can be initialized as well.
    For eg., struct book library = { "C Primer Plus",
@@ -127,5 +131,10 @@ char * modified_fgets(char * s, int n)
    As opposed to arrays, where arr = int[2] {1,2}; is not valid, assignment to
    structures is possible, such as name1 = (struct name) {"Kushagr", "Jaiswal"};
    [Similar rules to that of array compound literals apply here as well]
+
+ * In C, one can use the same name for a tag and a variable in the same scope
+   without causing errors.
+   But, using the same name for two variables, or for two tags, in the same
+   scope causes errors.
 
  */
