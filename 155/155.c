@@ -107,4 +107,53 @@ char * modified_fgets(char * s, int n)
    [This is similar to what happens when an object is passed to a function by
     value. The parameter is initialized to the passed argument.]
 
+
+ * Flexible array members allow the declarations of structures for which the
+   last member is an array with special properties.
+   (a) The flexible array member must be the last member of the structure.
+   (b) There must be at least one other member.
+ * For eg., struct student
+            {
+                int rollNumber;
+                char[40] name;
+                double marks[];
+            };
+ * No memory is set aside for structures with flexible array members, so
+   instead of declaring variables for these structures, pointers should be
+   declared to these structures.
+   After that, memory should be set aside manually by using malloc(), etc.
+   For eg., struct student * p1;
+            p1 = malloc(sizeof(struct name) + 5*sizeof(double));
+   This memory allocation makes marks an array of 5 doubles.
+ * Structures with flexible array members shouldn't be used for assignment, as
+   that would only copy the non flexible members.
+   Similarly, structures with flexible array members shouldn't be passed to
+   functions by value, and should only be passed by reference.
+   Also, structures with flexible array members shouldn't be used as elements of
+   arrays or other structures.
+   Instead, memcpy() should be used (discussed later).
+
+
+ * struct nameOfPerson
+   {
+       char first[20];
+       char last[20];
+   };
+   struct person
+   {
+       int id;
+       struct nameOfPerson name;
+   };
+   struct person ted = {8483, {"Ted", "Grass"}};
+   Now, ted.name.first can be used to access "Ted".
+
+   This can also be done with the use of anonymous structures like this :-
+   struct person
+   {
+       int id;
+       struct {char firstName[20]; char lastName[20];};
+   };
+   struct person ted = {8483, {"Ted", "Grass"}};
+   Now, ted.first can be used to access "Ted".
+
  */

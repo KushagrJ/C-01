@@ -7,7 +7,7 @@
 
 // <type> *[] (which is equivalent to <type> ** in prototypes & headers) is for
 // a 1-D array of pointers / pointers-to-pointers.
-void sort_pointers_to_strings(char **, int);
+void sort_pointers_to_strings(const char **, int);
 // or void sort_pointers_to_strings(char *[], int);
 
 char * modified_fgets(char *, int);
@@ -17,7 +17,7 @@ int main(void)
 {
 
     char inputStrings[10][100];
-    char * pointersToStrings[10];
+    const char * pointersToStrings[10];
 
     printf("Enter upto 10 lines to be sorted :-\n");
     printf("(To stop, press ENTER on a newline)\n\n");
@@ -42,13 +42,13 @@ int main(void)
 }
 
 
-void sort_pointers_to_strings(char ** strings, int n)
+void sort_pointers_to_strings(const char ** strings, int n)
 // or void sort_pointers_to_strings(char * strings[], int n);
 {
 
     // Bubble sort.
 
-    char * temp;
+    const char * temp;
 
     for (int i = 1; i < n; i++)
         for (int j = 0; j < n-i; j++)

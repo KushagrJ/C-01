@@ -58,8 +58,12 @@ int sum(const int * integers, int size)
             int sum = sum((int []) {1,2,3,4,5,6}, 6);
    Here also, the address of the first element of the array gets passed.
 
- * Compound literals have block scope (discussed later). This means that the
-   existence of a compound literal is not guaranteed once the program's
-   execution leaves the block in which the compound literal is defined.
+ * Compound literals used within a block have block scope and automatic storage
+   duration (discussed later).
+   This means that the existence of the compound literal is not guaranteed once
+   the program's execution leaves the block in which the compound literal is
+   defined.
+ * Compound literals occurring outside of any function have static storage
+   duration (discussed later).
 
  */

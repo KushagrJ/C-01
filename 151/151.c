@@ -120,5 +120,12 @@ char * modified_fgets(char * s, int n)
 
  * Designated initializers for structures are also available, and are similar to
    designated initializers for arrays.
+   For eg., struct name = { .last = "J", .first = "Kushagr", "Jaiswal" };
+   ["Jaiswal" overrides "J"]
+ * Compound literals can be used for structures as well, just like for arrays.
+   For eg., (struct name) { "Kushagr", "Jaiswal" }
+   As opposed to arrays, where arr = int[2] {1,2}; is not valid, assignment to
+   structures is possible, such as name1 = (struct name) {"Kushagr", "Jaiswal"};
+   [Similar rules to that of array compound literals apply here as well]
 
  */
