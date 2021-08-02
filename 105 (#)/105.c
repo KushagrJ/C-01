@@ -158,7 +158,7 @@ int main(void)
    If fgets() encounters end of file or an error, then it returns a special
    pointer called the null pointer, which is guaranteed to not point to valid
    data so it can be used to indicate a special case. In code, a null pointer is
-   represented by the digit 0, or more commonly by NULL.
+   represented by ((void *) 0), or more commonly by NULL.
 
  * There is an optional function for string input, i.e. the gets_s() function.
 

@@ -8,7 +8,7 @@
 // <type> *[] (which is equivalent to <type> ** in prototypes & headers) is for
 // a 1-D array of pointers / pointers-to-pointers.
 void sort_pointers_to_strings(const char **, int);
-// or void sort_pointers_to_strings(char *[], int);
+// or void sort_pointers_to_strings(const char *[], int);
 
 char * modified_fgets(char *, int);
 
@@ -43,7 +43,7 @@ int main(void)
 
 
 void sort_pointers_to_strings(const char ** strings, int n)
-// or void sort_pointers_to_strings(char * strings[], int n);
+// or void sort_pointers_to_strings(const char * strings[], int n);
 {
 
     // Bubble sort.
