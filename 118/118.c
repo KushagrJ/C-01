@@ -91,9 +91,9 @@ int main(int argc, char ** argv)
               file must exist.
       "r+b" - Same, but in binary mode instead of text mode.
       "rb+" - Same as "r+b".
-   5. "w+"  - Open a text file for update (i.e. reading and writing both),
-              first truncating the file to zero length if it exists or creating
-              the file if it does not exist.
+   5. "w+"  - Open a text file for update (i.e. reading and writing both), first
+              truncating the file to zero length if it exists or creating the
+              file if it does not exist.
       "w+b" - Same, but in binary mode instead of text mode.
       "wb+" - Same as "w+b".
    6. "a+"  - Open a text file for update (i.e. reading and writing both),
