@@ -43,8 +43,8 @@ int main(int argc, char ** argv)
    supposed to answer.
 
  * All file content is in binary form (zeroes and ones).
-   1. If a file primarily uses the binary codes for characters (such as ASCII)
-      to represent text, then it is a text file.
+   1. If a file uses the binary codes for characters (such as ASCII) to
+      represent text, then it is a text file.
    2. If the binary values in the file represent machine-language code, numeric
       data, image/music/video encoding, etc., then it is a binary file.
 
@@ -121,6 +121,11 @@ int main(int argc, char ** argv)
    getchar() is equivalent to getc(stdin) and putchar(c) is equivalent to
    putc(c, stdout).
  * Just like getchar(), getc() also returns EOF when it encounters end-of-file.
+
+ * The file I/O functions automatically set the file position indicator to the
+   current position after reading/writing. For eg., getc(fp) takes a character
+   from the file and sets the file position indicator in the structure pointed
+   to by fp to the current position, for the next input function.
 
  * The fclose() function closes the file identified by the file pointer,
    flushing buffers as needed.
