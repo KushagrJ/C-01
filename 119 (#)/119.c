@@ -249,6 +249,7 @@ void wrap_line(char * s, const int wrapColumn)
  * The ferror() function returns a non-zero value if a read or write error has
    occurred, and it returns 0 otherwise.
 
+
    [Study programs involving the use of setvbuf(), fread() and fwrite() later]
 
  */
