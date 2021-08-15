@@ -44,7 +44,42 @@ int main(void)
  * Preprocessor directives run until the first newline following the #. However,
    since the combination of \ and ENTER is deleted before preprocessing, it can
    be used to spread the directive over several physical lines. Also, comments
-   may be written in the directive lines, as they too will get deleted.
+   may be written in the directive lines, as they too will get deleted before
+   preprocessing begins.
+ * The preprocessor doesn't do any calculations. It just makes substitutions
+   very literally.
+
+ * Each #define directive has three parts. The first part is #define itself.
+   The second part is the chosen abbreviation, known as a macro. The macro name
+   must conform to the same naming rules as C identifiers follow.
+   The third part (the remainder of the directive) is known as the replacement
+   list or body.
+ * Wherever the preprocessor finds the macro name not enclosed in double quotes,
+   it replaces it with the body. This process of going from a macro to the final
+   replacement is called macro expansion.
+   For eg., #define TWO 2
+            ...
+            printf("TWO: %d\n", TWO);
+            ...
+            Here, the TWO inside printf()'s control string will not be replaced
+            by 2, but the argument TWO will be.
+            Thus, the output will be TWO: 2
+ * More examples of #define :-
+   #define TWO 2
+   #define KJ "Program\
+   ming is fun!"
+   #define FOUR TWO*TWO   // Macro-nesting isn't supported by all compilers.
+   #define PRINT_4 printf("%d\n", FOUR);
+ * String literals using #define should be used carefully with printf(),
+   scanf(), etc., as unknown conversion specifiers (such as %b) invoke undefined
+   behaviour.
+   For eg., #define DISCOUNT "10% before noon!"
+            ...
+            printf(DISCOUNT);   // Undefined behaviour.
+            // fputs(DISCOUNT, stdout); and printf("%s", DISCOUNT); work fine.
+            ...
+ * String literals in general should be used carefully, as unknown escape
+   sequences (such as \c) also invoke undefined behaviour.
 
    https://gcc.gnu.org/onlinedocs/cpp/Macros.html#Macros - See this as well
 
