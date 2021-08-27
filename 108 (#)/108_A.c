@@ -295,4 +295,11 @@ static void report_count(void)
             But, since p isn't a restrict variable, the compiler cannot do this
             optimization for p, even if it would be logically correct.
 
+
+
+ * Due to the inclusion of 108.h, int count = 0; and extern int count; both
+   appear in 108_A.c
+   But, it's valid to have the defining declaration and an extern declaration in
+   the same file, as long as the declarations agree in type.
+
  */

@@ -1,11 +1,21 @@
 // C17 Standard
+// Include input validation in version B of this program.
 
 
 #include <stdio.h>
 
 
+#define PSQR(X) printf("The square of %d is %d\n", X, ((X)*(X)))
+
+
 int main(void)
 {
+
+    int num;
+    printf("Enter an integer: ");
+    scanf("%d", &num);
+
+    PSQR(num);
 
     return 0;
 
@@ -142,6 +152,27 @@ int main(void)
             int KJ(1) = 22;   // becomes int x1 = 22;
             ...
 
-   https://gcc.gnu.org/onlinedocs/cpp/Macros.html#Macros - See this as well
+ * Functions such as printf() accept a variable number of arguments.
+   Creating user-defined functions that accept a variable number of arguments is
+   discussed later.
+
+ * A macro that accepts a variable number of arguments can be created by using
+   an ellipsis as the final argument.
+   Then, the predefined macro __VA_ARGS__ can be used in its body to indicate
+   what will be substituted for the ellipsis.
+ * For eg., #define PR(...) printf(__VA_ARGS__)
+
+
+ * When the preprocessor spots an #include directive, it looks for the following
+   file and replaces the #include directive with the text from that file.
+ * On a UNIX (or similar) system, the angle brackets (<stdio.h>) tell the
+   preprocessor to look for the file in one or more standard system directories.
+   The double quotation marks ("my_header.h") tell it to first look in the
+   current directory (or the location described - "/home/my_header.h"), and then
+   look in the standard system directories.
+ * The .h suffix is conventionally used for header files.
+
+ * The most common header files contain manifest constants, function-like
+   macros, function prototypes, structure declarations, typedef statements, etc.
 
  */

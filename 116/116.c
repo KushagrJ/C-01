@@ -131,7 +131,7 @@ char * modified_fgets(char * s, int n)
    functions by value, and should only be passed by reference.
    Also, structures with flexible array members shouldn't be used as elements of
    arrays or other structures.
-   Instead, memcpy() should be used (discussed later).
+   [Instead, memcpy() should be used (discussed later)]
 
 
  * struct nameOfPerson
