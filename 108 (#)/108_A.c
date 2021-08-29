@@ -45,14 +45,14 @@ static void report_count(void)
 
 /* Trivia
 
- * In C, the term 'object' refers to a chunk of memory which can store one or
-   more values. An object might not always have a stored value, but it will be
-   of the right size to hold an appropriate value.
+ * In C, the term 'object' means a chunk of memory which can store one or more
+   values. An object might not always have a stored value, but it will be of the
+   right size to hold an appropriate value.
    [The term 'object' in object-oriented programming has a different meaning.
     C is not an object-oriented programming language.]
 
- * For eg., (a) int x; declares an identifier called x, which is used to
-                designate an object that can store an integer value. x is a
+ * For eg., (a) int x; declares an identifier x, which is used to designate /
+                refer to an object that can store an integer value. x is a
                 modifiable lvalue.
             (b) int * p = &x; - p is an identifier which designates an object
                 that can hold an address. p is a modifiable lvalue.
@@ -276,7 +276,7 @@ static void report_count(void)
  * The restrict keyword enhances computational support by giving the compiler
    permission to optimize certain kinds of code. It can be applied only to
    pointers, and it indicates that a pointer is the sole initial means of
-   accessing a data object.
+   accessing an object.
    For eg., in int arr[10]; int * p = arr;, p is neither the initial nor the
    sole means of access to the data in arr, but in
    int * restrict q = (int *) malloc(10 * sizeof (int));, q is the sole initial

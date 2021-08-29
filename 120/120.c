@@ -50,8 +50,7 @@ int main(void)
  * A C preprocessor directive begins with the # symbol. The # can appear at the
    leftmost column of a line or can be preceeded by whitespace. Also, there may
    be whitespace between the # and the remainder of the directive.
- * A directive can appear anywhere in a source file, and the definition holds
-   from its place of appearance to the end of the file.
+ * A directive can appear anywhere in a source file.
  * Preprocessor directives run until the first newline following the #. However,
    since the combination of \ and ENTER is deleted before preprocessing, it can
    be used to spread the directive over several physical lines. Also, comments
@@ -66,6 +65,8 @@ int main(void)
    must conform to the same naming rules as C identifiers follow.
    The third part (the remainder of the directive) is known as the replacement
    list or body.
+ * Any valid identifier name can be used as the name of a macro, even if it is a
+   C keyword, as the preprocessor does not know anything about keywords.
  * Wherever the preprocessor finds the macro name not enclosed in double quotes,
    it replaces it with the body. This process of going from a macro to the final
    replacement is called macro expansion.
@@ -130,6 +131,12 @@ int main(void)
                 used in the body. [Similarly for others]
                 Thus, increment/decrement operators shouldn't be used with
                 macros.
+
+ * Macros with empty body (#define KJ or #define sum(a)) don't produce any code,
+   as the macro name will get replaced by empty text.
+ * For eg., #define sum(x)
+            ...
+            sum(22); // Will get replaced by ; in the program.
 
  * For eg., #define PSQR(X) printf("The square of X is %d.\n", ((X)*(X)))
    PSQR(8); would print The square of X is 64., as the X inside double quotes is

@@ -180,6 +180,8 @@ void sort_pointers_to_structures(const struct student ** p)
 
  * A pointer to a function holds the address marking the start of the function
    code.
+   Unlike objects, the address of a function doesn't refer to data values, and
+   rather refers to executable code within memory.
  * Typically, a function pointer is used as an argument to another function,
    telling the second function which function to use.
  * For eg., for the function void to_upper(char *);, the pointer can be declared

@@ -148,19 +148,17 @@ int sum(int * integers, int size)
    Also, *arr == arr[0], *(arr+1) == arr[1], and so on.
    Thus, in essence, we have two different notations (arrays and pointers) for
    the same thing. The C Standard also describes arrays in terms of pointers.
-   For eg., arr[n] is defined as *(ar+n).
+   For eg., arr[n] is defined as *(arr + n).
    [Similar logic for multidimensional arrays]
  * For pointers, as in this program, p[1] == *(p+1), etc.
    [Note that the variable integers is no longer an array inside the sum
     function, and is now a pointer]
 
- * In function prototypes and headers, int * arr is equivalent to int arr[]
-   because when an array expression appears in most contexts, the type of the
-   expression is implicitly converted from "n-element array of type t" to
-   "pointer to t", and its value is set to point to the first element in the
-   array. Also, this converted expression is not an lvalue, which means that it
-   can't be assigned values. So, int * p; p = &a; works, but int arr[5];
-   arr = &a; doesn't.
+ * When an array expression appears in most contexts, the type of the expression
+   is implicitly converted from "n-element array of type t" to "pointer to t",
+   and its value is set to point to the first element in the array. Also, this
+   converted expression is not an lvalue, which means that it can't be assigned
+   values. So, int * p; p = &a; works, but int arr[5]; arr = &a; doesn't.
    This implicit conversion is the reason why & is not used with
    scanf("%s", str);
    [The exceptions to this rule are when the array expression appears as an
@@ -195,26 +193,33 @@ int sum(int * integers, int size)
    conversion as the data type of arr[3] is int (if arr is an array of
    integers). Thus, arr is an array, but arr[3] is not.
 
- * In most cases, a variable is an abstraction (a convenient name) for the
-   entire memory position allocated, i.e. it consists of the address of the
-   first byte alongwith the information about the number of the next contiguous
-   bytes to be considered a part of it.
-   [But sometimes, a variable is stored in a register instead of in memory. Then
-    it doesn't have an address, and pointers can't be created to it.]
- * A pointer (which is a variable / data object) stores just the address of the
-   first byte, and doesn't bother with the number of next contiguous bytes to
-   consider a part of the object it's pointing to, as the data type of the
-   pointer (i.e. pointer to <data type>) automatically provides that
-   information.
- * So, in int a; int * p = &a;, p is a convenient name for an entire memory
-   location (i.e. the first byte of p and the information that the next 7 (on
-   this system) contiguous bytes are also a part of p) and the value that is
-   stored in those 8 bytes of storage is just the address of the first byte
-   of a.
 
- * A variable is not a pointer automatically dereferenced.
+ * In most cases, a variable name (i.e. an identifier) is an abstraction
+   (a convenient name) which is used to designate / refer to an object, which is
+   a chunk of memory used to store one or more values.
+   Simply put, an identifier designating / referring to an object is a
+   convenient name given to that object.
+   [Sometimes, an object is a part of a register instead of memory.
+    Then, it doesn't have an address, and pointers can't be created to it.
+    But, the object can still be used with the help of an identifier.]
+ * The name of a pointer variable designates an object that stores the address
+   of only the first byte of the object it's pointing to.
+   The information about the number of next contiguous bytes to be considered a
+   part of that pointed-to object is automatically provided by the data type of
+   the pointer itself (i.e. pointer to <data type>).
+ * So, in int a; int * p = &a;, p is a convenient name for a chunk of memory
+   (i.e. 8 contiguous bytes on this system) and the value that is stored
+   in those 8 bytes is the address of only the first byte of a.
+
+ * Thus, a variable is not a pointer automatically dereferenced.
    A variable just holds the value it is supposed to hold.
    If it is a pointer, it will hold a memory address, if it is an integer, it
    will hold an integer value, etc.
+
+ * An identifier can be the name of an object, a function, a tag or a member of
+   a structure/union/enumeration, a typedef name, a label name, a macro name or
+   a macro parameter.
+ * An identifier designating an object is also known as an lvalue.
+ * A function name does not designate an object.
 
  */
