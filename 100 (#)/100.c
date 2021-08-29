@@ -194,14 +194,14 @@ int sum(int * integers, int size)
    integers). Thus, arr is an array, but arr[3] is not.
 
 
- * In most cases, a variable name (i.e. an identifier) is an abstraction
+ * In most cases, a variable name (which is an identifier) is an abstraction
    (a convenient name) which is used to designate / refer to an object, which is
    a chunk of memory used to store one or more values.
    Simply put, an identifier designating / referring to an object is a
    convenient name given to that object.
    [Sometimes, an object is a part of a register instead of memory.
     Then, it doesn't have an address, and pointers can't be created to it.
-    But, the object can still be used with the help of an identifier.]
+    But, the object can be used with the help of an identifier.]
  * The name of a pointer variable designates an object that stores the address
    of only the first byte of the object it's pointing to.
    The information about the number of next contiguous bytes to be considered a
@@ -221,5 +221,43 @@ int sum(int * integers, int size)
    a macro parameter.
  * An identifier designating an object is also known as an lvalue.
  * A function name does not designate an object.
+
+
+ * The C Standard does not use the term 'variable', and instead uses the terms
+   'identifier' and 'object' to describe what are commonly thought of as
+   variables.
+ * What is commonly thought of as a variable is actually the object itself, and
+   the variable name means the identifier designating that object (i.e. the name
+   given to that object).
+ * Similarly, the term 'array' also means the entire memory block, i.e. the
+   object that the array name designates. So, the name of an array also means
+   the identifier designating that object (i.e. the name given to that object).
+
+ * int x = 1;
+   Incorrect - x is an integer variable.
+   Partially correct - x is the name of an integer variable.
+   More correct - x is the name of a variable that can store an integer value.
+   Fully correct - x is an identifier that designates an object that can store
+   an integer value.
+   [Also, 'the value of x is 1' is incorrect, 'the value stored in x is 1' is
+    partially correct, 'the value stored in the variable called x is 1' is more
+    correct and 'the value stored in the object designated by x is 1' is fully
+    correct]
+   [Similarly for other variables, such as a float variable, a pointer variable
+    and a structure variable]
+ * int (* p)[10];
+   Fully correct - p is an identifier that designates an object that can store
+   the address of the first byte of another object that can store 10 integer
+   values.
+
+   [Rectify all incorrect uses of the terms 'variable' and 'array' in C-00 and
+    C-01.
+    For eg., replace (1) 'x is an integer variable' by 'x is the name of a
+                         variable that can store an integer value'.
+                     (2) 'x is an array of integers' by 'x is the name of an
+                          array that can store integer values'.
+                     (3) 'x gets incremented' by 'the value stored in the
+                          variable called x gets incremented'.]
+   [To be done from 25.c onwards]
 
  */

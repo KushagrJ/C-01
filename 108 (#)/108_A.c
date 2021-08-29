@@ -71,8 +71,8 @@ static void report_count(void)
    use the identifier.
 
 
- * A C variable has one of the following scopes: block scope, function scope,
-   function prototype scope or file scope.
+ * A C variable name has one of the following scopes: block scope, function
+   scope, function prototype scope or file scope.
  * A block is the region of code between braces (which includes the braces of
    a function definition), or the code controlled by a for/while/do-while loop
    or an if statement.
