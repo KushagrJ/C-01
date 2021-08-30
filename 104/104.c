@@ -34,10 +34,6 @@ int sum(const int * integers, int size)
 
 /* Trivia
 
- * Literals are constants that aren't symbolic. For eg., 5 is a type int
-   literal, 81.3 is a type double literal, 'Y' is a type char literal and
-   "element" is a string literal.
-
  * The compound literal that creates a nameless array equivalent to
    int arr[2] = {10,20}; is (int [2]) {10,20} or (int []) {10,20}
  * Because these compound literals are nameless, therefore they can't be created

@@ -104,8 +104,8 @@ int main(void)
    [The C compiler takes a more complex view of tokens than the preprocessor
     does. The compiler understands the rules of C and doesn’t necessarily
     require spaces to separate tokens. For eg., the C compiler would view 2*2 as
-    three tokens because it recognizes that each 2 is a constant and that * is
-    an operator.]
+    three tokens because it recognizes that each 2 is a constant expression and
+    that * is an operator.]
  * Thus, #define SIX 2 * 3 and #define SIX 2    *    3 are the same, but
    #define SIX 2*3 is different.
    Redefinition without first using #undef is allowed only if the new definition

@@ -184,7 +184,7 @@ int main(void)
  * Thus, if an array is to be used to represent a bunch of strings, then an
    array of pointers is more efficient than an array of arrays of char.
    But, if the strings need to be altered, then this is not possible with an
-   array of pointers, as the pointers are pointing to constant data (i.e. string
+   array of pointers, as the pointers are pointing to const data (i.e. string
    literals).
  * sizeof subjects is 40 on this system, whereas sizeof days is 50.
 

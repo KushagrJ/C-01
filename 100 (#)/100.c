@@ -122,8 +122,9 @@ int sum(int * integers, int size)
              pointer to an integer), whereas &arr has the type int (*)[3] (i.e.
              pointer to a 3-element array of integers).
 
- * When an integer constant or an int variable is added to / subtracted from a
-   pointer, then the resultant address is given according to the data type.
+ * When an integer constant expression or an int variable is added to /
+   subtracted from a pointer, then the resultant address is given according to
+   the data type.
    This is also a reason why pointer declarations require the information of the
    data type the pointer would be pointing to.
    Note that two pointers can't be added, multiplied, etc.
@@ -196,20 +197,16 @@ int sum(int * integers, int size)
 
  * In most cases, a variable name (which is an identifier) is an abstraction
    (a convenient name) which is used to designate / refer to an object, which is
-   a chunk of memory used to store one or more values.
+   a chunk of memory used to store values.
    Simply put, an identifier designating / referring to an object is a
    convenient name given to that object.
    [Sometimes, an object is a part of a register instead of memory.
     Then, it doesn't have an address, and pointers can't be created to it.
     But, the object can be used with the help of an identifier.]
- * The name of a pointer variable designates an object that stores the address
-   of only the first byte of the object it's pointing to.
-   The information about the number of next contiguous bytes to be considered a
-   part of that pointed-to object is automatically provided by the data type of
-   the pointer itself (i.e. pointer to <data type>).
- * So, in int a; int * p = &a;, p is a convenient name for a chunk of memory
+ * In int a; int * p = &a;, p is a convenient name for a chunk of memory
    (i.e. 8 contiguous bytes on this system) and the value that is stored
-   in those 8 bytes is the address of only the first byte of a.
+   in those 8 bytes is the address of only the first byte of the object referred
+   to by a.
 
  * Thus, a variable is not a pointer automatically dereferenced.
    A variable just holds the value it is supposed to hold.
@@ -219,7 +216,8 @@ int sum(int * integers, int size)
  * An identifier can be the name of an object, a function, a tag or a member of
    a structure/union/enumeration, a typedef name, a label name, a macro name or
    a macro parameter.
- * An identifier designating an object is also known as an lvalue.
+ * An expression (which includes identifiers) designating an object is also
+   known as an lvalue.
  * A function name does not designate an object.
 
 
@@ -234,30 +232,21 @@ int sum(int * integers, int size)
    the identifier designating that object (i.e. the name given to that object).
 
  * int x = 1;
-   Incorrect - x is an integer variable.
-   Partially correct - x is the name of an integer variable.
-   More correct - x is the name of a variable that can store an integer value.
-   Fully correct - x is an identifier that designates an object that can store
-   an integer value.
+   Incorrect - x is an int variable.
+   Partially correct - x is the name of an int variable.
+   More correct - x is the name of a variable that can store an int value.
+   Fully correct - x is an identifier that designates / refers to an object
+   of data type 'int' (i.e. an object that can store an int value).
    [Also, 'the value of x is 1' is incorrect, 'the value stored in x is 1' is
     partially correct, 'the value stored in the variable called x is 1' is more
-    correct and 'the value stored in the object designated by x is 1' is fully
-    correct]
+    correct and 'the value stored in the object designated / referred to by x is
+    1' is fully correct]
    [Similarly for other variables, such as a float variable, a pointer variable
     and a structure variable]
  * int (* p)[10];
-   Fully correct - p is an identifier that designates an object that can store
-   the address of the first byte of another object that can store 10 integer
-   values.
-
-   [Rectify all incorrect uses of the terms 'variable' and 'array' in C-00 and
-    C-01.
-    For eg., replace (1) 'x is an integer variable' by 'x is the name of a
-                         variable that can store an integer value'.
-                     (2) 'x is an array of integers' by 'x is the name of an
-                          array that can store integer values'.
-                     (3) 'x gets incremented' by 'the value stored in the
-                          variable called x gets incremented'.]
-   [To be done from 25.c onwards]
+   Fully correct - p is an identifier that designates / refers to an object of
+   data type 'pointer to 10-element array of int' (i.e. an object that can store
+   the address of the first byte of another object of data type '10-element
+   array of int').
 
  */

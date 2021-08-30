@@ -145,12 +145,11 @@ int sum(int * start, int * end)
    can be made to point somewhere else.
    [For eg., int arr[2] = {1,2}; const int * p = arr; *p = 2; - Error
              int arr[2] = {1,2}; const int * p = arr; p++; - Valid]
-   It's valid to assign the addresses of either constant or non-constant data to
+   It's valid to assign the addresses of either const or non-const data to
    pointers to constants.
    [For eg., int foo[2] = {1,2}; const int bar[2] = {3,4};
              const int * p = foo; p = bar; p = &foo[1]; - Valid]
-   Only the addresses of non-constant data should be assigned to regular
-   pointers.
+   Only the addresses of non-const data should be assigned to regular pointers.
    [For eg., int foo[2] = {1,2}; const int bar[2] = {3,4};
              int * p = foo; - Valid
              p = bar; - Warning (any attempt to modify const data using a
