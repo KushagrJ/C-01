@@ -38,15 +38,14 @@ int main(void)
                       time of translation, as in 10:15:20
    __FILE__         - String literal representing the name of the current source
                       file
-   __LINE__         - Integer constant expression representing the current line
-                      number in the current source file
-   __STDC__         - Integer constant expression representing whether the
-                      implementation conforms to the C standard (1 for true)
-   __STDC_HOSTED__  - Integer constant expression representing whether the
-                      environment is hosted (1 for true)
-   __STDC_VERSION__ - Long integer constant expression in the form "yyyymmL"
-                      representing the version of the C standard the compiler
-                      conforms to.
+   __LINE__         - Integer value representing the current line number in the
+                      current source file
+   __STDC__         - Integer value representing whether the implementation
+                      conforms to the C standard (1 for true)
+   __STDC_HOSTED__  - Integer value representing whether the nvironment is
+                      hosted (1 for true)
+   __STDC_VERSION__ - Long integer value in the form "yyyymmL" representing the
+                      version of the C standard the compiler conforms to.
  * __func__ is a string literal representing the name of the function containing
    it. __func__ is not a predefined macro and is rather a predefined identifier
    of the compiler, as the preprocessor does not know the name of the current

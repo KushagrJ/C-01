@@ -236,7 +236,8 @@ int sum(int * integers, int size)
    Partially correct - x is the name of an int variable.
    More correct - x is the name of a variable that can store an int value.
    Fully correct - x is an identifier that designates / refers to an object
-   of data type 'int' (i.e. an object that can store an int value).
+   of data type 'int' (i.e. an object that can store a value of data type
+   'int').
    [Also, 'the value of x is 1' is incorrect, 'the value stored in x is 1' is
     partially correct, 'the value stored in the variable called x is 1' is more
     correct and 'the value stored in the object designated / referred to by x is
@@ -246,7 +247,8 @@ int sum(int * integers, int size)
  * int (* p)[10];
    Fully correct - p is an identifier that designates / refers to an object of
    data type 'pointer to 10-element array of int' (i.e. an object that can store
-   the address of the first byte of another object of data type '10-element
-   array of int').
+   a value of data type 'pointer to 10-element array of int'). A value of data
+   type 'pointer to 10-element array of int' is the address of the first byte of
+   another object of data type '10-element array of int'.
 
  */

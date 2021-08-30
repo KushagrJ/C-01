@@ -52,10 +52,14 @@ static void report_count(void)
     C is not an object-oriented programming language.]
 
  * For eg., (a) int x; declares an identifier x, which is used to designate /
-                refer to an object that can store an integer value. x is a
-                modifiable lvalue.
-            (b) int * p = &x; - p is an identifier which designates an object
-                that can hold an address. p is a modifiable lvalue.
+                refer to an object of data type 'int' (i.e. an object that can
+                store a value of data type 'int'). x is a modifiable lvalue.
+            (b) int * p = &x; - p is an identifier which designates an object of
+                data type 'pointer to int' (i.e. an object that can store a
+                value of data type 'pointer to int'). A value of data type
+                'pointer to int' is the address of the first byte of another
+                object of data type 'int'.
+                p is a modifiable lvalue.
                 As opposed to p, *p is not an identifier, but it also designates
                 an object, i.e. the same object that x designates. *p is also a
                 modifiable lvalue.
