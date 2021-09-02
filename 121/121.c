@@ -116,4 +116,39 @@ int main(void)
    So, the #line directive can be used to make the error message report that the
    error was found at line 12 of 121.c
 
+
+ * The #error directive causes the preprocessor to issue an error message that
+   includes any text in the directive, and to halt the compilation process.
+   For eg., #if __STDC_VERSION__ != 201112L
+            #error Please use -std=c11
+            #endif
+            ...
+
+
+ * The #pragma directive is used to place instructions for the compiler in the
+   source code.
+   These directives are machine-specific or operating-system-specific that may
+   or may not apply to all machines and operating systems. These directives also
+   might mean different things on different compilers.
+ * The GCC compiler discourages the use of pragmas, as thay make the code
+   non-portable.
+ * For eg., a compiler can use the pragma '#pragma c17 on' to use the C17
+   standard, instead of using command line arguments such as '-std=17'.
+
+
+ * The term 'generic programming' indicates code that is not specific to a
+   particular type, but which, once a type is specified, can be translated into
+   code for that type.
+ * C++ lets the user create generic algorithms in the form of templates that the
+   compiler can then use to instantiate code automatically for a specified type.
+ * In C, a generic selection expression can be used to select a value on the
+   basis of the type of an expression (int, double, etc.).
+ * The generic selection expression is not a preprocessor statement, but it is
+   most commonly used as a part of a #define macro definition.
+ * A generic selection expression is like a switch statement, except that the
+   type of an expression rather than the value of an expression is matched to a
+   label. The expression isn't evaluated, and only its type is determined.
+ * For eg., #define M(x) _Generic((x), int: 0, float: 1, double: 2, default: 3)
+            #define N(x) _Generic((x), char *: "ptr to char", default: "none")
+
  */
