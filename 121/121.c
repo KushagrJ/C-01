@@ -151,4 +151,48 @@ int main(void)
  * For eg., #define M(x) _Generic((x), int: 0, float: 1, double: 2, default: 3)
             #define N(x) _Generic((x), char *: "ptr to char", default: "none")
 
+
+ * Normally, a function call has overhead, i.e. it takes execution time to set
+   up the call, pass arguments, jump to the function code, and return.
+ * Function-like macros can be used to completely avoid overhead.
+ * Using inline functions is another alternative to reduce overhead, and
+   sometimes to avoid it completely as well.
+   Making a function inline suggests that calls to the function be as fast as
+   possible. The extent up to which such suggestions are effective is
+   implementation-defined, similar to the register storage class.
+   So, making a function inline may cause the compiler to replace the function
+   call with inline code and/or perform some other sorts of optimizations, or it
+   may have no effect at all.
+ * A function with internal linkage (i.e. a static function) can be made inline.
+   [Other uses of the keyword 'inline' are not discussed here, such as without
+    'static' or with 'extern'.
+    Inline functions have special rules about what 'extern' means.
+    For non-inline and non-static functions, 'extern' is not needed as it is on
+    by default.]
+ * Usually, inline functions are defined before the first use in a file, thereby
+   negating the use of a prototype.
+   For eg., #include <stdio.h>
+            ...
+            inline static void eatline(void)
+            {
+                while (getchar() != '\n')
+                    continue;
+            }
+            ...
+            int main(void)
+            ...
+ * Taking the address of an inline function will make it non-inline, as an
+   inline function doesn't have a separate block of code set aside for it.
+ * An inline function should be short, because for a long function, the time
+   consumed in calling the function is very less as compared to the time
+   consumed in executing the body of the function. So, making a long function
+   inline won't lead to great savings in time.
+ * The simplest way to make an inline function accessible to multiple files
+   within a multi-file program is to put the function definition in a header
+   file and then include the header file in those files.
+   Thus, an inline function is an exception to the practice of not placing
+   executable code in a header file.
+ * The keyword 'inline' is not a storage-class specifier, like static and
+   extern, and is rather a function specifier.
+
  */
