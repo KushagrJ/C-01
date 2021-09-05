@@ -13,15 +13,24 @@ int main(int argc, char ** argv)
 {
 
     if (argc != 2)
-        printf("Enter this: %s filename\n", argv[0]), exit(EXIT_FAILURE);
+    {
+        printf("Enter this: %s filename\n", argv[0]);
+        exit(EXIT_FAILURE);
+    }
 
     FILE * in;
     if ((in = fopen(argv[1], "r")) == NULL)
-        fprintf(stderr, "Can't open %s!\n", argv[1]), exit(EXIT_FAILURE);
+    {
+        fprintf(stderr, "Can't open %s!\n", argv[1]);
+        exit(EXIT_FAILURE);
+    }
 
     FILE * out;
     if ((out = fopen("119_OUT.txt", "w")) == NULL)
-        fprintf(stderr, "Can't create output file!\n"), exit(EXIT_FAILURE);
+    {
+        fprintf(stderr, "Can't create output file!\n");
+        exit(EXIT_FAILURE);
+    }
 
     char s[1024];
     while (modified_fgets(s, 1024, in) != NULL)
@@ -78,7 +87,10 @@ void wrap_line(char * s, const int wrapColumn)
         if (i - lastWrap == wrapColumn)
         {
             if (lastSpace == -1)
-                fprintf(stderr, "Too long words!\n"), exit(EXIT_FAILURE);
+            {
+                fprintf(stderr, "Too long words!\n");
+                exit(EXIT_FAILURE);
+            }
             s[lastSpace] = '\n';
             lastWrap = lastSpace + 1;
             lastSpace = -1;

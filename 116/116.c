@@ -15,7 +15,7 @@ struct name
 
 struct name * get_name(struct name *);
 struct name calculate_number_of_letters(struct name *);
-void show_info(struct name);
+void show_info(const struct name);
 char * modified_fgets(char *, int);
 
 
@@ -59,7 +59,7 @@ struct name calculate_number_of_letters(struct name * p)
 }
 
 
-void show_info(struct name guy)
+void show_info(const struct name guy)
 {
     printf("\nYour name has %u letters\n", guy.numberOfLetters);
 }

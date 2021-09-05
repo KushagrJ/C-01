@@ -4,14 +4,13 @@
 #include <stdlib.h>
 
 
-int sum(int *, int);
+int sum(const int *, int);
 
 
 int main(void)
 {
 
     int * integers = (int *) malloc(10 * sizeof (int));
-
     if (integers == NULL)
         exit(EXIT_FAILURE);
 
@@ -20,20 +19,20 @@ int main(void)
 
     printf("The sum is %d\n", sum(integers, 10));
 
+    free(integers);
+
     return 0;
 
 }
 
 
-int sum(int * integers, int size)
+int sum(const int * integers, int size)
 {
 
     int sum = 0;
 
     for (int i = 0; i < size; i++)
         sum += integers[i];
-
-    free(integers);
 
     return sum;
 

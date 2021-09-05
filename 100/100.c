@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 
-int sum(int *, int);
+int sum(const int *, int);
 // or int sum(int [], int);              - Any non-negative integer can be
 // or int sum(int * integers, int size);   written inside []. It will get
 // or int sum(int integers[], int size);   ignored anyway.
@@ -22,7 +22,7 @@ int main(void)
 }
 
 
-int sum(int * integers, int size)
+int sum(const int * integers, int size)
 // or int sum(int integers[], int size)
 {
 

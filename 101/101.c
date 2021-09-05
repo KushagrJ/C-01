@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 
-int sum(int *, int *);
+int sum(const int *, int *);
 
 
 int main(void)
@@ -18,12 +18,12 @@ int main(void)
 }
 
 
-int sum(int * start, int * end)
+int sum(const int * start, int * end)
 {
 
     int sum = 0;
 
-    for (int * i = start; i < end; i++)
+    for (const int * i = start; i < end; i++)
         sum += *i;
 
 //  for ( ; start < end; start++)

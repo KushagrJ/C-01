@@ -12,7 +12,7 @@ struct funds
 };
 
 
-void print_bank_names(struct funds);
+void print_bank_names(const struct funds);
 double sum(const struct funds *);
 
 
@@ -32,7 +32,7 @@ int main(void)
 }
 
 
-void print_bank_names(struct funds stephen)
+void print_bank_names(const struct funds stephen)
 {
     printf("Bank 1: %s\n", stephen.bank1);
     printf("Bank 2: %s\n", stephen.bank2);
