@@ -6,7 +6,7 @@
 
 
 // <type> *[] (which is equivalent to <type> ** in prototypes & headers) is for
-// a 1-D array of pointers / pointers-to-pointers.
+// a 1-D array of pointers / pointers-to-pointers in prototypes & headers.
 void sort_pointers_to_strings(const char **, int);
 // or void sort_pointers_to_strings(const char *[], int);
 

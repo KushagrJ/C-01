@@ -4,9 +4,9 @@
 
 
 int sum(const int *, int);
-// or int sum(int [], int);              - Any non-negative integer can be
-// or int sum(int * integers, int size);   written inside []. It will get
-// or int sum(int integers[], int size);   ignored anyway.
+// or int sum(const int [], int);              - Any non-negative integer can be
+// or int sum(const int * integers, int size);   written inside []. It will get
+// or int sum(const int integers[], int size);   ignored anyway.
 
 
 int main(void)
@@ -23,7 +23,7 @@ int main(void)
 
 
 int sum(const int * integers, int size)
-// or int sum(int integers[], int size)
+// or int sum(const int integers[], int size)
 {
 
     int sum = 0;

@@ -86,20 +86,20 @@ int sum(const int * const * arr, int rows, int cols)
        an array is created, the values are guaranteed to be stored contiguously
        in the memory, no matter the dimension of the array.
 
- * (b) Now, for a malloced block of values of a primitive data type, a similar
-       logic applies and the starting address of the block can be passed to a
-       function that expects a const qualified pointer.
+ * (b) Now, for a non-const malloced block of values of a primitive data type, a
+       similar logic applies and the starting address of the block can be passed
+       to a function that expects a const qualified pointer.
 
- * (c) But, for a malloced block of pointers that point to different malloced
-       blocks of values a primitive data type (i.e. for a dynamically allocated
-       equivalent of a 2-D array of values of a primitive data type, such as in
-       this program), the implicit conversion should be considered unsafe by the
-       compiler.
+ * (c) But, for a non-const malloced block of pointers that point to different
+       non-const malloced blocks of values a primitive data type (i.e. for a
+       dynamically allocated equivalent of a non-const 2-D array of values of a
+       primitive data type, such as in this program), the implicit conversion
+       should be considered unsafe by the compiler.
        The reason is because these pointers point to 'rows' that may be stored
        in different memory locations, unlike a 2-D array, where every 'row'
        begins immediately after the previous one ends.
        Also, these pointers may be made to point somewhere else (for eg., two
-       rows can be swapped with each other), something that is impossible in a
+       'rows' can be swapped with each other), something that is impossible in a
        2-D array.
        Thus, in this case, in order to be safe, in the function declaration,
        every pointer to 'rows' should be declared as a constant pointer, in
@@ -110,5 +110,6 @@ int sum(const int * const * arr, int rows, int cols)
        that the individual pointers will not be made to point anywhere else.
        Finally, in the function call, explicitly casting the pointer is
        necessary, as opposed to cases (a) and (b) above.
+       [Similarly for higher dimensions]
 
  */

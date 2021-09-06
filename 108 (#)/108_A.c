@@ -261,7 +261,7 @@ static void report_count(void)
 
  * A C function can be either external (the default), static or 'inline
    (discussed later)'.
- * Using the keyword 'extern' for external functions is redundant.
+ * Using the keyword extern for external functions is redundant.
  * An external function can be accessed by functions in other files, but a
    static function can be used only within the defining file.
 
