@@ -1,4 +1,5 @@
 // C17 Standard
+// This program doesn't require input validation.
 
 #include <stdio.h>
 #include <stdlib.h>
