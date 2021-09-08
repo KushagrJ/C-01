@@ -214,4 +214,19 @@ char * modified_fgets(char * s, int n)
              puts(str);
              prints The sum of 3 and 7 is 10]
 
+
+ * The memcpy() and memmove() functions copy n bytes without any conversion
+   (i.e. as is) from the location pointed to by s2 to the location pointed to by
+   s1, returning the value of s1.
+   [For eg., memcpy(s1, s2, n) or memmove(s1, s2, n)]
+ * memcpy() is free to assume that there is no overlap between the two memory
+   ranges. If the memory ranges overlap, then memcpy() invokes undefined
+   behaviour.
+ * memmove() doesn't make such an assumption, and the copying takes place as if
+   all the bytes are first copied to a temporary buffer before being copied to
+   the final destination.
+
+ * memmove() should be preferred instead of memcpy(), strcat(), strncat(),
+   strcpy() and strncpy().
+
  */
