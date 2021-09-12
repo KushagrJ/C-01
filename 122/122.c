@@ -5,10 +5,6 @@
 #include <stdlib.h>
 
 
-#define TITLE_SIZE 40
-#define AUTHOR_SIZE 50
-
-
 void get_string_from_user(char **, size_t);
 
 
