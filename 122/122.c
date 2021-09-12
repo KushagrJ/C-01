@@ -89,14 +89,13 @@ int main(void)
     }
 
 
-    if (head)
+    while (head)
     {
-        while (head)
-        {
-            struct book * next = head->next;
-            free(head);
-            head = next;
-        }
+        struct book * next = head->next;
+        free(head->title);
+        free(head->author);
+        free(head);
+        head = next;
     }
 
     return 0;
