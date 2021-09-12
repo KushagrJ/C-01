@@ -48,21 +48,26 @@ int main(int argc, char ** argv)
 char * modified_fgets(char * s, const int n, FILE * fp)
 {
 
-    char * returnValue;
-    returnValue = fgets(s, n, fp);
+    char * returnValue = fgets(s, n, fp);
 
     int i = 0;
     int c;
 
-    if (returnValue != NULL)
+    if (returnValue)
     {
         while ((s[i] != '\n') && (s[i] != '\0'))
             i++;
+
         if (s[i] == '\n')
+        {
             s[i] = '\0';
+        }
+
         else // s[i] == '\0' (i.e. there are extra characters in the line).
+        {
             while (((c = getc(fp)) != '\n') && (c != EOF))
                 continue;
+        }
     }
 
     return returnValue;

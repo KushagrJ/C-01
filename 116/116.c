@@ -68,20 +68,26 @@ void show_info(const struct name guy)
 char * modified_fgets(char * s, int n)
 {
 
-    char * returnValue;
-    int i = 0;
+    char * returnValue = fgets(s, n, stdin);
 
-    returnValue = fgets(s, n, stdin);
+    int i = 0;
+    int c;
 
     if (returnValue)
     {
         while ((s[i] != '\n') && (s[i] != '\0'))
             i++;
+
         if (s[i] == '\n')
+        {
             s[i] = '\0';
+        }
+
         else // s[i] == '\0' (i.e. there are extra characters in the buffer).
-            while (getchar() != '\n')
+        {
+            while (((c = getchar()) != '\n') && (c != EOF))
                 continue;
+        }
     }
 
     return returnValue;

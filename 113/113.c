@@ -23,7 +23,6 @@ int main(void)
     struct book * library = (struct book *) malloc(3 * sizeof (struct book));
     if (library == NULL)
         exit(EXIT_FAILURE);
-    struct book library[3];
 
     for (int i = 0; i < 3; i++)
     {
@@ -55,20 +54,26 @@ int main(void)
 char * modified_fgets(char * s, int n)
 {
 
-    char * returnValue;
-    int i = 0;
+    char * returnValue = fgets(s, n, stdin);
 
-    returnValue = fgets(s, n, stdin);
+    int i = 0;
+    int c;
 
     if (returnValue)
     {
         while ((s[i] != '\n') && (s[i] != '\0'))
             i++;
+
         if (s[i] == '\n')
+        {
             s[i] = '\0';
+        }
+
         else // s[i] == '\0' (i.e. there are extra characters in the buffer).
-            while (getchar() != '\n')
+        {
+            while (((c = getchar()) != '\n') && (c != EOF))
                 continue;
+        }
     }
 
     return returnValue;
