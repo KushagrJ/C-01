@@ -28,26 +28,75 @@ int main(void)
     struct book * prev;
     struct book * current;
 
-    for ( ; ; )
+    while (1)
     {
-        current = (struct book *) malloc(sizeof (struct book));
-        if (current == NULL)
-        {
-            fprintf(stderr, "Unsuccessful allocation!\n");
-            exit(EXIT_FAILURE);
-        }
-
         printf("Enter a book title (empty line to stop): ");
-        size_t assumed_size_of_book_title = 50;
-        current->title = (char *) malloc(assumed_size_of_book_title);
-        if (current->title == NULL)
+        size_t assumed_size_of_bookTitle_array = 50;
+        char * bookTitle = (char *) malloc(assumed_size_of_bookTitle_array);
+        if (bookTitle == NULL)
         {
             fprintf(stderr, "Unsuccessful allocation!\n");
             exit(EXIT_FAILURE);
         }
-        get_string_from_user(&(current->title), assumed_size_of_book_title);
+        get_string_from_user(&bookTitle, assumed_size_of_bookTitle_array);
 
-        if (current->title[0] == '\0')
+        if (bookTitle[0] == '\0')
+        {
+            free(bookTitle);
+            break;
+        }
+
+        current = (struct book *) malloc(sizeof (struct book));
+
+        if (head == NULL)
+            head = current;
+        else
+            prev->next = current;
+
+        current->next = NULL;
+        current->title = bookTitle;
+
+        printf("Enter the author: ");
+        size_t assumed_size_of_author_array = 50;
+        current->author = (char *) malloc(assumed_size_of_author_array);
+        if (current->author == NULL)
+        {
+            fprintf(stderr, "Unsuccessful allocation!\n");
+            exit(EXIT_FAILURE);
+        }
+        get_string_from_user(&(current->author), assumed_size_of_author_array);
+
+        printf("Enter the price: Rs. ");
+        scanf("%lf", &current->price);
+        while (getchar() != '\n')
+            continue;
+        printf("\n");
+
+        prev = current;
+    }
+
+
+    if (head)
+    {
+        printf("\n\nHere are the books you entered :-\n\n");
+        current = head;
+        while (current)
+        {
+            printf("\'%s\' by %s: Rs. %g\n",
+                   current->title, current->author, current->price);
+            current = current->next;
+        }
+    }
+
+
+    if (head)
+    {
+        while (head)
+        {
+            struct book * next = head->next;
+            free(head);
+            head = next;
+        }
     }
 
     return 0;
@@ -61,7 +110,7 @@ void get_string_from_user(char ** ptr_string,
 
     size_t i = 0;
     int c;
-    while ((c = getchar()) != EOF)
+    while ((c = getchar()) != '\n')
     {
         (*ptr_string)[i] = c;
 
