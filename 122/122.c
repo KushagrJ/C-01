@@ -48,8 +48,8 @@ int main(void)
             head = current;
         else
             prev->next = current;
-
         current->next = NULL;
+
         current->title = bookTitle;
 
         printf("Enter the author: ");
@@ -105,7 +105,7 @@ void get_string_from_user(char ** ptr_string,
 
     size_t i = 0;
     int c;
-    while ((c = getchar()) != '\n')
+    while (((c = getchar()) != '\n') && (c != EOF))
     {
         (*ptr_string)[i] = c;
 
@@ -148,8 +148,8 @@ void get_string_from_user(char ** ptr_string,
    using realloc() every time the limit is reached. Once the entire data is
    stored, a final call to realloc() can be made to free the unwanted extra
    memory.
- * This method has a few limitations, such as extra work needs to be done to add
-   and remove data in between the existing data.
+ * This method has a few limitations, such as extra work needs to be done using
+   memmove() to add and remove data in between the existing data.
 
  * Another method to accomplish this task is to use the linked list data
    structure.
