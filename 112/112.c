@@ -4,15 +4,15 @@
 #include <stdio.h>
 
 
-char * modified_fgets(char *, int);
-
-
 struct book
 {
     char title[40];
     char author[30];
     double price;
 };
+
+
+char * modified_fgets(char *, int);
 
 
 int main(void)

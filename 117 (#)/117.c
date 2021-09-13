@@ -165,7 +165,7 @@ void sort_pointers_to_structures(const struct student ** p)
 
  * typedef enables the creation of custom names for a type.
  * Unlike #define, typedef is limited to giving symbolic names to types only.
-   Also, the interpretaion is performed by the compiler, instead of the
+   Also, the interpretation is performed by the compiler, instead of the
    preprocessor - similar to enum symbolic constants.
  * For eg., typedef unsigned char BYTE;
             BYTE x = 'K';

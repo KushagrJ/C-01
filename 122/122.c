@@ -5,9 +5,6 @@
 #include <stdlib.h>
 
 
-void get_string_from_user(char **, size_t);
-
-
 struct book
 {
     char * title;
@@ -16,13 +13,18 @@ struct book
     struct book * next;
 };
 
+typedef struct book Node;
+
+
+void get_string_from_user(char **, size_t);
+
 
 int main(void)
 {
 
-    struct book * head = NULL;
-    struct book * prev;
-    struct book * current;
+    Node * head = NULL;
+    Node * prev;
+    Node * current;
 
     while (1)
     {
@@ -42,7 +44,7 @@ int main(void)
             break;
         }
 
-        current = (struct book *) malloc(sizeof (struct book));
+        current = (Node *) malloc(sizeof (Node));
 
         if (head == NULL)
             head = current;
@@ -87,7 +89,7 @@ int main(void)
 
     while (head)
     {
-        struct book * next = head->next;
+        Node * next = head->next;
         free(head->title);
         free(head->author);
         free(head);
@@ -157,9 +159,9 @@ void get_string_from_user(char ** ptr_string,
 
  * Another method to accomplish this task is to use a linked list.
  * In C, a linked list can be created by using dynamically allocated structures
-   that contain, in addition to some data, a pointer to the next structure of
-   the same type. Multiple such structures are 'linked' together with each
-   structure knowing where to find the next structure.
+   (called nodes) that contain, in addition to some data, a pointer to the next
+   structure of the same type. Multiple such structures/nodes are 'linked'
+   together with each structure knowing where to find the next structure.
  * The pointer can be set to NULL to indicate that there are no more structures,
    i.e. the current structure is the last one.
  * Another separate pointer, known as the head pointer, is used to keep track of
