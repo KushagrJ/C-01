@@ -23,8 +23,8 @@ int main(void)
 {
 
     Node * head = NULL;
-    Node * prev;
     Node * current;
+    Node * previous;
 
     while (1)
     {
@@ -46,10 +46,10 @@ int main(void)
 
         current = (Node *) malloc(sizeof (Node));
 
-        if (head == NULL)
+        if (head == NULL) // i.e. current points to the first node.
             head = current;
         else
-            prev->next = current;
+            previous->next = current;
         current->next = NULL;
 
         current->title = bookTitle;
@@ -70,7 +70,7 @@ int main(void)
             continue;
         printf("\n");
 
-        prev = current;
+        previous = current;
     }
 
 
