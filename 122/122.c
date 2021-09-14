@@ -150,12 +150,12 @@ void get_string_from_user(char ** ptr_string,
    size of the allocated memory using realloc() every time the limit is reached.
    Once the entire data is stored, a final call to realloc() can be made to free
    the unwanted extra memory.
- * This method has a few limitations, such as extra work needs to be done to add
-   and remove items in between the existing data.
-   For eg., to insert an item into the 10th position, the existing memory block
+ * This method has a few limitations, such as extra work needs to be done to
+   insert and remove items in between the existing data.
+   For eg., to insert an item at the 10th position, the existing memory block
    will have to be resized to accomodate one more item, and the existing 10th
    onwards items will have to be shifted using memmove() or a loop before the
-   new element can be inserted. [Similar logic for removing an item]
+   new item can be inserted. [Similar logic for removing an item]
 
  * Another method to accomplish this task is to use a linked list.
  * In C, a linked list can be created by using dynamically allocated structures
@@ -173,10 +173,10 @@ void get_string_from_user(char ** ptr_string,
    from 0 to 9 need to be accessed to finally get the location of the 10th
    structure, whereas in a dynamically allocated array of structures, accessing
    the 10th structure can be done by array indexing.
- * Adding and removing items in between the existing data is easier in a linked
-   list. After locating the required position (by first traversing the linked
-   list using a loop and a counter to know the position number), a new item
-   can be easily inserted and an existing item can be easily removed.
+ * Inserting and removing items in between the existing data is easier in a
+   linked list. After locating the item at the required index (by traversing the
+   linked list using a loop and a counter to know the position number), a new
+   item can be easily inserted and an existing item can be easily removed.
 
  * In this program, the realloc() method is used to get string inputs of
    unknown lengths from the user, and a linked list is used for the details of
