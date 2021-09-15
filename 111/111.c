@@ -91,7 +91,7 @@ int sum(const int * const * arr, int rows, int cols)
        to a function that expects a const qualified pointer.
 
  * (c) But, for a non-const malloced block of pointers that point to different
-       non-const malloced blocks of values a primitive data type (i.e. for a
+       non-const malloced blocks of values of a primitive data type (i.e. for a
        dynamically allocated equivalent of a non-const 2-D array of values of a
        primitive data type, such as in this program), the implicit conversion
        should be considered unsafe by the compiler.

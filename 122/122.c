@@ -46,7 +46,7 @@ int main(void)
 
         current = (Node *) malloc(sizeof (Node));
 
-        if (head == NULL) // i.e. current points to the first node.
+        if (head == NULL) // i.e. current points to the zeroth node.
             head = current;
         else
             previous->next = current;
@@ -177,6 +177,8 @@ void get_string_from_user(char ** ptr_string,
    linked list. After locating the item at the required index (by traversing the
    linked list using a loop and a counter to know the position number), a new
    item can be easily inserted and an existing item can be easily removed.
+   [This is the main advantage of a linked list, i.e. arbitrary insertions and
+    removals can be done without reallocations]
 
  * In this program, the realloc() method is used to get string inputs of
    unknown lengths from the user, and a linked list is used for the details of

@@ -8,33 +8,114 @@
 int main(void)
 {
 
+    printf("\n");
+    puts("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
+    puts("*                                                         *");
+    puts("*   STUDENT LIST OF ROLL NUMBERS & GPAs                   *");
+    puts("*                                                         *");
+    puts("*                                                         *");
+    puts("*   Choice   Operation                                    *");
+    puts("*                                                         *");
+    puts("*   1        Insert a new student's details in the list   *");
+    puts("*                                                         *");
+    puts("*   2        Display a student's details from the list    *");
+    puts("*                                                         *");
+    puts("*   3        Remove a student's details from the list     *");
+    puts("*                                                         *");
+    puts("*   4        Search the list by Roll Number               *");
+    puts("*                                                         *");
+    puts("*   5        Search the list by GPA                       *");
+    puts("*                                                         *");
+    puts("*   6        Display the number of students in the list   *");
+    puts("*                                                         *");
+    puts("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
+
+
     List students = create_empty_list();
-
-    Item temp_item;
-
-
-    temp_item.rollNumber = 0;
-    temp_item.gpa = 9.0;
-    insert_item_in_list(&students, -1, &temp_item);
-
-    temp_item.rollNumber = 1;
-    temp_item.gpa = 9.1;
-    insert_item_in_list(&students, -1, &temp_item);
-
-    temp_item.rollNumber = 2;
-    temp_item.gpa = 9.2;
-    insert_item_in_list(&students, -1, &temp_item);
-
-    apply_function_to_item(&students, -1, print_item);
-    printf("\n\n");
+    Item temp;
 
 
-    temp_item.rollNumber = 3;
-    temp_item.gpa = 9.3;
-    insert_item_in_list(&students, 1, &temp_item);
+    while (true)
+    {
+        unsigned choice;
+        printf("\n\nEnter your choice: ");
+        scanf("%u", &choice);
 
-    apply_function_to_item(&students, -1, print_item);
-    printf("\n\n");
+        if (choice == 1)
+        {
+            printf("\nEnter the student's roll number: ");
+            scanf("%u", &temp.rollNumber);
+
+            printf("Enter their GPA: ");
+            scanf("%lf", &temp.gpa);
+
+            size_t position;
+            printf("Enter the position in the list (0 for last): ");
+            scanf("%zu", &position);
+
+            insert_item_in_list(&students, position - 1, &temp);
+        }
+
+        else if (choice == 2)
+        {
+            size_t position;
+            printf("Enter the position in the list (0 for all): ");
+            scanf("%zu", &position);
+
+            apply_function_to_item(&students, position - 1, print_item);
+        }
+
+        else if (choice == 3)
+        {
+            size_t position;
+            printf("Enter the position in the list: ");
+            scanf("%zu", &position);
+
+            remove_item_from_list(&students, position - 1);
+        }
+
+        else if (choice == 4)
+        {
+            printf("Enter the roll number: ");
+            scanf("%u", &temp.rollNumber);
+
+            bool matchFound =
+                search_by_rollNumber_and_apply_function(&students, &temp,
+                                                        print_item);
+            if (!(matchFound))
+                printf("\nNo match found!\n");
+        }
+
+        else if (choice == 5)
+        {
+            double lower, upper;
+
+            printf("Enter the lower limit: ");
+            scanf("%lf", &lower);
+
+            printf("Enter the upper limit: ");
+            scanf("%lf", &upper);
+
+            bool matchFound =
+                search_by_gpa_range_and_apply_function(&students, lower, upper,
+                                                       print_item);
+            if (!(matchFound))
+                printf("\nNo match found!\n");
+        }
+
+        else if (choice == 6)
+        {
+            printf("%zu\n", number_of_items_in_list(&students));
+        }
+
+
+        char resume;
+        printf("\nDo you want to continue? (y/n): ");
+        scanf(" %c", &resume);
+
+        if (resume != 'y')
+            break;
+    }
 
 
     empty_list(&students);
@@ -73,18 +154,18 @@ int main(void)
    of items. Each item in turn consists of the roll number and GPA of a student.
  * The following operations can be performed on such a list :-
    (1) Creating an empty list.
-   (2) Determining whether a list is empty.
-   (3) Determining how many items are there in a list.
-   (4) Operating on 'all items' / 'an item at any index' in a list.
-   (5) Inserting an item at any index in a list.
-   (6) Removing an item at any index from a list.
-   (7) Replacing an item at any index in a list with another item.
-   (8) Searching for an item in a list and determining the index of its first
-       occurrence.
-   (9) Emptying a list.
+   (2) Inserting an item at any index in a list.
+   (3) Operating on 'all items' / 'an item at any index' in a list.
+   (4) Removing an item at any index from a list.
+   (5) Searching for an item by roll number in a list and operating on it.
+   (6) Searching for an item by gpa range in a list an operating on it.
+   (7) Determining how many items are there in a list.
+   (8) Emptying a list.
+ * The realloc() method can also be used to implement a list ADT.
 
  * The declaration List students; should be thought of as a new variable
    students being declared of the type List.
+
 
  * Using const List * parameters for functions that don't change the list is
    confusing in this program.
