@@ -23,24 +23,29 @@ typedef struct node Node;
 typedef Node * List;
 
 
-void print_item(Item *);
+void print_item(Item *, size_t);
 
 List create_empty_list(void);
 
 // If index is -1, then the item will be inserted at the end of the list.
 // Else, the item will be inserted at the given index.
-void insert_item_in_list(List *, ssize_t index, Item *);
+size_t insert_item_in_list(List *, ssize_t index, Item *);
 
 // If index is -1, then the function will be applied to all items sequentially.
 // Else, the function will be applied to the item at the given index.
-void apply_function_to_item(List *, ssize_t index, void (*)(Item *));
+void apply_function_to_item(List *, ssize_t index, void (*)(Item *, size_t));
 
 void remove_item_from_list(List *, size_t index);
 
-bool search_by_rollNumber_and_apply_function(List *, Item *, void (*)(Item *));
+bool search_by_rollNumber_and_apply_function(List *, Item *,
+                                             void (*)(Item *, size_t));
 
 bool search_by_gpa_range_and_apply_function(List *, double, double,
-                                            void (*)(Item *));
+                                            void (*)(Item *, size_t));
+
+// If rollNumber is true, then the list will be sorted by rollNumber.
+// Else, the list will be sorted by gpa.
+void bubble_sort(List *, bool rollNumber);
 
 size_t number_of_items_in_list(List *);
 

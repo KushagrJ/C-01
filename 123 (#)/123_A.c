@@ -26,7 +26,11 @@ int main(void)
     puts("*                                                         *");
     puts("*   5        Search the list by GPA                       *");
     puts("*                                                         *");
-    puts("*   6        Display the number of students in the list   *");
+    puts("*   6        Sort the list by Roll Number                 *");
+    puts("*                                                         *");
+    puts("*   7        Sort the list by GPA                         *");
+    puts("*                                                         *");
+    puts("*   8        Display the number of students in the list   *");
     puts("*                                                         *");
     puts("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
 
@@ -50,16 +54,21 @@ int main(void)
             scanf("%lf", &temp.gpa);
 
             size_t position;
-            printf("Enter the position in the list (0 for last): ");
+            printf("Enter the position in the list (0 for last position): ");
             scanf("%zu", &position);
 
-            insert_item_in_list(&students, position - 1, &temp);
+            size_t index_of_inserted_item =
+                insert_item_in_list(&students, position - 1, &temp);
+
+            printf("\nStudent details inserted successfully!\n");
+            apply_function_to_item(&students, index_of_inserted_item,
+                                   print_item);
         }
 
         else if (choice == 2)
         {
             size_t position;
-            printf("Enter the position in the list (0 for all): ");
+            printf("Enter the position in the list (0 for entire list): ");
             scanf("%zu", &position);
 
             apply_function_to_item(&students, position - 1, print_item);
@@ -72,6 +81,8 @@ int main(void)
             scanf("%zu", &position);
 
             remove_item_from_list(&students, position - 1);
+
+            printf("\nStudent details removed successfully!\n");
         }
 
         else if (choice == 4)
@@ -104,6 +115,20 @@ int main(void)
         }
 
         else if (choice == 6)
+        {
+            bubble_sort(&students, true);
+
+            printf("\nSorted by Roll Number successfully!\n");
+        }
+
+        else if (choice == 7)
+        {
+            bubble_sort(&students, false);
+
+            printf("\nSorted by GPA successfully!\n");
+        }
+
+        else if (choice == 8)
         {
             printf("%zu\n", number_of_items_in_list(&students));
         }
@@ -153,14 +178,16 @@ int main(void)
  * In this program, a list ADT is implemented using a linked list which consists
    of items. Each item in turn consists of the roll number and GPA of a student.
  * The following operations can be performed on such a list :-
-   (1) Creating an empty list.
-   (2) Inserting an item at any index in a list.
-   (3) Operating on 'all items' / 'an item at any index' in a list.
-   (4) Removing an item at any index from a list.
-   (5) Searching for an item by roll number in a list and operating on it.
-   (6) Searching for an item by gpa range in a list an operating on it.
-   (7) Determining how many items are there in a list.
-   (8) Emptying a list.
+   (01) Creating an empty list.
+   (02) Inserting an item at any index in a list.
+   (03) Operating on 'all items' / 'an item at any index' in a list.
+   (04) Removing an item at any index from a list.
+   (05) Searching for an item by roll number in a list and operating on it.
+   (06) Searching for an item by gpa range in a list an operating on it.
+   (07) Sorting a list by roll number.
+   (08) Sorting a list by gpa.
+   (09) Determining how many items are there in a list.
+   (10) Emptying a list.
  * The realloc() method can also be used to implement a list ADT.
 
  * The declaration List students; should be thought of as a new variable
