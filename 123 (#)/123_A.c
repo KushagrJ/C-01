@@ -8,31 +8,30 @@
 int main(void)
 {
 
-    printf("\n");
-    puts("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
-    puts("*                                                         *");
-    puts("*   STUDENT LIST OF ROLL NUMBERS & GPAs                   *");
-    puts("*                                                         *");
-    puts("*                                                         *");
-    puts("*   Choice   Operation                                    *");
-    puts("*                                                         *");
-    puts("*   1        Insert a new student's details in the list   *");
-    puts("*                                                         *");
-    puts("*   2        Display a student's details from the list    *");
-    puts("*                                                         *");
-    puts("*   3        Remove a student's details from the list     *");
-    puts("*                                                         *");
-    puts("*   4        Search the list by Roll Number               *");
-    puts("*                                                         *");
-    puts("*   5        Search the list by GPA                       *");
-    puts("*                                                         *");
-    puts("*   6        Sort the list by Roll Number                 *");
-    puts("*                                                         *");
-    puts("*   7        Sort the list by GPA                         *");
-    puts("*                                                         *");
-    puts("*   8        Display the number of students in the list   *");
-    puts("*                                                         *");
-    puts("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
+    puts("\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n"
+           "*                                                         *\n"
+           "*   STUDENT LIST OF ROLL NUMBERS & GPAs                   *\n"
+           "*                                                         *\n"
+           "*                                                         *\n"
+           "*   Choice   Operation                                    *\n"
+           "*                                                         *\n"
+           "*   1        Insert a new student's details in the list   *\n"
+           "*                                                         *\n"
+           "*   2        Display a student's details from the list    *\n"
+           "*                                                         *\n"
+           "*   3        Remove a student's details from the list     *\n"
+           "*                                                         *\n"
+           "*   4        Search the list by Roll Number               *\n"
+           "*                                                         *\n"
+           "*   5        Search the list by GPA                       *\n"
+           "*                                                         *\n"
+           "*   6        Sort the list by Roll Number                 *\n"
+           "*                                                         *\n"
+           "*   7        Sort the list by GPA                         *\n"
+           "*                                                         *\n"
+           "*   8        Display the number of students in the list   *\n"
+           "*                                                         *\n"
+           "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
 
 
     List students = create_empty_list();
