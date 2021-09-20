@@ -34,7 +34,7 @@ int main(int argc, char ** argv)
 
     char s[1024];
     while (modified_fgets(s, 1024, in) != NULL)
-        wrap_line(s, 80), fprintf(stdout, "%s\n", s);
+        wrap_line(s, 80), fprintf(out, "%s\n", s);
 
     fclose(in);
     fclose(out);
