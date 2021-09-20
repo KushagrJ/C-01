@@ -31,6 +31,8 @@ int main(void)
          "*                                                         *\n"
          "*   8        Display the number of students in the list   *\n"
          "*                                                         *\n"
+         "*   9        Exit                                         *\n"
+         "*                                                         *\n"
          "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
 
 
@@ -119,13 +121,10 @@ int main(void)
             printf("%zu\n", number_of_items_in_list(&students));
         }
 
-
-        char resume;
-        printf("\nDo you want to continue? (y/n): ");
-        scanf(" %c", &resume);
-
-        if (resume != 'y')
+        else if (choice == 9)
+        {
             break;
+        }
     }
 
 
@@ -175,10 +174,11 @@ int main(void)
    (09) Determining how many items are there in a list.
    (10) Emptying a list.
  * The static array method (not recommended because of a fixed number of items)
-   and the realloc() method can also be used to implement a list ADT.
-   Since a linked list is used, therefore there is no operation added to
-   determine whether the list is full, as elements can be added to this list
-   as long as the computer doesn't run out of memory.
+   and the dynamic array method (using realloc()) can also be used to implement
+   a list ADT.
+   Since a linked list is used, therefore there is no operation available to
+   determine whether a list is full, as items can be added to the list as long
+   as the computer doesn't run out of memory.
 
  * The declaration List students; should be thought of as a new variable
    students being declared of the type List.

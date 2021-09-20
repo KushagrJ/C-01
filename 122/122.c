@@ -145,11 +145,11 @@ void get_string_from_user(char ** ptr_string,
 
 /* Trivia
 
- * To store an unknown number of similar data items, one technique is initially
-   allocating some memory dynamically using malloc(), and later doubling the
-   size of the allocated memory using realloc() every time the limit is reached.
-   Once the entire data is stored, a final call to realloc() can be made to free
-   the unwanted extra memory.
+ * To store an unknown number of similar data items, one technique is using a
+   dynamic array, i.e. initially allocating some memory dynamically using
+   malloc(), and later doubling the size of the allocated memory using realloc()
+   every time the limit is reached. Once the entire data is stored, a final call
+   to realloc() can be made to free the unwanted extra memory.
  * This method has a few limitations, such as extra work needs to be done to
    insert and remove items in between the existing data.
    For eg., to insert an item at the 10th position, the existing memory block
@@ -162,25 +162,25 @@ void get_string_from_user(char ** ptr_string,
    (called nodes) that contain, in addition to some data, a pointer to the next
    structure of the same type. Multiple such structures/nodes are 'linked'
    together with each structure knowing where to find the next structure.
- * The pointer can be set to NULL to indicate that there are no more structures,
-   i.e. the current structure is the last one.
+ * The pointer to the next structure can be set to NULL to indicate that there
+   are no more structures, i.e. the current structure is the last one.
  * Another separate pointer, known as the head pointer, is used to keep track of
    the first structure in a linked list of structures.
 
  * Accessing items non-sequentially is slower in a linked list as compared to
-   the realloc() method.
+   dynamic arrays.
    For eg., to access the 10th structure in a linked list, all the structures
    from 0 to 9 need to be accessed to finally get the location of the 10th
    structure, whereas in a dynamically allocated array of structures, accessing
    the 10th structure can be done by array indexing.
  * Inserting and removing items in between the existing data is easier in a
    linked list. After locating the item at the required index (by traversing the
-   linked list using a loop and a counter to know the position number), a new
-   item can be easily inserted and an existing item can be easily removed.
+   linked list using a loop and a counter to know the index number), a new item
+   can be easily inserted and an existing item can be easily removed.
    [This is the main advantage of a linked list, i.e. arbitrary insertions and
     removals can be done without reallocations]
 
- * In this program, the realloc() method is used to get string inputs of
+ * In this program, the dynamic array method is used to get string inputs of
    unknown lengths from the user, and a linked list is used for the details of
    an unknown number of different books.
 
