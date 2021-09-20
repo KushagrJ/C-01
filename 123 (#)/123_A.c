@@ -183,12 +183,16 @@ int main(void)
    (03) Operating on 'all items' / 'an item at any index' in a list.
    (04) Removing an item at any index from a list.
    (05) Searching for an item by roll number in a list and operating on it.
-   (06) Searching for an item by gpa range in a list an operating on it.
+   (06) Searching for an item by gpa range in a list and operating on it.
    (07) Sorting a list by roll number.
    (08) Sorting a list by gpa.
    (09) Determining how many items are there in a list.
    (10) Emptying a list.
- * The realloc() method can also be used to implement a list ADT.
+ * The static array method (not recommended because of a fixed number of items)
+   and the realloc() method can also be used to implement a list ADT.
+   Since a linked list is used, therefore there is no operation added to
+   determine whether the list is full, as elements can be added to this list
+   as long as the computer doesn't run out of memory.
 
  * The declaration List students; should be thought of as a new variable
    students being declared of the type List.

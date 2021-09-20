@@ -3,7 +3,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 
 char * modified_fgets(char *, const int, FILE *);
@@ -35,7 +34,7 @@ int main(int argc, char ** argv)
 
     char s[1024];
     while (modified_fgets(s, 1024, in) != NULL)
-        wrap_line(s, 80), fprintf(out, "%s\n", s);
+        wrap_line(s, 80), fprintf(stdout, "%s\n", s);
 
     fclose(in);
     fclose(out);
@@ -82,10 +81,9 @@ void wrap_line(char * s, const int wrapColumn)
 {
 
     int lastWrap = 0;
-    int stringLength = strlen(s);
     int lastSpace = -1;
 
-    for (int i = 0; i < stringLength; i++)
+    for (int i = 0; s[i] != '\0'; i++)
     {
         if (s[i] == ' ')
             lastSpace = i;

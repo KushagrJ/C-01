@@ -46,7 +46,7 @@ int main(void)
 
         current = (Node *) malloc(sizeof (Node));
 
-        if (head == NULL) // i.e. current points to the zeroth node.
+        if (head == NULL)   // i.e. current points to the zeroth node.
             head = current;
         else
             previous->next = current;

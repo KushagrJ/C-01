@@ -23,19 +23,34 @@ size_t insert_item_in_list(Node ** ptr_head, ssize_t index, Item * ptr_item)
 
     size_t index_of_inserted_item;
 
-    // new is to be inserted in between previous and current.
-
     Node * current = *ptr_head;
     Node * previous = NULL;
 
     size_t i = 0;
-    while ((index == -1) ? current != NULL : i != (size_t) index)
+
+    if (index == -1)
     {
-        previous = current;
-        current = current->next;
-        i++;
+        while (current)
+        {
+            previous = current;
+            current = current->next;
+            i++;
+        }
     }
+
+    else
+    {
+        while (i != (size_t) index)
+        {
+            previous = current;
+            current = current->next;
+            i++;
+        }
+    }
+
     index_of_inserted_item = i;
+
+    // new is to be inserted in between previous and current.
 
     Node * new = (Node *) malloc(sizeof (Node));
     if (new == NULL)
@@ -45,7 +60,7 @@ size_t insert_item_in_list(Node ** ptr_head, ssize_t index, Item * ptr_item)
     }
     memmove(&(new->item), ptr_item, sizeof (Item));
 
-    if (previous == NULL) // i.e. new points to the zeroth node.
+    if (previous == NULL)   // i.e. new points to the zeroth node.
         *ptr_head = new;
     else
         previous->next = new;
@@ -93,7 +108,7 @@ void remove_item_from_list(Node ** ptr_head, size_t index)
         current = current->next;
     }
 
-    if (previous == NULL) // i.e. the zeroth node is to be removed.
+    if (previous == NULL)   // i.e. the zeroth node is to be removed.
         *ptr_head = current->next;
     else
         previous->next = current->next;
@@ -106,7 +121,7 @@ bool search_by_rollNumber_and_apply_function(Node ** ptr_head, Item * ptr_item,
                                              void (* func)(Item *, size_t))
 {
 
-    _Bool matchFound = false;
+    bool matchFound = false;
 
     Node * current = *ptr_head;
 
@@ -158,34 +173,70 @@ void bubble_sort(Node ** ptr_head, bool rollNumber)
 
     Node * end_of_current_iteration = NULL;
 
-    while (end_of_current_iteration != (*ptr_head)->next)
+    if (rollNumber)
     {
-        current = *ptr_head;
-        previous = NULL;
-        next = (*ptr_head)->next;
-
-        while (next != end_of_current_iteration)
+        while (end_of_current_iteration != (*ptr_head)->next)
         {
-            if ((rollNumber ? current->item.rollNumber : current->item.gpa) >
-                    (rollNumber ? next->item.rollNumber : next->item.gpa))
-            {
-                if (previous == NULL) // i.e. the zeroth and first nodes are to
-                    *ptr_head = next; // be swapped.
-                else
-                    previous->next = next;
-                current->next = next->next;
-                next->next = current;
+            current = *ptr_head;
+            previous = NULL;
+            next = (*ptr_head)->next;
 
+            while (next != end_of_current_iteration)
+            {
+                if (current->item.rollNumber > next->item.rollNumber)
+                {
+                    if (previous == NULL)   // i.e. the zeroth and the first
+                        *ptr_head = next;   // nodes are to be swapped.
+                    else
+                        previous->next = next;
+                    current->next = next->next;
+                    next->next = current;
+
+                    // To swap the addresses stored in current and next.
+                    current = next;
+                    next = next->next;
+                }
+
+                previous = current;
                 current = next;
                 next = next->next;
             }
 
-            previous = current;
-            current = next;
-            next = next->next;
+            end_of_current_iteration = current;
         }
+    }
 
-        end_of_current_iteration = current;
+    else
+    {
+       while (end_of_current_iteration != (*ptr_head)->next)
+        {
+            current = *ptr_head;
+            previous = NULL;
+            next = (*ptr_head)->next;
+
+            while (next != end_of_current_iteration)
+            {
+                if (current->item.gpa > next->item.gpa)
+                {
+                    if (previous == NULL)   // i.e. the zeroth and the first
+                        *ptr_head = next;   // nodes are to be swapped.
+                    else
+                        previous->next = next;
+                    current->next = next->next;
+                    next->next = current;
+
+                    // To swap the addresses stored in current and next.
+                    current = next;
+                    next = next->next;
+                }
+
+                previous = current;
+                current = next;
+                next = next->next;
+            }
+
+            end_of_current_iteration = current;
+        }
     }
 
 }
