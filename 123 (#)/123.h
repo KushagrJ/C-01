@@ -37,10 +37,10 @@ void apply_function_to_item(List *, ssize_t index, void (*)(Item *, size_t));
 
 void remove_item_from_list(List *, size_t index);
 
-bool search_by_rollNumber_and_apply_function(List *, Item *,
+void search_by_rollNumber_and_apply_function(List *, Item *,
                                              void (*)(Item *, size_t));
 
-bool search_by_gpa_range_and_apply_function(List *, double, double,
+void search_by_gpa_range_and_apply_function(List *, double, double,
                                             void (*)(Item *, size_t));
 
 // If rollNumber is true, then the list will be sorted by rollNumber.

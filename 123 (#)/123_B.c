@@ -66,6 +66,8 @@ size_t insert_item_in_list(Node ** ptr_head, ssize_t index, Item * ptr_item)
         previous->next = new;
     new->next = current;
 
+    printf("\nStudent details inserted successfully!\n");
+
     return index_of_inserted_item;
 
 }
@@ -74,6 +76,12 @@ size_t insert_item_in_list(Node ** ptr_head, ssize_t index, Item * ptr_item)
 void apply_function_to_item(Node ** ptr_head, ssize_t index,
                             void (* func)(Item *, size_t))
 {
+
+    if (*ptr_head == NULL)
+    {
+        printf("\nThe list is currently empty!\n");
+        return;
+    }
 
     Node * current = *ptr_head;
 
@@ -114,10 +122,12 @@ void remove_item_from_list(Node ** ptr_head, size_t index)
         previous->next = current->next;
     free(current);
 
+    printf("\nStudent details removed successfully!\n");
+
 }
 
 
-bool search_by_rollNumber_and_apply_function(Node ** ptr_head, Item * ptr_item,
+void search_by_rollNumber_and_apply_function(Node ** ptr_head, Item * ptr_item,
                                              void (* func)(Item *, size_t))
 {
 
@@ -135,12 +145,13 @@ bool search_by_rollNumber_and_apply_function(Node ** ptr_head, Item * ptr_item,
         current = current->next;
     }
 
-    return matchFound;
+    if (!(matchFound))
+        printf("\nNo match found!\n");
 
 }
 
 
-bool search_by_gpa_range_and_apply_function(Node ** ptr_head, double lower,
+void search_by_gpa_range_and_apply_function(Node ** ptr_head, double lower,
                                             double upper,
                                             void (* func)(Item *, size_t))
 {
@@ -159,13 +170,20 @@ bool search_by_gpa_range_and_apply_function(Node ** ptr_head, double lower,
         current = current->next;
     }
 
-    return matchFound;
+    if (!(matchFound))
+        printf("\nNo match found!\n");
 
 }
 
 
 void bubble_sort(Node ** ptr_head, bool rollNumber)
 {
+
+    if (*ptr_head == NULL)
+    {
+        printf("\nThe list is currently empty!\n");
+        return;
+    }
 
     Node * current;
     Node * previous;
@@ -204,6 +222,8 @@ void bubble_sort(Node ** ptr_head, bool rollNumber)
 
             end_of_current_iteration = current;
         }
+
+        printf("\nSorted by Roll Number successfully!\n");
     }
 
     else
@@ -237,6 +257,8 @@ void bubble_sort(Node ** ptr_head, bool rollNumber)
 
             end_of_current_iteration = current;
         }
+
+        printf("\nSorted by GPA successfully!\n");
     }
 
 }

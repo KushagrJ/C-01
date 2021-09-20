@@ -8,30 +8,30 @@
 int main(void)
 {
 
-    puts("\n* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n"
-           "*                                                         *\n"
-           "*   STUDENT LIST OF ROLL NUMBERS & GPAs                   *\n"
-           "*                                                         *\n"
-           "*                                                         *\n"
-           "*   Choice   Operation                                    *\n"
-           "*                                                         *\n"
-           "*   1        Insert a new student's details in the list   *\n"
-           "*                                                         *\n"
-           "*   2        Display a student's details from the list    *\n"
-           "*                                                         *\n"
-           "*   3        Remove a student's details from the list     *\n"
-           "*                                                         *\n"
-           "*   4        Search the list by Roll Number               *\n"
-           "*                                                         *\n"
-           "*   5        Search the list by GPA                       *\n"
-           "*                                                         *\n"
-           "*   6        Sort the list by Roll Number                 *\n"
-           "*                                                         *\n"
-           "*   7        Sort the list by GPA                         *\n"
-           "*                                                         *\n"
-           "*   8        Display the number of students in the list   *\n"
-           "*                                                         *\n"
-           "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
+    puts("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n"
+         "*                                                         *\n"
+         "*   STUDENT LIST OF ROLL NUMBERS & GPAs                   *\n"
+         "*                                                         *\n"
+         "*                                                         *\n"
+         "*   Choice   Operation                                    *\n"
+         "*                                                         *\n"
+         "*   1        Insert a new student's details in the list   *\n"
+         "*                                                         *\n"
+         "*   2        Display a student's details from the list    *\n"
+         "*                                                         *\n"
+         "*   3        Remove a student's details from the list     *\n"
+         "*                                                         *\n"
+         "*   4        Search the list by Roll Number               *\n"
+         "*                                                         *\n"
+         "*   5        Search the list by GPA                       *\n"
+         "*                                                         *\n"
+         "*   6        Sort the list by Roll Number                 *\n"
+         "*                                                         *\n"
+         "*   7        Sort the list by GPA                         *\n"
+         "*                                                         *\n"
+         "*   8        Display the number of students in the list   *\n"
+         "*                                                         *\n"
+         "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
 
 
     List students = create_empty_list();
@@ -59,7 +59,6 @@ int main(void)
             size_t index_of_inserted_item =
                 insert_item_in_list(&students, position - 1, &temp);
 
-            printf("\nStudent details inserted successfully!\n");
             apply_function_to_item(&students, index_of_inserted_item,
                                    print_item);
         }
@@ -80,8 +79,6 @@ int main(void)
             scanf("%zu", &position);
 
             remove_item_from_list(&students, position - 1);
-
-            printf("\nStudent details removed successfully!\n");
         }
 
         else if (choice == 4)
@@ -89,11 +86,8 @@ int main(void)
             printf("Enter the roll number: ");
             scanf("%u", &temp.rollNumber);
 
-            bool matchFound =
-                search_by_rollNumber_and_apply_function(&students, &temp,
-                                                        print_item);
-            if (!(matchFound))
-                printf("\nNo match found!\n");
+            search_by_rollNumber_and_apply_function(&students, &temp,
+                                                    print_item);
         }
 
         else if (choice == 5)
@@ -106,25 +100,18 @@ int main(void)
             printf("Enter the upper limit: ");
             scanf("%lf", &upper);
 
-            bool matchFound =
-                search_by_gpa_range_and_apply_function(&students, lower, upper,
-                                                       print_item);
-            if (!(matchFound))
-                printf("\nNo match found!\n");
+            search_by_gpa_range_and_apply_function(&students, lower, upper,
+                                                   print_item);
         }
 
         else if (choice == 6)
         {
             bubble_sort(&students, true);
-
-            printf("\nSorted by Roll Number successfully!\n");
         }
 
         else if (choice == 7)
         {
             bubble_sort(&students, false);
-
-            printf("\nSorted by GPA successfully!\n");
         }
 
         else if (choice == 8)
