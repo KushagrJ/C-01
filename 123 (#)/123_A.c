@@ -36,7 +36,8 @@ int main(void)
          "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
 
 
-    List students = create_empty_list();
+    List students;
+    create_empty_list(&students);
     Item temp;
 
 
@@ -59,7 +60,7 @@ int main(void)
             scanf("%zu", &position);
 
             size_t index_of_inserted_item =
-                insert_item_in_list(&students, position - 1, &temp);
+                insert_item_in_list(&students, &temp, position - 1);
 
             apply_function_to_item(&students, index_of_inserted_item,
                                    print_item);
@@ -85,10 +86,12 @@ int main(void)
 
         else if (choice == 4)
         {
-            printf("Enter the roll number: ");
-            scanf("%u", &temp.rollNumber);
+            unsigned rollNumber;
 
-            search_by_rollNumber_and_apply_function(&students, &temp,
+            printf("Enter the roll number: ");
+            scanf("%u", &rollNumber);
+
+            search_by_rollNumber_and_apply_function(&students, rollNumber,
                                                     print_item);
         }
 
@@ -184,21 +187,8 @@ int main(void)
    students being declared of the type List.
 
 
- * Using const List * parameters for functions that don't change the list is
-   confusing in this program.
-   List is equivalent to Node *, so const List * actually means Node * const *,
-   and not const Node **.
-   This means that using a const List * parameter, the contents of the items can
-   still be altered.
-   Thus, a const List * parameter such as const List * ptr_head only means that
-   head cannot be made to point to another structure.
-   So, using const List * just to show that head (i.e. the List variable) will
-   not point to any other structure is confusing, as the exact implementation
-   details are supposed to be hidden at the higher level and this type can
-   make the user incorrectly believe that the contents of the items will not be
-   altered by the function.
-   To make the functions truly unable to change the contents of the items, a
-   parameter of type const Node * const * needs to be used.
-   Hence, in this program, const is avoided completely.
+ * In this program, const is avoided completely.
+   Later, modify this program by using const wherever required.
+   [See 111.c's Trivia (points (a), (b) and (c)]
 
  */

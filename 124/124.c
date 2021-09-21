@@ -18,22 +18,39 @@ struct student_rollNumber_and_gpa
 
 typedef struct student_rollNumber_and_gpa Item;
 
-// To hide the fact in the prototypes and main() that a static array is used.
-typedef Item Stack[STACK_SIZE];
+
+struct stack
+{
+    Item stack[STACK_SIZE];
+    ssize_t index_of_last_item;
+};
+
+// To hide the exact implementation details from the main() function.
+typedef struct stack Stack;
 
 
+// Argument 1: Address of the item which is to be printed.
 void print_item(Item *);
 
-void push(Stack, ssize_t * ptr_index_of_last_item, Item *);
+// Argument 1: Address of a Stack variable.
+void create_empty_stack(struct stack *);
 
-void apply_function_to_last_item(Stack, ssize_t * ptr_index_of_last_item,
-                                 void (*)(Item *));
+// Argument 1: Address of a Stack variable.
+// Argument 2: Address of the item which is to be pushed.
+void push(struct stack *, Item *);
 
-void pop(ssize_t * ptr_index_of_last_item);
+// Argument 1: Address of a Stack variable.
+// Argument 2: Address of the function which is to be applied to the last item.
+void apply_function_to_last_item(struct stack *, void (*)(Item *));
 
-bool is_empty(ssize_t * ptr_index_of_last_item);
+// Argument 1: Address of a Stack variable.
+void pop(struct stack *);
 
-bool is_full(ssize_t * ptr_index_of_last_item);
+// Argument 1: Address of a Stack variable.
+bool is_empty(struct stack *);
+
+// Argument 1: Address of a Stack variable.
+bool is_full(struct stack *);
 
 
 int main(void)
@@ -65,8 +82,60 @@ int main(void)
 
 
     Stack students;
-    ssize_t index_of_last_item = -1;
+    create_empty_stack(&students);
     Item temp;
+
+
+    while (true)
+    {
+        unsigned choice;
+        printf("\n\nEnter your choice: ");
+        scanf("%u", &choice);
+
+        if (choice == 1)
+        {
+            printf("\nEnter the student's roll number: ");
+            scanf("%u", &temp.rollNumber);
+
+            printf("Enter their GPA: ");
+            scanf("%lf", &temp.gpa);
+
+            push(&students, &temp);
+
+            apply_function_to_last_item(&students, print_item);
+        }
+
+        else if (choice == 2)
+        {
+            apply_function_to_last_item(&students, print_item);
+        }
+
+        else if (choice == 3)
+        {
+            pop(&students);
+        }
+
+        else if (choice == 4)
+        {
+            if (is_empty(&students))
+                printf("\nThe stack is empty!\n");
+            else
+                printf("\nThe stack is not empty!\n");
+        }
+
+        else if (choice == 5)
+        {
+            if (is_full(&students))
+                printf("\nThe stack is full!\n");
+            else
+                printf("\nThe stack is not full!\n");
+        }
+
+        else if (choice == 6)
+        {
+            break;
+        }
+    }
 
 
     return 0;
@@ -81,62 +150,73 @@ void print_item(Item * ptr_item)
 }
 
 
-void push(Item * arr, ssize_t * ptr_index_of_last_item, Item * ptr_item)
+void create_empty_stack(struct stack * ptr_stack)
+{
+    ptr_stack->index_of_last_item = -1;
+}
+
+
+void push(struct stack * ptr_stack, Item * ptr_item)
 {
 
-    if (*ptr_index_of_last_item == STACK_SIZE)
+    if (ptr_stack->index_of_last_item == STACK_SIZE)
     {
         printf("\nThe stack is full!\n");
         return;
     }
 
-    (*ptr_index_of_last_item)++;
-    memmove(arr + (*ptr_index_of_last_item), ptr_item, sizeof (Item));
+    (ptr_stack->index_of_last_item)++;
+    memmove((ptr_stack->stack) + ptr_stack->index_of_last_item,
+            ptr_item, sizeof (Item));
+
+    printf("\nStudent details inserted successfully!\n");
 
 }
 
 
-void apply_function_to_last_item(Item * arr, ssize_t * ptr_index_of_last_item,
+void apply_function_to_last_item(struct stack * ptr_stack,
                                  void (* func)(Item *))
 {
 
-    if (*ptr_index_of_last_item == -1)
+    if (ptr_stack->index_of_last_item == -1)
     {
         printf("\nThe stack is empty!\n");
         return;
     }
 
-    (*func)(arr + (*ptr_index_of_last_item));
+    (*func)((ptr_stack->stack) + ptr_stack->index_of_last_item);
 
 }
 
 
-void pop(ssize_t * ptr_index_of_last_item)
+void pop(struct stack * ptr_stack)
 {
 
-    if (*ptr_index_of_last_item == -1)
+    if (ptr_stack->index_of_last_item == -1)
     {
         printf("\nThe stack is empty!\n");
         return;
     }
 
-    (*ptr_index_of_last_item)--;
+    (ptr_stack->index_of_last_item)--;
+
+    printf("\nStudent details removed successfully!\n");
 
 }
 
 
-bool is_empty(ssize_t * ptr_index_of_last_item)
+bool is_empty(struct stack * ptr_stack)
 {
-    if (*ptr_index_of_last_item == -1)
+    if (ptr_stack->index_of_last_item == -1)
         return true;
     else
         return false;
 }
 
 
-bool is_full(ssize_t * ptr_index_of_last_item)
+bool is_full(struct stack * ptr_stack)
 {
-    if (*ptr_index_of_last_item == STACK_SIZE)
+    if (ptr_stack->index_of_last_item == STACK_SIZE)
         return true;
     else
         return false;
