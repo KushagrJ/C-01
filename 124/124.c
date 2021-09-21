@@ -7,7 +7,7 @@
 #include <string.h>
 
 
-#define STACK_SIZE 10
+#define STACK_SIZE 3
 
 
 struct student_rollNumber_and_gpa
@@ -94,15 +94,23 @@ int main(void)
 
         if (choice == 1)
         {
-            printf("\nEnter the student's roll number: ");
-            scanf("%u", &temp.rollNumber);
+            if (is_full(&students))
+            {
+                printf("\nThe stack is full!\n");
+            }
 
-            printf("Enter their GPA: ");
-            scanf("%lf", &temp.gpa);
+            else
+            {
+                printf("\nEnter the student's roll number: ");
+                scanf("%u", &temp.rollNumber);
 
-            push(&students, &temp);
+                printf("Enter their GPA: ");
+                scanf("%lf", &temp.gpa);
 
-            apply_function_to_last_item(&students, print_item);
+                push(&students, &temp);
+
+                apply_function_to_last_item(&students, print_item);
+            }
         }
 
         else if (choice == 2)
@@ -159,12 +167,6 @@ void create_empty_stack(struct stack * ptr_stack)
 void push(struct stack * ptr_stack, Item * ptr_item)
 {
 
-    if (ptr_stack->index_of_last_item == STACK_SIZE - 1)
-    {
-        printf("\nThe stack is full!\n");
-        return;
-    }
-
     (ptr_stack->index_of_last_item)++;
     memmove((ptr_stack->stack) + ptr_stack->index_of_last_item,
             ptr_item, sizeof (Item));
@@ -216,7 +218,7 @@ bool is_empty(struct stack * ptr_stack)
 
 bool is_full(struct stack * ptr_stack)
 {
-    if (ptr_stack->index_of_last_item == STACK_SIZE)
+    if (ptr_stack->index_of_last_item == STACK_SIZE - 1)
         return true;
     else
         return false;
