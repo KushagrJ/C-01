@@ -159,7 +159,7 @@ void create_empty_stack(struct stack * ptr_stack)
 void push(struct stack * ptr_stack, Item * ptr_item)
 {
 
-    if (ptr_stack->index_of_last_item == STACK_SIZE)
+    if (ptr_stack->index_of_last_item == STACK_SIZE - 1)
     {
         printf("\nThe stack is full!\n");
         return;
