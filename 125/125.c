@@ -23,7 +23,7 @@ typedef struct student_rollNumber_and_gpa Item;
 struct stack
 {
     Item * stack;
-    ssize_t index_of_last_item;
+    ssize_t index_of_top_item;
 };
 
 // To hide the exact implementation details from the main() function.
@@ -41,8 +41,8 @@ void create_empty_stack(struct stack *);
 void push(struct stack *, Item *);
 
 // Argument 1: Address of a Stack variable.
-// Argument 2: Address of the function which is to be applied to the last item.
-void apply_function_to_last_item(struct stack *, void (*)(Item *));
+// Argument 2: Address of the function which is to be applied to the top item.
+void apply_function_to_top_item(struct stack *, void (*)(Item *));
 
 // Argument 1: Address of a Stack variable.
 void pop(struct stack *);
@@ -70,10 +70,10 @@ int main(void)
          "*   1        Insert a new student's details at the end    *\n"
          "*            of the stack                                 *\n"
          "*                                                         *\n"
-         "*   2        Display the last student's details from      *\n"
+         "*   2        Display the top student's details from       *\n"
          "*            the stack                                    *\n"
          "*                                                         *\n"
-         "*   3        Remove the last student's details from       *\n"
+         "*   3        Remove the top student's details from        *\n"
          "*            the stack                                    *\n"
          "*                                                         *\n"
          "*   4        Check whether the stack is empty             *\n"
@@ -104,12 +104,12 @@ int main(void)
 
             push(&students, &temp);
 
-            apply_function_to_last_item(&students, print_item);
+            apply_function_to_top_item(&students, print_item);
         }
 
         else if (choice == 2)
         {
-            apply_function_to_last_item(&students, print_item);
+            apply_function_to_top_item(&students, print_item);
         }
 
         else if (choice == 3)
@@ -156,7 +156,7 @@ void create_empty_stack(struct stack * ptr_stack)
         exit(EXIT_FAILURE);
     }
 
-    ptr_stack->index_of_last_item = -1;
+    ptr_stack->index_of_top_item = -1;
 
 }
 
@@ -166,7 +166,7 @@ void push(struct stack * ptr_stack, Item * ptr_item)
 
     static size_t assumed_size_of_stack = ASSUMED_STACK_SIZE;
 
-    if (ptr_stack->index_of_last_item == (ssize_t) (assumed_size_of_stack - 1))
+    if (ptr_stack->index_of_top_item == (ssize_t) (assumed_size_of_stack - 1))
     {
         assumed_size_of_stack *= 2;
 
@@ -179,8 +179,8 @@ void push(struct stack * ptr_stack, Item * ptr_item)
         ptr_stack->stack = temp;
     }
 
-    (ptr_stack->index_of_last_item)++;
-    memmove((ptr_stack->stack) + (ptr_stack->index_of_last_item),
+    (ptr_stack->index_of_top_item)++;
+    memmove((ptr_stack->stack) + (ptr_stack->index_of_top_item),
             ptr_item, sizeof (Item));
 
     printf("\nStudent details inserted successfully!\n");
@@ -188,17 +188,16 @@ void push(struct stack * ptr_stack, Item * ptr_item)
 }
 
 
-void apply_function_to_last_item(struct stack * ptr_stack,
-                                 void (* func)(Item *))
+void apply_function_to_top_item(struct stack * ptr_stack, void (* func)(Item *))
 {
 
-    if (ptr_stack->index_of_last_item == -1)
+    if (ptr_stack->index_of_top_item == -1)
     {
         printf("\nThe stack is empty!\n");
         return;
     }
 
-    (*func)((ptr_stack->stack) + (ptr_stack->index_of_last_item));
+    (*func)((ptr_stack->stack) + (ptr_stack->index_of_top_item));
 
 }
 
@@ -206,13 +205,13 @@ void apply_function_to_last_item(struct stack * ptr_stack,
 void pop(struct stack * ptr_stack)
 {
 
-    if (ptr_stack->index_of_last_item == -1)
+    if (ptr_stack->index_of_top_item == -1)
     {
         printf("\nThe stack is empty!\n");
         return;
     }
 
-    (ptr_stack->index_of_last_item)--;
+    (ptr_stack->index_of_top_item)--;
 
     printf("\nStudent details removed successfully!\n");
 
@@ -221,7 +220,7 @@ void pop(struct stack * ptr_stack)
 
 bool is_empty(struct stack * ptr_stack)
 {
-    if (ptr_stack->index_of_last_item == -1)
+    if (ptr_stack->index_of_top_item == -1)
         return true;
     else
         return false;
