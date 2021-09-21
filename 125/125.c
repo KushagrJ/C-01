@@ -4,10 +4,11 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include <string.h>
 
 
-#define STACK_SIZE 10
+#define ASSUMED_STACK_SIZE 10
 
 
 struct student_rollNumber_and_gpa
@@ -21,7 +22,7 @@ typedef struct student_rollNumber_and_gpa Item;
 
 struct stack
 {
-    Item stack[STACK_SIZE];
+    Item * stack;
     ssize_t index_of_last_item;
 };
 
@@ -52,6 +53,9 @@ bool is_empty(struct stack *);
 // Argument 1: Address of a Stack variable.
 bool is_full(struct stack *);
 
+// Argument 1: Address of a Stack variable.
+void empty_stack(struct stack *);
+
 
 int main(void)
 {
@@ -74,9 +78,7 @@ int main(void)
          "*                                                         *\n"
          "*   4        Check whether the stack is empty             *\n"
          "*                                                         *\n"
-         "*   5        Check whether the stack is full              *\n"
-         "*                                                         *\n"
-         "*   6        Exit                                         *\n"
+         "*   5        Exit                                         *\n"
          "*                                                         *\n"
          "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
 
@@ -94,23 +96,15 @@ int main(void)
 
         if (choice == 1)
         {
-            if (is_full(&students))
-            {
-                printf("\nThe stack is full!\n");
-            }
+            printf("\nEnter the student's roll number: ");
+            scanf("%u", &temp.rollNumber);
 
-            else
-            {
-                printf("\nEnter the student's roll number: ");
-                scanf("%u", &temp.rollNumber);
+            printf("Enter their GPA: ");
+            scanf("%lf", &temp.gpa);
 
-                printf("Enter their GPA: ");
-                scanf("%lf", &temp.gpa);
+            push(&students, &temp);
 
-                push(&students, &temp);
-
-                apply_function_to_last_item(&students, print_item);
-            }
+            apply_function_to_last_item(&students, print_item);
         }
 
         else if (choice == 2)
@@ -133,18 +127,12 @@ int main(void)
 
         else if (choice == 5)
         {
-            if (is_full(&students))
-                printf("\nThe stack is full!\n");
-            else
-                printf("\nThe stack is not full!\n");
-        }
-
-        else if (choice == 6)
-        {
             break;
         }
     }
 
+
+    empty_stack(&students);
 
     return 0;
 
@@ -160,12 +148,36 @@ void print_item(Item * ptr_item)
 
 void create_empty_stack(struct stack * ptr_stack)
 {
+
+    ptr_stack->stack = (Item *) malloc(ASSUMED_STACK_SIZE * sizeof (Item));
+    if (ptr_stack->stack == NULL)
+    {
+        fprintf(stderr, "Unsuccessful allocation!\n");
+        exit(EXIT_FAILURE);
+    }
+
     ptr_stack->index_of_last_item = -1;
+
 }
 
 
 void push(struct stack * ptr_stack, Item * ptr_item)
 {
+
+    static size_t assumed_size_of_stack = ASSUMED_STACK_SIZE;
+
+    if (ptr_stack->index_of_last_item == (ssize_t) (assumed_size_of_stack - 1))
+    {
+        assumed_size_of_stack *= 2;
+
+        Item * temp = realloc(ptr_stack->stack, assumed_size_of_stack);
+        if (temp == NULL)
+        {
+            fprintf(stderr, "Unsuccessful allocation!\n");
+            exit(EXIT_FAILURE);
+        }
+        ptr_stack->stack = temp;
+    }
 
     (ptr_stack->index_of_last_item)++;
     memmove((ptr_stack->stack) + (ptr_stack->index_of_last_item),
@@ -216,12 +228,9 @@ bool is_empty(struct stack * ptr_stack)
 }
 
 
-bool is_full(struct stack * ptr_stack)
+void empty_stack(struct stack * ptr_stack)
 {
-    if (ptr_stack->index_of_last_item == STACK_SIZE - 1)
-        return true;
-    else
-        return false;
+    free(ptr_stack->stack);
 }
 
 
@@ -230,8 +239,8 @@ bool is_full(struct stack * ptr_stack)
 
 /* Trivia
 
- * In this program, a stack ADT is implemented using a static array which can
-   contain a fixed number of items.
+ * In this program, a stack ADT is implemented using a dynamic array which can
+   contain a variable number of items.
    Each item consists of the roll number and GPA of a student.
 
  * The following operations can be performed on such a stack :-
@@ -240,7 +249,11 @@ bool is_full(struct stack * ptr_stack)
    (3) Operating on the item at the end of a stack.
    (4) Removing the item at the end of a stack (i.e. popping).
    (5) Determining whether a stack is empty.
-   (6) Determining whether a stack is full.
+   (6) Emptying a stack.
+
+ * Since a dynamic array is used, therefore there is no operation available to
+   determine whether a stack is full, as items can be added to the stack as long
+   as the computer doesn't run out of memory.
 
 
  * In this program, const is avoided completely.

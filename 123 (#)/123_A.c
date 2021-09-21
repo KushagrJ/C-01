@@ -163,8 +163,10 @@ int main(void)
        or the programming language.
 
 
- * In this program, a list ADT is implemented using a linked list which consists
-   of items. Each item in turn consists of the roll number and GPA of a student.
+ * In this program, a list ADT is implemented using a linked list which can
+   contain a variable number of items.
+   Each item consists of the roll number and GPA of a student.
+
  * The following operations can be performed on such a list :-
    (01) Creating an empty list.
    (02) Inserting an item at any index in a list.
@@ -176,10 +178,10 @@ int main(void)
    (08) Sorting a list by gpa.
    (09) Determining how many items are there in a list.
    (10) Emptying a list.
- * The static array method (not recommended because of a fixed number of items)
-   and the dynamic array method (using realloc()) can also be used to implement
-   a list ADT.
-   Since a linked list is used, therefore there is no operation available to
+
+ * A static array (not recommended because of a fixed number of items) and a
+   dynamic array (using realloc()) can also be used to implement a list ADT.
+ * Since a linked list is used, therefore there is no operation available to
    determine whether a list is full, as items can be added to the list as long
    as the computer doesn't run out of memory.
 

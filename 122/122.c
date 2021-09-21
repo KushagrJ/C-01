@@ -149,7 +149,8 @@ void get_string_from_user(char ** ptr_string,
    dynamic array, i.e. initially allocating some memory dynamically using
    malloc(), and later doubling the size of the allocated memory using realloc()
    every time the limit is reached. Once the entire data is stored, a final call
-   to realloc() can be made to free the unwanted extra memory.
+   to realloc() can be made to free the unwanted extra memory (not necessary to
+   do in every program).
  * This method has a few limitations, such as extra work needs to be done to
    insert and remove items in between the existing data.
    For eg., to insert an item at the 10th position, the existing memory block
@@ -180,8 +181,8 @@ void get_string_from_user(char ** ptr_string,
    [This is the main advantage of a linked list, i.e. arbitrary insertions and
     removals can be done without reallocations]
 
- * In this program, the dynamic array method is used to get string inputs of
-   unknown lengths from the user, and a linked list is used for the details of
-   an unknown number of different books.
+ * In this program, a dynamic array is used to get string inputs of unknown
+   lengths from the user, and a linked list is used for the details of an
+   unknown number of different books.
 
  */
