@@ -32,6 +32,7 @@ void create_empty_list(Node **);
 // Argument 1: Address of a List variable.
 // Argument 2: Address of the item which is to be inserted.
 // Argument 3: Index where the item is to be inserted.
+// Return Value: Index of the inserted item.
 // If the index is -1, then the item will be inserted at the end of the list.
 // Else, the item will be inserted at the given index.
 size_t insert_item_in_list(Node **, Item *, ssize_t);
@@ -51,7 +52,8 @@ void remove_item_from_list(Node **, size_t index);
 // Argument 2: rollNumber which is to be searched.
 // Argument 3: Address of the function which is to be to be applied to the
 //             matched item(s).
-void search_by_rollNumber_and_apply_function(Node **, unsigned,
+// Return Value: A bool value depicting whether matches were found.
+bool search_by_rollNumber_and_apply_function(Node **, unsigned,
                                              void (*)(Item *, size_t));
 
 // Argument 1: Address of a List variable.
@@ -59,7 +61,8 @@ void search_by_rollNumber_and_apply_function(Node **, unsigned,
 // Argument 3: Upper limit of the gpa range which is to be searched.
 // Argument 4: Address of the function which is to be to be applied to the
 //             matched item(s).
-void search_by_gpa_range_and_apply_function(Node **, double, double,
+// Return Value: A bool value depicting whether matches were found.
+bool search_by_gpa_range_and_apply_function(Node **, double, double,
                                             void (*)(Item *, size_t));
 
 // Argument 1: Address of a List variable.
@@ -70,6 +73,7 @@ void search_by_gpa_range_and_apply_function(Node **, double, double,
 void bubble_sort(Node **, bool);
 
 // Argument 1: Address of a List variable.
+// Return Value: Number of items in the list.
 size_t number_of_items_in_list(Node **);
 
 // Argument 1: Address of a List variable.

@@ -38,7 +38,7 @@ int main(void)
 
     List students;
     create_empty_list(&students);
-    Item temp;
+    Item temp_item;
 
 
     while (true)
@@ -50,17 +50,19 @@ int main(void)
         if (choice == 1)
         {
             printf("\nEnter the student's roll number: ");
-            scanf("%u", &temp.rollNumber);
+            scanf("%u", &temp_item.rollNumber);
 
             printf("Enter their GPA: ");
-            scanf("%lf", &temp.gpa);
+            scanf("%lf", &temp_item.gpa);
 
             size_t position;
             printf("Enter the position in the list (0 for last position): ");
             scanf("%zu", &position);
 
             size_t index_of_inserted_item =
-                insert_item_in_list(&students, &temp, position - 1);
+                insert_item_in_list(&students, &temp_item, position - 1);
+
+            printf("\nStudent details inserted successfully!\n");
 
             apply_function_to_item(&students, index_of_inserted_item,
                                    print_item);
@@ -68,20 +70,38 @@ int main(void)
 
         else if (choice == 2)
         {
-            size_t position;
-            printf("Enter the position in the list (0 for entire list): ");
-            scanf("%zu", &position);
+            if (number_of_items_in_list(&students) == 0)
+            {
+                printf("\nThe list is currently empty!\n");
+            }
 
-            apply_function_to_item(&students, position - 1, print_item);
+            else
+            {
+                size_t position;
+                printf("Enter the position in the list (0 for entire list): ");
+                scanf("%zu", &position);
+
+                apply_function_to_item(&students, position - 1, print_item);
+            }
         }
 
         else if (choice == 3)
         {
-            size_t position;
-            printf("Enter the position in the list: ");
-            scanf("%zu", &position);
+            if (number_of_items_in_list(&students) == 0)
+            {
+                printf("\nThe list is currently empty!\n");
+            }
 
-            remove_item_from_list(&students, position - 1);
+            else
+            {
+                size_t position;
+                printf("Enter the position in the list: ");
+                scanf("%zu", &position);
+
+                remove_item_from_list(&students, position - 1);
+
+                printf("\nStudent details removed successfully!\n");
+            }
         }
 
         else if (choice == 4)
@@ -91,8 +111,12 @@ int main(void)
             printf("Enter the roll number: ");
             scanf("%u", &rollNumber);
 
-            search_by_rollNumber_and_apply_function(&students, rollNumber,
-                                                    print_item);
+            bool matchFound =
+                search_by_rollNumber_and_apply_function(&students, rollNumber,
+                                                        print_item);
+
+            if (!(matchFound))
+                printf("\nNo match found!\n");
         }
 
         else if (choice == 5)
@@ -105,18 +129,40 @@ int main(void)
             printf("Enter the upper limit: ");
             scanf("%lf", &upper);
 
-            search_by_gpa_range_and_apply_function(&students, lower, upper,
-                                                   print_item);
+            bool matchFound =
+                search_by_gpa_range_and_apply_function(&students, lower, upper,
+                                                       print_item);
+
+            if (!(matchFound))
+                printf("\nNo match found!\n");
         }
 
         else if (choice == 6)
         {
-            bubble_sort(&students, true);
+            if (number_of_items_in_list(&students) == 0)
+            {
+                printf("\nThe list is currently empty!\n");
+            }
+
+            else
+            {
+                bubble_sort(&students, true);
+                printf("\nSorted by Roll Number successfully!\n");
+            }
         }
 
         else if (choice == 7)
         {
-            bubble_sort(&students, false);
+            if (number_of_items_in_list(&students) == 0)
+            {
+                printf("\nThe list is currently empty!\n");
+            }
+
+            else
+            {
+                bubble_sort(&students, false);
+                printf("\nSorted by GPA successfully!\n");
+            }
         }
 
         else if (choice == 8)

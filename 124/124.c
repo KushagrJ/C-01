@@ -36,20 +36,22 @@ void print_item(Item *);
 void create_empty_stack(struct stack *);
 
 // Argument 1: Address of a Stack variable.
-// Argument 2: Address of the item which is to be pushed.
+// Argument 2: Address of the item which is to be pushed on the top.
 void push(struct stack *, Item *);
 
 // Argument 1: Address of a Stack variable.
-// Argument 2: Address of the function which is to be applied to the top item.
-void apply_function_to_top_item(struct stack *, void (*)(Item *));
+// Argument 2: Address of the item to which the top item is to be assigned.
+void peek(struct stack *, Item *);
 
 // Argument 1: Address of a Stack variable.
 void pop(struct stack *);
 
 // Argument 1: Address of a Stack variable.
+// Return Value: A bool value depicting whether the stack is empty.
 bool is_empty(struct stack *);
 
 // Argument 1: Address of a Stack variable.
+// Return Value: A bool value depicting whether the stack is full.
 bool is_full(struct stack *);
 
 
@@ -63,11 +65,10 @@ int main(void)
          "*                                                         *\n"
          "*   Choice   Operation                                    *\n"
          "*                                                         *\n"
-         "*   1        Insert a new student's details at the end    *\n"
+         "*   1        Insert a new student's details on the top    *\n"
          "*            of the stack                                 *\n"
          "*                                                         *\n"
-         "*   2        Display the top student's details from       *\n"
-         "*            the stack                                    *\n"
+         "*   2        Display the stack                            *\n"
          "*                                                         *\n"
          "*   3        Remove the top student's details from        *\n"
          "*            the stack                                    *\n"
@@ -83,7 +84,7 @@ int main(void)
 
     Stack students;
     create_empty_stack(&students);
-    Item temp;
+    Item temp_item;
 
 
     while (true)
@@ -102,25 +103,66 @@ int main(void)
             else
             {
                 printf("\nEnter the student's roll number: ");
-                scanf("%u", &temp.rollNumber);
+                scanf("%u", &temp_item.rollNumber);
 
                 printf("Enter their GPA: ");
-                scanf("%lf", &temp.gpa);
+                scanf("%lf", &temp_item.gpa);
 
-                push(&students, &temp);
+                push(&students, &temp_item);
 
-                apply_function_to_top_item(&students, print_item);
+                printf("\nStudent details inserted successfully!\n");
+
+                print_item(&temp_item);
             }
         }
 
         else if (choice == 2)
         {
-            apply_function_to_top_item(&students, print_item);
+            Stack temp_stack;
+            create_empty_stack(&temp_stack);
+
+            while (true)
+            {
+                if (is_empty(&students))
+                    break;
+
+                peek(&students, &temp_item);
+                push(&temp_stack, &temp_item);
+                pop(&students);
+            }
+
+            if (is_empty(&temp_stack))
+            {
+                printf("\nThe stack is empty!\n");
+            }
+
+            else
+            {
+                while (true)
+                {
+                    if (is_empty(&temp_stack))
+                        break;
+
+                    peek(&temp_stack, &temp_item);
+                    print_item(&temp_item);
+                    push(&students, &temp_item);
+                    pop(&temp_stack);
+                }
+            }
         }
 
         else if (choice == 3)
         {
-            pop(&students);
+            if (is_empty(&students))
+            {
+                printf("\nThe stack is empty!\n");
+            }
+
+            else
+            {
+                pop(&students);
+                printf("\nStudent details removed successfully!\n");
+            }
         }
 
         else if (choice == 4)
@@ -166,43 +208,21 @@ void create_empty_stack(struct stack * ptr_stack)
 
 void push(struct stack * ptr_stack, Item * ptr_item)
 {
-
     (ptr_stack->index_of_top_item)++;
     memmove((ptr_stack->stack) + (ptr_stack->index_of_top_item),
             ptr_item, sizeof (Item));
-
-    printf("\nStudent details inserted successfully!\n");
-
 }
 
 
-void apply_function_to_top_item(struct stack * ptr_stack, void (* func)(Item *))
+void peek(struct stack * ptr_stack, Item * ptr_item)
 {
-
-    if (ptr_stack->index_of_top_item == -1)
-    {
-        printf("\nThe stack is empty!\n");
-        return;
-    }
-
-    (*func)((ptr_stack->stack) + (ptr_stack->index_of_top_item));
-
+    *ptr_item = *((ptr_stack->stack) + (ptr_stack->index_of_top_item));
 }
 
 
 void pop(struct stack * ptr_stack)
 {
-
-    if (ptr_stack->index_of_top_item == -1)
-    {
-        printf("\nThe stack is empty!\n");
-        return;
-    }
-
     (ptr_stack->index_of_top_item)--;
-
-    printf("\nStudent details removed successfully!\n");
-
 }
 
 
