@@ -49,7 +49,7 @@ void peek(struct stack *, Item *);
 void pop(struct stack *);
 
 // Argument 1: Address of a Stack variable.
-// Return Value: A bool value depicting whether the stack is empty.
+// Return Value: Bool value depicting whether the stack is empty.
 bool is_empty(struct stack *);
 
 // Argument 1: Address of a Stack variable.
@@ -268,9 +268,9 @@ void empty_stack(struct stack * ptr_stack)
 
  * The following operations can be performed on such a stack :-
    (1) Creating an empty stack.
-   (2) Inserting an item at the end of a stack (i.e. pushing).
-   (3) Operating on the item at the end of a stack.
-   (4) Removing the item at the end of a stack (i.e. popping).
+   (2) Inserting an item at the top of a stack (i.e. pushing).
+   (3) Retrieving the item at the top of a stack (i.e. peeking).
+   (4) Removing the item at the top of a stack (i.e. popping).
    (5) Determining whether a stack is empty.
    (6) Emptying a stack.
 

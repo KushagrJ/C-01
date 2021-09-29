@@ -22,6 +22,7 @@ typedef struct node Node;
 // To hide the exact implementation details from the main() function.
 typedef Node * List;
 
+
 // Argument 1: Address of the item which is to be printed.
 // Argument 2: Index of the item which is to be printed.
 void print_item(Item *, size_t);
@@ -52,7 +53,7 @@ void remove_item_from_list(Node **, size_t index);
 // Argument 2: rollNumber which is to be searched.
 // Argument 3: Address of the function which is to be to be applied to the
 //             matched item(s).
-// Return Value: A bool value depicting whether matches were found.
+// Return Value: Bool value depicting whether matches were found.
 bool search_by_rollNumber_and_apply_function(Node **, unsigned,
                                              void (*)(Item *, size_t));
 
@@ -61,12 +62,12 @@ bool search_by_rollNumber_and_apply_function(Node **, unsigned,
 // Argument 3: Upper limit of the gpa range which is to be searched.
 // Argument 4: Address of the function which is to be to be applied to the
 //             matched item(s).
-// Return Value: A bool value depicting whether matches were found.
+// Return Value: Bool value depicting whether matches were found.
 bool search_by_gpa_range_and_apply_function(Node **, double, double,
                                             void (*)(Item *, size_t));
 
 // Argument 1: Address of a List variable.
-// Argument 2: A bool value depicting whether the list is to be sorted by
+// Argument 2: Bool value depicting whether the list is to be sorted by
 //             rollNumber or by gpa.
 // If the bool value is true, then the list will be sorted by rollNumber.
 // Else, the list will be sorted by gpa.
