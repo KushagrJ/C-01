@@ -274,6 +274,8 @@ void empty_stack(struct stack * ptr_stack)
    (5) Determining whether a stack is empty.
    (6) Emptying a stack.
 
+ * Displaying a stack sequentially isn't a standard stack operation.
+
  * Since a dynamic array is used, therefore there is no operation available to
    determine whether a stack is full, as items can be added to the stack as long
    as the computer doesn't run out of memory.

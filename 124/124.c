@@ -261,6 +261,8 @@ bool is_full(struct stack * ptr_stack)
    (5) Determining whether a stack is empty.
    (6) Determining whether a stack is full.
 
+ * Displaying a stack sequentially isn't a standard stack operation.
+
 
  * In this program, const is avoided completely.
    Later, modify this program by using const wherever required.

@@ -21,55 +21,54 @@ int precedence(char);
 int main(void)
 {
 
-    char infix[100];
-    printf("Enter an infix expression: ");
-    scanf(" %99[^\n]", infix);
-
     char postfix[100];
 
+    int c;
     int j = 0;
 
-    for (int i = 0; infix[i]; i++)
+    printf("Enter an infix expression: ");
+
+    while (((c = getchar()) != '\n') && (c != EOF))
     {
-        if (isalnum(infix[i])) // i.e. if infix[i] is an operand.
+        if (isalnum(c)) // i.e. if c is an operand.
         {
-            postfix[j++] = infix[i];
+            postfix[j++] = c;
         }
 
-        else if (infix[i] == '(')
+        else if (c == '(')
         {
             push('(');
         }
 
-        else if (infix[i] == ')')
+        else if (c == ')')
         {
-            while (true)
+            char temp;
+
+            while ((temp = peek()) != '(')
             {
-                char temp = peek();
+                postfix[j++] = peek();
                 pop();
-                if (temp == '(')
-                    break;
-                postfix[j++] = temp;
             }
+
+            pop();
         }
 
         else // i.e. if infix[i] is an operator.
         {
             if (is_empty())
             {
-                push(infix[i]);
+                push(c);
             }
 
             else
             {
-                while ((!is_empty()) &&
-                           (precedence(peek()) >= precedence(infix[i])))
+                while ((!is_empty()) && (precedence(peek()) >= precedence(c)))
                 {
                     postfix[j++] = peek();
                     pop();
                 }
 
-                push(infix[i]);
+                push(c);
             }
         }
     }
@@ -143,12 +142,38 @@ int precedence(char c)
 
 /* Trivia
 
- * Study other algorithms as well that give different orders of evaluation due
-   to different associativities of operators.
- * In this program, the condition precedence(peek()) > precedence(infix[i])
-   makes the associativity of all operators right-to-left, whereas the condition
-   precedence(peek()) >= precedence(infix[i]) makes the associativity of all
-   operators left-to-right.
+ * Algorithm :-
+
+   1. Scan the infix expression from left to right, one char at a time.
+   a. If (the scanned char is an operand)
+          Add the scanned char to postfix.
+   b. Else If (the scanned char is an opening parenthesis)
+          Push the scanned char to operatorStack.
+   c. Else If (the scanned char is a closing parenthesis)
+          While (the top item of operatorStack is not an opening parenthesis)
+              Add the top item of operatorStack to postfix.
+              Pop the top item of operatorStack.
+          Pop the opening parenthesis from operatorStack.
+   d. Else If (the scanned char is an operator)
+          If (operatorStack is empty)
+              Push the scanned char to operatorStack.
+          Else
+              While (operatorStack is not empty) and (the precedence of the top
+              item of operatorStack is >= the precedence of the scanned char)
+                  Add the top item of operatorStack to postfix.
+                  Pop the top item of operatorStack.
+              Push the scanned char to operatorStack.
+   2. While (operatorStack is not empty)
+          Add the top item of operatorStack to postfix.
+          Pop the top item of operatorStack.
+
+ * In this algorithm, the condition precedence(peek()) > precedence(c) makes the
+   associativity & the order of evaluation of the operators having the same
+   precedence strictly right-to-left, whereas the condition
+   precedence(peek()) >= precedence(c) makes the associativity & the order of
+   evaluation of the operators having the same precedence strictly
+   left-to-right.
+
 
  * This program focusses on the demonstration of the infix to postfix expression
    conversion, and not on the stack ADT.
@@ -158,10 +183,10 @@ int precedence(char c)
 
  * For eg., A+B*C/(D+E) [Assuming left-to-right associativity]
 
-   Token    Action         Postfix    Stack    Notes
+   Token    Action         Postfix    Stack    Notes (for precedence)
 
    A        Add A          A
-   +        Push +         A              +    stack is empty
+   +        Push +         A              +
    B        Add B          AB             +
    *        Push *         AB            *+    prec. of + >= prec. of * is False
    C        Add C          ABC           *+
