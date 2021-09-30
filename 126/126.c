@@ -42,9 +42,7 @@ int main(void)
 
         else if (c == ')')
         {
-            char temp;
-
-            while ((temp = peek()) != '(')
+            while (peek() != '(')
             {
                 postfix[j++] = peek();
                 pop();
@@ -144,25 +142,27 @@ int precedence(char c)
 
  * Algorithm :-
 
-   1. Scan the infix expression from left to right, one char at a time.
-   a. If (the scanned char is an operand)
-          Add the scanned char to postfix.
-   b. Else If (the scanned char is an opening parenthesis)
-          Push the scanned char to operatorStack.
-   c. Else If (the scanned char is a closing parenthesis)
-          While (the top item of operatorStack is not an opening parenthesis)
-              Add the top item of operatorStack to postfix.
-              Pop the top item of operatorStack.
-          Pop the opening parenthesis from operatorStack.
-   d. Else If (the scanned char is an operator)
-          If (operatorStack is empty)
-              Push the scanned char to operatorStack.
-          Else
-              While (operatorStack is not empty) and (the precedence of the top
-              item of operatorStack is >= the precedence of the scanned char)
+   1. For (every character in the infix expression)
+          If (the scanned character is an operand)
+              Add the scanned character to postfix.
+          Else If (the scanned character is an opening parenthesis)
+              Push the scanned character to operatorStack.
+          Else If (the scanned character is a closing parenthesis)
+              While (the top item of operatorStack is not an opening
+              parenthesis)
                   Add the top item of operatorStack to postfix.
                   Pop the top item of operatorStack.
-              Push the scanned char to operatorStack.
+              Pop the opening parenthesis from operatorStack.
+          Else If (the scanned character is an operator)
+              If (operatorStack is empty)
+                  Push the scanned character to operatorStack.
+              Else
+                  While (operatorStack is not empty) and (the precedence of the
+                  top item of operatorStack is greater than or equal to the
+                  precedence of the scanned character)
+                      Add the top item of operatorStack to postfix.
+                      Pop the top item of operatorStack.
+                  Push the scanned character to operatorStack.
    2. While (operatorStack is not empty)
           Add the top item of operatorStack to postfix.
           Pop the top item of operatorStack.
