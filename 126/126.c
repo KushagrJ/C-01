@@ -142,7 +142,7 @@ int precedence(char c)
 
  * Algorithm :-
 
-   1. For (every character in the infix expression)
+   1. For (every character in the infix expression - from left to right)
           If (the scanned character is an operand)
               Add the scanned character to postfix.
           Else If (the scanned character is an opening parenthesis)
