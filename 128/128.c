@@ -16,8 +16,7 @@ int main(void)
 
 /* Trivia
 
- * 127.c - Postfix to Infix.
-   128.c - Infix evaluation.
+ * 128.c - Infix evaluation.
    129.c - Postfix evaluaion.
    130.c - Infix to Prefix.
    131.c - Prefix to Infix.

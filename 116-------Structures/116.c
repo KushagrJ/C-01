@@ -160,6 +160,6 @@ char * modified_fgets(char * s, int n)
        struct {char firstName[20]; char lastName[20];};
    };
    struct person ted = {8483, {"Ted", "Grass"}};
-   Now, ted.first can be used to access "Ted".
+   Now, ted.firstName can be used to access "Ted".
 
  */
