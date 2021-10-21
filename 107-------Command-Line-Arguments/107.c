@@ -20,7 +20,7 @@ int main(int argc, char ** argv)
 
 
 
-/* Trivia
+/* Trivia - 107.c
 
  * C compilers allow main() to have zero or two arguments (some implementations
    allow additional arguments, but that would be an extension of the standard).
@@ -72,4 +72,4 @@ int main(int argc, char ** argv)
              character if the string was converted completely.
              10 specifies the base (i.e. a decimal integer).]
 
- */
+ * End of Trivia */

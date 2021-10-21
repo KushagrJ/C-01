@@ -91,7 +91,7 @@ char * modified_fgets(char * s, int n)
 
 
 
-/* Trivia
+/* Trivia - 106.c
 
  * A pointer such as char ** p can't be used for a 2-D array of chars (as
    discussed before) and can only be used as a 'pointer to a pointer to char' or
@@ -235,4 +235,4 @@ char * modified_fgets(char * s, int n)
  * memmove() should be preferred instead of memcpy(), strcat(), strncat(),
    strcpy() and strncpy().
 
- */
+ * End of Trivia */

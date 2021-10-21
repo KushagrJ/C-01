@@ -247,7 +247,7 @@ bool is_full(struct stack * ptr_stack)
 
 
 
-/* Trivia
+/* Trivia - 124.c
 
  * In this program, a stack ADT is implemented using a static array which can
    contain a fixed number of items.
@@ -268,4 +268,4 @@ bool is_full(struct stack * ptr_stack)
    Later, modify this program by using const wherever required.
    [See 111.c's Trivia (points (a), (b) and (c)]
 
- */
+ * End of Trivia */

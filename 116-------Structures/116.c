@@ -98,7 +98,7 @@ char * modified_fgets(char * s, int n)
 
 
 
-/* Trivia
+/* Trivia - 116.c
 
  * Similar to variables, one structure can be assigned to another structure of
    the same type, unlike arrays, since a structure name doesn't decay to its
@@ -162,4 +162,4 @@ char * modified_fgets(char * s, int n)
    struct person ted = {8483, {"Ted", "Grass"}};
    Now, ted.firstName can be used to access "Ted".
 
- */
+ * End of Trivia */

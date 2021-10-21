@@ -44,7 +44,7 @@ int sum(const int (* arr)[3], int rows)
 
 
 
-/* Trivia
+/* Trivia - 102.c
 
    int arr[][3] = { {1,2,3}, {4,5,6}, {7,8,9} };
    Here, (a) arr/&arr[0], arr[0]/&arr[0][0] and &arr represent the same address.
@@ -128,4 +128,4 @@ int sum(const int (* arr)[3], int rows)
    also generally declared as int (* p)[10];, etc.
    [Similarly for higher dimensions]
 
- */
+ * End of Trivia */

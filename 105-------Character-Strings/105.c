@@ -33,7 +33,7 @@ int main(void)
 
 
 
-/* Trivia
+/* Trivia - 105.c
 
  * The puts() function, prototyped in stdio.h, displays strings, and unlike
    printf(), it automatically appends a newline at the end.
@@ -188,4 +188,4 @@ int main(void)
    literals).
  * sizeof subjects is 40 on this system, whereas sizeof days is 50.
 
- */
+ * End of Trivia */

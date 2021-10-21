@@ -65,7 +65,7 @@ char * modified_fgets(char * s, int n)
 
 
 
-/* Trivia
+/* Trivia - 112.c
 
  * A structure can be thought of as a super-array, in which one element can be
    char, the next element double, and the next an int array.
@@ -143,4 +143,4 @@ char * modified_fgets(char * s, int n)
    But, using the same name for two variables, or for two tags, in the same
    scope causes errors.
 
- */
+ * End of Trivia */

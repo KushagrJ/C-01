@@ -107,7 +107,7 @@ void wrap_line(char * s, const int wrapColumn)
 
 
 
-/* Trivia
+/* Trivia - 119.c
 
  * Each file is opened/closed independently of the other.
  * The same file pointer can be used for different files, provided those files
@@ -268,4 +268,4 @@ void wrap_line(char * s, const int wrapColumn)
 
    [Study programs involving the use of setvbuf(), fread() and fwrite() later]
 
- */
+ * End of Trivia */

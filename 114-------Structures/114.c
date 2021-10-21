@@ -50,8 +50,8 @@ int main(void)
 
 
 
-/* Trivia
+/* Trivia - 114.c
 
  * Nested structures can also be used.
 
- */
+ * End of Trivia */

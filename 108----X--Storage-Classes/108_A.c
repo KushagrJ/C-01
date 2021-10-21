@@ -43,7 +43,7 @@ static void report_count(void)
 
 
 
-/* Trivia
+/* Trivia - 108_A.c
 
  * In C, the term 'object' means a chunk of memory which can store one or more
    values. An object might not always have a stored value, but it will be of the
@@ -307,4 +307,4 @@ static void report_count(void)
    But, it's valid to have the defining declaration and an extern declaration in
    the same file, as long as the declarations agree in type.
 
- */
+ * End of Trivia */

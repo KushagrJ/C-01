@@ -37,7 +37,7 @@ int sum(const int * start, int * end)
 
 
 
-/* Trivia
+/* Trivia - 101.c
 
  * A function working on an array needs to know where to start and stop.
    One way to tell this to a function is by using a pointer parameter to
@@ -164,4 +164,4 @@ int sum(const int * start, int * end)
  * Finally, in const int * const p = arr;, p is a pointer that can neither
    change where its pointing to nor change values.
 
- */
+ * End of Trivia */

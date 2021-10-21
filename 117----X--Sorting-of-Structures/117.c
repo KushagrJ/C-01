@@ -86,7 +86,7 @@ void sort_pointers_to_structures(const struct student ** p)
 
 
 
-/* Trivia
+/* Trivia - 117.c
 
  * Pointers to structures are generally used as function arguments for reasons
    of efficiency, using const when needed to protect data from unintended
@@ -198,4 +198,4 @@ void sort_pointers_to_structures(const struct student ** p)
  * Surprisingly, to call a function using a pointer, one can use p() as well as
    (* p)();
 
- */
+ * End of Trivia */

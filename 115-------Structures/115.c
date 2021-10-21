@@ -48,11 +48,11 @@ double sum(const struct funds * pointerToStephen)
 
 
 
-/* Trivia
+/* Trivia - 115.c
 
  * Structures can be passed either by value or by reference to functions.
  * Similar to others, passing a structure by value makes the receiving function
    get a copy of the original structure, but passing a structure by reference
    makes the receiving function get access to the original structure.
 
- */
+ * End of Trivia */

@@ -32,7 +32,7 @@ int sum(const int * integers, int size)
 
 
 
-/* Trivia
+/* Trivia - 104.c
 
  * The compound literal that creates a nameless array equivalent to
    int arr[2] = {10,20}; is (int [2]) {10,20} or (int []) {10,20}
@@ -63,4 +63,4 @@ int sum(const int * integers, int size)
  * Compound literals occurring outside of any function have static storage
    duration (discussed later).
 
- */
+ * End of Trivia */

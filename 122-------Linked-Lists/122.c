@@ -143,7 +143,7 @@ void get_string_from_user(char ** ptr_string,
 
 
 
-/* Trivia
+/* Trivia - 122.c
 
  * To store an unknown number of similar data items, one technique is using a
    dynamic array, i.e. initially allocating some memory dynamically using
@@ -185,4 +185,4 @@ void get_string_from_user(char ** ptr_string,
    lengths from the user, and a linked list is used for the details of an
    unknown number of different books.
 
- */
+ * End of Trivia */

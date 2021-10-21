@@ -24,7 +24,7 @@ int main(void)
 
 
 
-/* Trivia
+/* Trivia - 120.c
 
  * The C preprocessor looks at a program before it is compiled.
    Following the given directives, it replaces the symbolic abbreviations in a
@@ -400,4 +400,4 @@ int main(void)
    getc() and putc(), except that fgetc() and fputc() cannot be implemented as
    macros.
 
- */
+ * End of Trivia */

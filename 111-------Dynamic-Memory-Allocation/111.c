@@ -58,7 +58,7 @@ int sum(const int * const * arr, int rows, int cols)
 
 
 
-/* Trivia
+/* Trivia - 111.c
 
  * One way to dynamically allocate a 2-D array is to allocate a malloced block
    of pointers to the starting addresses of the rows.
@@ -112,4 +112,4 @@ int sum(const int * const * arr, int rows, int cols)
        necessary, as opposed to cases (a) and (b) above.
        [Similarly for higher dimensions]
 
- */
+ * End of Trivia */

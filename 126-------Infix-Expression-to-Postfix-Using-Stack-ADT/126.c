@@ -138,7 +138,7 @@ int precedence(char c)
 
 
 
-/* Trivia
+/* Trivia - 126.c
 
  * Algorithm :-
 
@@ -202,4 +202,4 @@ int precedence(char c)
             Add & Pop /    ABC*DE+/       +
             Add & Pop +    ABC*DE+/+
 
- */
+ * End of Trivia */

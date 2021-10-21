@@ -59,7 +59,7 @@ int sum(int rows, int cols, const int (* arr)[cols])
 
 
 
-/* Trivia
+/* Trivia - 103.c
 
  * int sum(const int (* arr)[cols], int rows, int cols) is invalid, since the
    arr declaration uses rows and cols and thus, they have to be declared before
@@ -68,4 +68,4 @@ int sum(int rows, int cols, const int (* arr)[cols])
    i.e. [*], is simply a placeholder for dimensions in variable-length arrays.
    It is not related to pointers in any way.
 
- */
+ * End of Trivia */

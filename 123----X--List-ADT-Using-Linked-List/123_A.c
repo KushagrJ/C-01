@@ -187,7 +187,7 @@ int main(void)
 
 
 
-/* Trivia
+/* Trivia - 123_A.c
 
  * A type specifies two kinds of information: a set of properties and a set of
    operations.
@@ -239,4 +239,4 @@ int main(void)
    Later, modify this program by using const wherever required.
    [See 111.c's Trivia (points (a), (b) and (c)]
 
- */
+ * End of Trivia */

@@ -32,7 +32,7 @@ int main(int argc, char ** argv)
 
 
 
-/* Trivia
+/* Trivia - 118.c
 
    [See 12.c's Trivia]
 
@@ -132,4 +132,4 @@ int main(int argc, char ** argv)
    flushing buffers as needed.
  * fclose() returns 0 if the file is closed successfully, and EOF if not.
 
- */
+ * End of Trivia */

@@ -50,7 +50,7 @@ void add_and_multiply(int * ptr_sum, long long * ptr_product, int n, ...)
 
 
 
-/* Trivia
+/* Trivia - 121.c
 
  * The stdarg.h header file provides the capability for creating functions that
    accept a variable number of arguments.
@@ -83,4 +83,4 @@ void add_and_multiply(int * ptr_sum, long long * ptr_product, int n, ...)
    source va_list variable.
    For eg, va_copy(ap_copy, ap);
 
- */
+ * End of Trivia */

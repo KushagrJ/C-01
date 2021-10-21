@@ -47,7 +47,7 @@ int main(void)
 
 
 
-/* Trivia
+/* Trivia - 109.c
 
  * The rand() function, prototyped in stdlib.h, returns pseudo-random integers
    between 0 and RAND_MAX (defined in the standard library), which means that
@@ -65,4 +65,4 @@ int main(void)
    argument of srand() should be a value that is constantly changing, such as
    the current time.
 
- */
+ * End of Trivia */

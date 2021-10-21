@@ -42,7 +42,7 @@ int sum(const int * integers, int size)
 
 
 
-/* Trivia
+/* Trivia - 110.c
 
  * The allocated storage duration allows the usage of library functions to
    allocate and manage memory.
@@ -96,4 +96,4 @@ int sum(const int * integers, int size)
     whereas a malloced block is always taken from the heap. Also, a VLA has
     fixed size once allocated, whereas a malloced block can be resized.]
 
- */
+ * End of Trivia */

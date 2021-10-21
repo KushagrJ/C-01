@@ -84,7 +84,7 @@ char * modified_fgets(char * s, int n)
 
 
 
-/* Trivia
+/* Trivia - 113.c
 
  * struct book library[size]; (and using the array-pointer similarities,
    struct book * library = (struct book *) malloc(size * sizeof (struct book));)
@@ -97,4 +97,4 @@ char * modified_fgets(char * s, int n)
    These notations are equivalent even if library is created as an array,
    instead of using malloc().
 
- */
+ * End of Trivia */

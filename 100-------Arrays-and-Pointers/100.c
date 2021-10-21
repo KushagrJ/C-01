@@ -39,7 +39,7 @@ int sum(const int * integers, int size)
 
 
 
-/* Trivia
+/* Trivia - 100.c
 
  * If an array isn't initialized (i.e. only declared), then its elements, like
    uninitialized ordinary variables, get garbage values.
@@ -251,4 +251,4 @@ int sum(const int * integers, int size)
    type 'pointer to 10-element array of int' is the address of the first byte of
    another object of data type '10-element array of int'.
 
- */
+ * End of Trivia */
