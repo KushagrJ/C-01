@@ -7,7 +7,7 @@
 #include <string.h>
 
 
-char stack[100][100];
+char string_stack[100][100];
 int index_of_top_item = -1;
 
 
@@ -53,7 +53,7 @@ int main(void)
         }
     }
 
-    printf("The equivalent infix expression is %s\n", stack[0]);
+    printf("The equivalent infix expression is %s\n", string_stack[0]);
 
     return 0;
 
@@ -62,20 +62,20 @@ int main(void)
 
 void push(char * s)
 {
-    index_of_top_item++;
-    strcpy(stack[index_of_top_item], s);
+    (index_of_top_item)++;
+    strcpy(string_stack[index_of_top_item], s);
 }
 
 
 char * peek(void)
 {
-    return stack[index_of_top_item];
+    return string_stack[index_of_top_item];
 }
 
 
 void pop(void)
 {
-    index_of_top_item--;
+    (index_of_top_item)--;
 }
 
 

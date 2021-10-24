@@ -7,7 +7,7 @@
 #include <stdlib.h>
 
 
-char operatorStack[100];
+char operator_stack[100];
 int index_of_top_item = -1;
 
 
@@ -51,23 +51,15 @@ int main(void)
             pop();
         }
 
-        else // i.e. if infix[i] is an operator.
+        else // i.e. if c is an operator.
         {
-            if (is_empty())
+            while ((!is_empty()) && (precedence(peek()) >= precedence(c)))
             {
-                push(c);
+                postfix[j++] = peek();
+                pop();
             }
 
-            else
-            {
-                while ((!is_empty()) && (precedence(peek()) >= precedence(c)))
-                {
-                    postfix[j++] = peek();
-                    pop();
-                }
-
-                push(c);
-            }
+            push(c);
         }
     }
 
@@ -88,20 +80,20 @@ int main(void)
 
 void push(char c)
 {
-    index_of_top_item++;
-    operatorStack[index_of_top_item] = c;
+    (index_of_top_item)++;
+    operator_stack[index_of_top_item] = c;
 }
 
 
 char peek(void)
 {
-    return operatorStack[index_of_top_item];
+    return operator_stack[index_of_top_item];
 }
 
 
 void pop(void)
 {
-    index_of_top_item--;
+    (index_of_top_item)--;
 }
 
 
@@ -114,9 +106,9 @@ bool is_empty(void)
 }
 
 
-int precedence(char c)
+int precedence(char operator)
 {
-    switch (c)
+    switch (operator)
     {
         case '(':
             return 0;
@@ -143,29 +135,26 @@ int precedence(char c)
  * Algorithm :-
 
    1. For (every character in the infix expression - from left to right)
-          If (the scanned character is an operand)
-              Add the scanned character to postfix.
-          Else If (the scanned character is an opening parenthesis)
-              Push the scanned character to operatorStack.
-          Else If (the scanned character is a closing parenthesis)
-              While (the top item of operatorStack is not an opening
-              parenthesis)
-                  Add the top item of operatorStack to postfix.
-                  Pop the top item of operatorStack.
-              Pop the opening parenthesis from operatorStack.
-          Else If (the scanned character is an operator)
-              If (operatorStack is empty)
-                  Push the scanned character to operatorStack.
-              Else
-                  While (operatorStack is not empty) and (the precedence of the
-                  top item of operatorStack is greater than or equal to the
-                  precedence of the scanned character)
-                      Add the top item of operatorStack to postfix.
-                      Pop the top item of operatorStack.
-                  Push the scanned character to operatorStack.
-   2. While (operatorStack is not empty)
-          Add the top item of operatorStack to postfix.
-          Pop the top item of operatorStack.
+          1(a). If (the scanned character is an operand)
+                    Add the scanned character to postfix.
+          1(b). Else If (the scanned character is an opening parenthesis)
+                    Push the opening parenthesis to operator_stack.
+          1(c). Else If (the scanned character is a closing parenthesis)
+                    1. While (the top item of operator_stack is not an opening
+                       parenthesis)
+                           1. Add the top item of operator_stack to postfix.
+                           2. Pop the top item of operator_stack.
+                    2. Pop the opening parenthesis from operator_stack.
+          1(d). Else If (the scanned character is an operator)
+                    1. While (operator_stack is not empty) and (the precedence
+                       of the top item of operator_stack is greater than or
+                       equal to the precedence of the scanned character)
+                           1. Add the top item of operator_stack to postfix.
+                           2. Pop the top item of operator_stack.
+                    2. Push the scanned character to operator_stack.
+   2. While (operator_stack is not empty)
+          1. Add the top item of operator_stack to postfix.
+          2. Pop the top item of operator_stack.
 
  * In this algorithm, the condition precedence(peek()) > precedence(c) makes the
    associativity & the order of evaluation of the operators having the same
