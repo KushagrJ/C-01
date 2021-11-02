@@ -30,29 +30,29 @@ typedef struct stack Stack;
 
 
 // Argument 1: Address of the item which is to be printed.
-void print_item(Item *);
+void print_item(Item*);
 
 // Argument 1: Address of a Stack variable.
-void create_empty_stack(struct stack *);
+void create_empty_stack(struct stack*);
 
 // Argument 1: Address of a Stack variable.
 // Argument 2: Address of the item which is to be pushed on the top.
-void push(struct stack *, Item *);
+void push(struct stack*, Item*);
 
 // Argument 1: Address of a Stack variable.
 // Argument 2: Address of the item to which the top item is to be assigned.
-void peek(struct stack *, Item *);
+void peek(struct stack*, Item*);
 
 // Argument 1: Address of a Stack variable.
-void pop(struct stack *);
+void pop(struct stack*);
 
 // Argument 1: Address of a Stack variable.
 // Return Value: Bool value depicting whether the stack is empty.
-bool is_empty(struct stack *);
+bool is_empty(struct stack*);
 
 // Argument 1: Address of a Stack variable.
 // Return Value: Bool value depicting whether the stack is full.
-bool is_full(struct stack *);
+bool is_full(struct stack*);
 
 
 int main(void)
@@ -68,7 +68,7 @@ int main(void)
          "*   1        Insert a new student's details on the top    *\n"
          "*            of the stack                                 *\n"
          "*                                                         *\n"
-         "*   2        Display the stack                            *\n"
+         "*   2        Display the stack (last in, first out)       *\n"
          "*                                                         *\n"
          "*   3        Remove the top student's details from        *\n"
          "*            the stack                                    *\n"
@@ -118,35 +118,29 @@ int main(void)
 
         else if (choice == 2)
         {
-            Stack temp_stack;
-            create_empty_stack(&temp_stack);
-
-            while (true)
-            {
-                if (is_empty(&students))
-                    break;
-
-                peek(&students, &temp_item);
-                push(&temp_stack, &temp_item);
-                pop(&students);
-            }
-
-            if (is_empty(&temp_stack))
+            if (is_empty(&students))
             {
                 printf("\nThe stack is empty!\n");
             }
 
             else
             {
-                while (true)
-                {
-                    if (is_empty(&temp_stack))
-                        break;
+                Stack temp_stack;
+                create_empty_stack(&temp_stack);
 
-                    peek(&temp_stack, &temp_item);
+                while (!is_empty(&students))
+                {
+                    peek(&students, &temp_item);
+                    pop(&students);
                     print_item(&temp_item);
-                    push(&students, &temp_item);
+                    push(&temp_stack, &temp_item);
+                }
+
+                while (!is_empty(&temp_stack))
+                {
+                    peek(&temp_stack, &temp_item);
                     pop(&temp_stack);
+                    push(&students, &temp_item);
                 }
             }
         }
@@ -193,20 +187,20 @@ int main(void)
 }
 
 
-void print_item(Item * ptr_item)
+void print_item(Item* ptr_item)
 {
     printf("\nRoll No. - %u\n", ptr_item->rollNumber);
     printf("GPA - %.1f/10\n", ptr_item->gpa);
 }
 
 
-void create_empty_stack(struct stack * ptr_stack)
+void create_empty_stack(struct stack* ptr_stack)
 {
     ptr_stack->index_of_top_item = -1;
 }
 
 
-void push(struct stack * ptr_stack, Item * ptr_item)
+void push(struct stack* ptr_stack, Item* ptr_item)
 {
     (ptr_stack->index_of_top_item)++;
     memmove((ptr_stack->stack) + (ptr_stack->index_of_top_item),
@@ -214,19 +208,19 @@ void push(struct stack * ptr_stack, Item * ptr_item)
 }
 
 
-void peek(struct stack * ptr_stack, Item * ptr_item)
+void peek(struct stack* ptr_stack, Item* ptr_item)
 {
     *ptr_item = *((ptr_stack->stack) + (ptr_stack->index_of_top_item));
 }
 
 
-void pop(struct stack * ptr_stack)
+void pop(struct stack* ptr_stack)
 {
     (ptr_stack->index_of_top_item)--;
 }
 
 
-bool is_empty(struct stack * ptr_stack)
+bool is_empty(struct stack* ptr_stack)
 {
     if (ptr_stack->index_of_top_item == -1)
         return true;
@@ -235,7 +229,7 @@ bool is_empty(struct stack * ptr_stack)
 }
 
 
-bool is_full(struct stack * ptr_stack)
+bool is_full(struct stack* ptr_stack)
 {
     if (ptr_stack->index_of_top_item == STACK_SIZE - 1)
         return true;
@@ -261,7 +255,7 @@ bool is_full(struct stack * ptr_stack)
    (5) Determining whether a stack is empty.
    (6) Determining whether a stack is full.
 
- * Displaying a stack sequentially isn't a standard stack operation.
+ * Displaying a stack isn't a standard stack operation.
 
 
  * In this program, const is avoided completely.

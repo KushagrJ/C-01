@@ -4,7 +4,7 @@
 #include "123.h"
 
 
-void print_item(Item * ptr_item, size_t index)
+void print_item(Item* ptr_item, size_t index)
 {
     printf("\n%2zu", index + 1);
     printf("     Roll No. - %u\n", ptr_item->rollNumber);
@@ -12,19 +12,19 @@ void print_item(Item * ptr_item, size_t index)
 }
 
 
-void create_empty_list(Node ** ptr_head)
+void create_empty_list(Node** ptr_head)
 {
     *ptr_head = NULL;
 }
 
 
-size_t insert_item_in_list(Node ** ptr_head, Item * ptr_item, ssize_t index)
+size_t insert_item_in_list(Node** ptr_head, Item* ptr_item, ssize_t index)
 {
 
     size_t index_of_inserted_item;
 
-    Node * current = *ptr_head;
-    Node * previous = NULL;
+    Node* current = *ptr_head;
+    Node* previous = NULL;
 
     size_t i = 0;
 
@@ -52,7 +52,7 @@ size_t insert_item_in_list(Node ** ptr_head, Item * ptr_item, ssize_t index)
 
     // new is to be inserted in between previous and current.
 
-    Node * new = (Node *) malloc(sizeof (Node));
+    Node* new = (Node*) malloc(sizeof (Node));
     if (new == NULL)
     {
         fprintf(stderr, "Unsuccessful allocation!\n");
@@ -71,11 +71,11 @@ size_t insert_item_in_list(Node ** ptr_head, Item * ptr_item, ssize_t index)
 }
 
 
-void apply_function_to_item(Node ** ptr_head, ssize_t index,
-                            void (* func)(Item *, size_t))
+void apply_function_to_item(Node** ptr_head, ssize_t index,
+                            void (* func)(Item*, size_t))
 {
 
-    Node * current = *ptr_head;
+    Node* current = *ptr_head;
 
     if (index == -1)
     {
@@ -96,11 +96,11 @@ void apply_function_to_item(Node ** ptr_head, ssize_t index,
 }
 
 
-void remove_item_from_list(Node ** ptr_head, size_t index)
+void remove_item_from_list(Node** ptr_head, size_t index)
 {
 
-    Node * current = *ptr_head;
-    Node * previous = NULL;
+    Node* current = *ptr_head;
+    Node* previous = NULL;
 
     for (size_t i = 0; i != index; i++)
     {
@@ -117,14 +117,14 @@ void remove_item_from_list(Node ** ptr_head, size_t index)
 }
 
 
-bool search_by_rollNumber_and_apply_function(Node ** ptr_head,
+bool search_by_rollNumber_and_apply_function(Node** ptr_head,
                                              unsigned rollNumber,
-                                             void (* func)(Item *, size_t))
+                                             void (* func)(Item*, size_t))
 {
 
     bool matchFound = false;
 
-    Node * current = *ptr_head;
+    Node* current = *ptr_head;
 
     for (size_t i = 0; current; i++)
     {
@@ -141,14 +141,14 @@ bool search_by_rollNumber_and_apply_function(Node ** ptr_head,
 }
 
 
-bool search_by_gpa_range_and_apply_function(Node ** ptr_head, double lower,
+bool search_by_gpa_range_and_apply_function(Node** ptr_head, double lower,
                                             double upper,
-                                            void (* func)(Item *, size_t))
+                                            void (* func)(Item*, size_t))
 {
 
     bool matchFound = false;
 
-    Node * current = *ptr_head;
+    Node* current = *ptr_head;
 
     for (size_t i = 0; current; i++)
     {
@@ -165,14 +165,14 @@ bool search_by_gpa_range_and_apply_function(Node ** ptr_head, double lower,
 }
 
 
-void bubble_sort(Node ** ptr_head, bool rollNumber)
+void bubble_sort(Node** ptr_head, bool rollNumber)
 {
 
-    Node * current;
-    Node * previous;
-    Node * next;
+    Node* current;
+    Node* previous;
+    Node* next;
 
-    Node * end_of_current_iteration = NULL;
+    Node* end_of_current_iteration = NULL;
 
     if (rollNumber)
     {
@@ -241,7 +241,7 @@ void bubble_sort(Node ** ptr_head, bool rollNumber)
 }
 
 
-size_t number_of_items_in_list(Node ** ptr_head)
+size_t number_of_items_in_list(Node** ptr_head)
 {
 
     Node * current = *ptr_head;
@@ -258,16 +258,16 @@ size_t number_of_items_in_list(Node ** ptr_head)
 }
 
 
-void empty_list(Node ** ptr_head)
+void empty_list(Node** ptr_head)
 {
 
-    Node * current = *ptr_head;
+    Node* current = *ptr_head;
 
     while (current)
     {
-        Node * next = current->next;
+        Node* temp = current->next;
         free(current);
-        current = next;
+        current = temp;
     }
 
 }

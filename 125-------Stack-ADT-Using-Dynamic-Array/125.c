@@ -23,7 +23,7 @@ typedef struct student_rollNumber_and_gpa Item;
 struct stack
 {
     size_t current_size_of_stack;
-    Item * stack;
+    Item* stack;
     ssize_t index_of_top_item;
 };
 
@@ -32,28 +32,28 @@ typedef struct stack Stack;
 
 
 // Argument 1: Address of the item which is to be printed.
-void print_item(Item *);
+void print_item(Item*);
 
 // Argument 1: Address of a Stack variable.
-void create_empty_stack(struct stack *);
+void create_empty_stack(struct stack*);
 
 // Argument 1: Address of a Stack variable.
 // Argument 2: Address of the item which is to be pushed on the top.
-void push(struct stack *, Item *);
+void push(struct stack*, Item*);
 
 // Argument 1: Address of a Stack variable.
 // Argument 2: Address of the item to which the top item is to be assigned.
-void peek(struct stack *, Item *);
+void peek(struct stack*, Item*);
 
 // Argument 1: Address of a Stack variable.
-void pop(struct stack *);
+void pop(struct stack*);
 
 // Argument 1: Address of a Stack variable.
 // Return Value: Bool value depicting whether the stack is empty.
-bool is_empty(struct stack *);
+bool is_empty(struct stack*);
 
 // Argument 1: Address of a Stack variable.
-void empty_stack(struct stack *);
+void empty_stack(struct stack*);
 
 
 int main(void)
@@ -69,7 +69,7 @@ int main(void)
          "*   1        Insert a new student's details on the top    *\n"
          "*            of the stack                                 *\n"
          "*                                                         *\n"
-         "*   2        Display the stack                            *\n"
+         "*   2        Display the stack (last in, first out)       *\n"
          "*                                                         *\n"
          "*   3        Remove the top student's details from        *\n"
          "*            the stack                                    *\n"
@@ -109,39 +109,33 @@ int main(void)
 
         else if (choice == 2)
         {
-            Stack temp_stack;
-            create_empty_stack(&temp_stack);
-
-            while (true)
-            {
-                if (is_empty(&students))
-                    break;
-
-                peek(&students, &temp_item);
-                push(&temp_stack, &temp_item);
-                pop(&students);
-            }
-
-            if (is_empty(&temp_stack))
+            if (is_empty(&students))
             {
                 printf("\nThe stack is empty!\n");
             }
 
             else
             {
-                while (true)
+                Stack temp_stack;
+                create_empty_stack(&temp_stack);
+
+                while (!is_empty(&students))
                 {
-                    if (is_empty(&temp_stack))
-                        break;
-
-                    peek(&temp_stack, &temp_item);
+                    peek(&students, &temp_item);
+                    pop(&students);
                     print_item(&temp_item);
-                    push(&students, &temp_item);
-                    pop(&temp_stack);
+                    push(&temp_stack, &temp_item);
                 }
-            }
 
-            empty_stack(&temp_stack);
+                while (!is_empty(&temp_stack))
+                {
+                    peek(&temp_stack, &temp_item);
+                    pop(&temp_stack);
+                    push(&students, &temp_item);
+                }
+
+                empty_stack(&temp_stack);
+            }
         }
 
         else if (choice == 3)
@@ -180,20 +174,20 @@ int main(void)
 }
 
 
-void print_item(Item * ptr_item)
+void print_item(Item* ptr_item)
 {
     printf("\nRoll No. - %u\n", ptr_item->rollNumber);
     printf("GPA - %.1f/10\n", ptr_item->gpa);
 }
 
 
-void create_empty_stack(struct stack * ptr_stack)
+void create_empty_stack(struct stack* ptr_stack)
 {
 
     ptr_stack->current_size_of_stack = ASSUMED_STACK_SIZE;
 
     ptr_stack->stack =
-        (Item *) malloc(ptr_stack->current_size_of_stack * sizeof (Item));
+        (Item*) malloc(ptr_stack->current_size_of_stack * sizeof (Item));
     if (ptr_stack->stack == NULL)
     {
         fprintf(stderr, "Unsuccessful allocation!\n");
@@ -205,7 +199,7 @@ void create_empty_stack(struct stack * ptr_stack)
 }
 
 
-void push(struct stack * ptr_stack, Item * ptr_item)
+void push(struct stack* ptr_stack, Item* ptr_item)
 {
 
     if (ptr_stack->index_of_top_item ==
@@ -213,8 +207,8 @@ void push(struct stack * ptr_stack, Item * ptr_item)
     {
         ptr_stack->current_size_of_stack *= 2;
 
-        Item * temp = realloc(ptr_stack->stack,
-                              ptr_stack->current_size_of_stack * sizeof (Item));
+        Item* temp = realloc(ptr_stack->stack,
+                             ptr_stack->current_size_of_stack * sizeof (Item));
         if (temp == NULL)
         {
             fprintf(stderr, "Unsuccessful allocation!\n");
@@ -230,19 +224,19 @@ void push(struct stack * ptr_stack, Item * ptr_item)
 }
 
 
-void peek(struct stack * ptr_stack, Item * ptr_item)
+void peek(struct stack* ptr_stack, Item* ptr_item)
 {
     *ptr_item = *((ptr_stack->stack) + (ptr_stack->index_of_top_item));
 }
 
 
-void pop(struct stack * ptr_stack)
+void pop(struct stack* ptr_stack)
 {
     (ptr_stack->index_of_top_item)--;
 }
 
 
-bool is_empty(struct stack * ptr_stack)
+bool is_empty(struct stack* ptr_stack)
 {
     if (ptr_stack->index_of_top_item == -1)
         return true;
@@ -251,7 +245,7 @@ bool is_empty(struct stack * ptr_stack)
 }
 
 
-void empty_stack(struct stack * ptr_stack)
+void empty_stack(struct stack* ptr_stack)
 {
     free(ptr_stack->stack);
 }
@@ -274,7 +268,7 @@ void empty_stack(struct stack * ptr_stack)
    (5) Determining whether a stack is empty.
    (6) Emptying a stack.
 
- * Displaying a stack sequentially isn't a standard stack operation.
+ * Displaying a stack isn't a standard stack operation.
 
  * Since a dynamic array is used, therefore there is no operation available to
    determine whether a stack is full, as items can be added to the stack as long

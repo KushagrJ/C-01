@@ -7,30 +7,30 @@
 
 struct book
 {
-    char * title;
-    char * author;
+    char* title;
+    char* author;
     double price;
-    struct book * next;
+    struct book* next;
 };
 
 typedef struct book Node;
 
 
-void get_string_from_user(char **, size_t);
+void get_string_from_user(char**, size_t);
 
 
 int main(void)
 {
 
-    Node * head = NULL;
-    Node * current;
-    Node * previous;
+    Node* head = NULL;
+    Node* current;
+    Node* previous;
 
     while (1)
     {
         printf("Enter a book title (empty line to stop): ");
         size_t assumed_size_of_bookTitle_array = 50;
-        char * bookTitle = (char *) malloc(assumed_size_of_bookTitle_array);
+        char* bookTitle = (char*) malloc(assumed_size_of_bookTitle_array);
         if (bookTitle == NULL)
         {
             fprintf(stderr, "Unsuccessful allocation!\n");
@@ -44,7 +44,7 @@ int main(void)
             break;
         }
 
-        current = (Node *) malloc(sizeof (Node));
+        current = (Node*) malloc(sizeof (Node));
 
         if (head == NULL)   // i.e. current points to the zeroth node.
             head = current;
@@ -56,7 +56,7 @@ int main(void)
 
         printf("Enter the author: ");
         size_t assumed_size_of_author_array = 50;
-        current->author = (char *) malloc(assumed_size_of_author_array);
+        current->author = (char*) malloc(assumed_size_of_author_array);
         if (current->author == NULL)
         {
             fprintf(stderr, "Unsuccessful allocation!\n");
@@ -89,11 +89,11 @@ int main(void)
 
     while (head)
     {
-        Node * next = head->next;
+        Node* temp = head->next;
         free(head->title);
         free(head->author);
         free(head);
-        head = next;
+        head = temp;
     }
 
     return 0;
@@ -101,7 +101,7 @@ int main(void)
 }
 
 
-void get_string_from_user(char ** ptr_string,
+void get_string_from_user(char** ptr_string,
                           size_t assumed_size_of_string_array)
 {
 
@@ -116,7 +116,7 @@ void get_string_from_user(char ** ptr_string,
         {
             assumed_size_of_string_array *= 2;
 
-            char * temp = realloc(*ptr_string, assumed_size_of_string_array);
+            char* temp = realloc(*ptr_string, assumed_size_of_string_array);
             if (temp == NULL)
             {
                 fprintf(stderr, "Unsuccessful allocation!\n");
@@ -129,7 +129,7 @@ void get_string_from_user(char ** ptr_string,
 
     size_t actual_size_of_string_array = i+1;
 
-    char * temp = realloc(*ptr_string, actual_size_of_string_array);
+    char* temp = realloc(*ptr_string, actual_size_of_string_array);
     if (temp == NULL)
     {
         fprintf(stderr, "Unsuccessful allocation!\n");
@@ -184,5 +184,69 @@ void get_string_from_user(char ** ptr_string,
  * In this program, a dynamic array is used to get string inputs of unknown
    lengths from the user, and a linked list is used for the details of an
    unknown number of different books.
+
+
+ * A simple linked list implementation :-
+
+   #include <stdio.h>
+   #include <stdlib.h>
+
+
+   struct node
+   {
+       int num;
+       struct node* next;
+   };
+
+   typedef struct node Node;
+
+
+   int main(void)
+   {
+
+       Node* head = NULL;
+
+       Node* current;
+       Node* previous;
+
+       int num;
+       printf("Enter integers (q to quit): ");
+
+       while (scanf("%d", &num) == 1)
+       {
+           current = (Node*) malloc(sizeof (Node));
+           current->num = num;
+
+           if (head == NULL)
+               head = current;
+           else
+               previous->next = current;
+           current->next = NULL;
+
+           previous = current;
+       }
+
+       if (head)
+       {
+           printf("Integers entered: ");
+           current = head;
+           while (current)
+           {
+               printf("%d ", current->num);
+               current = current->next;
+           }
+           putchar('\n');
+       }
+
+       while (head)
+       {
+           Node* temp = head->next;
+           free(head);
+           head = temp;
+       }
+
+       return 0;
+
+   }
 
  * End of Trivia */
