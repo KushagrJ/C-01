@@ -152,11 +152,11 @@ void get_string_from_user(char** ptr_string,
    to realloc() can be made to free the unwanted extra memory (not necessary to
    do in every program).
  * This method has a few limitations, such as extra work needs to be done to
-   insert and remove items in between the existing data.
+   insert and delete items in between the existing data.
    For eg., to insert an item at the 10th position, the existing memory block
    will have to be resized to accomodate one more item, and the existing 10th
    onwards items will have to be shifted using memmove() or a loop before the
-   new item can be inserted. [Similar logic for removing an item]
+   new item can be inserted. [Similar logic for deleting an item]
 
  * Another method to accomplish this task is to use a linked list.
  * In C, a linked list can be created by using dynamically allocated structures
@@ -174,19 +174,19 @@ void get_string_from_user(char** ptr_string,
    from 0 to 9 need to be accessed to finally get the location of the 10th
    structure, whereas in a dynamically allocated array of structures, accessing
    the 10th structure can be done by array indexing.
- * Inserting and removing items in between the existing data is easier in a
+ * Inserting and deleting items in between the existing data is easier in a
    linked list. After locating the item at the required index (by traversing the
    linked list using a loop and a counter to know the index number), a new item
-   can be easily inserted and an existing item can be easily removed.
+   can be easily inserted and an existing item can be easily deleted.
    [This is the main advantage of a linked list, i.e. arbitrary insertions and
-    removals can be done without reallocations]
+    deletions can be done without reallocations]
 
  * In this program, a dynamic array is used to get string inputs of unknown
-   lengths from the user, and a linked list is used for the details of an
+   lengths from the user, and a singly linked list is used for the details of an
    unknown number of different books.
 
 
- * A simple linked list implementation :-
+ * A simple singly linked list implementation :-
 
    #include <stdio.h>
    #include <stdlib.h>
@@ -248,5 +248,140 @@ void get_string_from_user(char** ptr_string,
        return 0;
 
    }
+
+
+ * A simple doubly linked list implementation :-
+
+   #include <stdio.h>
+   #include <stdlib.h>
+
+
+   struct node
+   {
+       struct node* previous;
+       int num;
+       struct node* next;
+   };
+
+   typedef struct node Node;
+
+
+   int main(void)
+   {
+
+       Node* head = NULL;
+       Node* tail = NULL;
+
+       Node* current;
+       Node* previous;
+
+       int num;
+       printf("Enter integers (q to quit): ");
+
+       while (scanf("%d", &num) == 1)
+       {
+           current = (Node*) malloc(sizeof (Node));
+           current->num = num;
+
+           if (head == NULL)
+           {
+               head = current;
+               current->previous = NULL;
+           }
+
+           else
+           {
+               previous->next = current;
+               current->previous = previous;
+           }
+
+           current->next = NULL;
+           tail = current;
+
+           previous = current;
+       }
+
+       if (head)
+       {
+           printf("Integers entered: ");
+           current = head;
+           while (current)
+           {
+               printf("%d ", current->num);
+               current = current->next;
+           }
+           putchar('\n');
+       }
+
+       if (tail)
+       {
+           printf("In reverse: ");
+           current = tail;
+           while (current)
+           {
+               printf("%d ", current->num);
+               current = current->previous;
+           }
+           putchar('\n');
+       }
+
+       while (head)
+       {
+           Node* temp = head->next;
+           free(head);
+           head = temp;
+       }
+
+       return 0;
+
+   }
+
+
+ * For arbitrary insertions and deletions :-
+
+   Cases for insertion into a singly linked list :-
+   1. The SLL is currently empty (i.e. head == NULL) and then insertion is done
+      (the head changes).
+   2. The SLL is currently non-empty (i.e. head != NULL) and then insertion is
+      done at the beginning (the head changes).
+   3. The SLL is currently non-empty (i.e. head != NULL) and then insertion is
+      done after a node (the head does not change).
+   [The same function can be used for cases 1 and 2. (Coincidence?)]
+
+   Cases for deletion from a singly linked list :-
+   1. The SLL is currently non-empty (i.e. head != NULL) and then deletion is
+      done at the beginning (the head changes).
+   2. The SLL is currently non-empty (i.e. head != NULL) and then deletion is
+      done after a node (the head does not change).
+
+   Cases for insertion into a doubly linked list :-
+   1. The DLL is currently empty (i.e. head == NULL && tail == NULL) and then
+      insertion is done (the head and the tail both change).
+   2. The DLL is currently non-empty (i.e. head != NULL && tail != NULL) and
+      then insertion is done at the beginning (the head changes but the tail
+      does not change).
+   3. The DLL is currently non-empty (i.e. head != NULL && tail != NULL) and
+      then insertion is done at the end (the tail changes but the head does not
+      change).
+   4. The DLL is currently non-empty (i.e. head != NULL && tail != NULL) and
+      then insertion is done after a node such that node != tail (neither the
+      head nor the tail changes).
+   [(head == NULL && tail != NULL) and (head != NULL && tail == NULL) are
+    impossible cases]
+
+   Cases for deletion from a doubly linked list :-
+   1. The DLL is currently non-empty (i.e. head != NULL && tail != NULL),
+      consists of only one node (i.e. head == tail) and then deletion is done
+      (the head and the tail both change).
+   2. The DLL is currently non-empty (i.e. head != NULL && tail != NULL),
+      consists of more than one nodes (i.e. head != tail) and then deletion is
+      done at the beginning (the head changes but the tail does not change).
+   3. The DLL is currently non-empty (i.e. head != NULL && tail != NULL),
+      consists of more than one nodes (i.e. head != tail) and then deletion is
+      done at the end (the tail changes but the head does not change).
+   4. The DLL is currently non-empty (i.e. head != NULL && tail != NULL),
+      consists of more than one nodes (i.e. head != tail) and then deletion is
+      done after a node such that node->next != tail (neither the head nor the
+      tail changes).
 
  * End of Trivia */
