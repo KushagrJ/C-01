@@ -209,8 +209,8 @@ int main(void)
        or the programming language.
 
 
- * In this program, a list ADT is implemented using a linked list which can
-   contain a variable number of items.
+ * In this program, a list ADT is implemented using a singly linked list which
+   can contain a variable number of items.
    Each item consists of the roll number and GPA of a student.
 
  * The following operations can be performed on such a list :-
