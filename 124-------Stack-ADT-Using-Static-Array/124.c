@@ -260,6 +260,5 @@ bool is_full(struct stack* ptr_stack)
 
  * In this program, const is avoided completely.
    Later, modify this program by using const wherever required.
-   [See 111.c's Trivia (points (a), (b) and (c)]
 
  * End of Trivia */

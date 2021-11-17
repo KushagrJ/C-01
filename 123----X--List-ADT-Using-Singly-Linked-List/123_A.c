@@ -8,36 +8,37 @@
 int main(void)
 {
 
-    puts("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n"
-         "*                                                         *\n"
-         "*   STUDENT LIST OF ROLL NUMBERS & GPAs                   *\n"
-         "*                                                         *\n"
-         "*                                                         *\n"
-         "*   Choice   Operation                                    *\n"
-         "*                                                         *\n"
-         "*   1        Insert a new student's details in the list   *\n"
-         "*                                                         *\n"
-         "*   2        Display a student's details from the list    *\n"
-         "*                                                         *\n"
-         "*   3        Remove a student's details from the list     *\n"
-         "*                                                         *\n"
-         "*   4        Search the list by Roll Number               *\n"
-         "*                                                         *\n"
-         "*   5        Search the list by GPA                       *\n"
-         "*                                                         *\n"
-         "*   6        Sort the list by Roll Number                 *\n"
-         "*                                                         *\n"
-         "*   7        Sort the list by GPA                         *\n"
-         "*                                                         *\n"
-         "*   8        Display the number of students in the list   *\n"
-         "*                                                         *\n"
-         "*   9        Exit                                         *\n"
-         "*                                                         *\n"
-         "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
+    puts("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n"
+         "*                                                           *\n"
+         "*   STUDENT LIST OF ROLL NUMBERS & GPAs                     *\n"
+         "*                                                           *\n"
+         "*                                                           *\n"
+         "*   Choice   Operation                                      *\n"
+         "*                                                           *\n"
+         "*   1        Insert a new student's details into the list   *\n"
+         "*                                                           *\n"
+         "*   2        Display a student's details from the list      *\n"
+         "*                                                           *\n"
+         "*   3        Delete a student's details from the list       *\n"
+         "*                                                           *\n"
+         "*   4        Search the list by Roll Number                 *\n"
+         "*                                                           *\n"
+         "*   5        Search the list by GPA                         *\n"
+         "*                                                           *\n"
+         "*   6        Sort the list by Roll Number                   *\n"
+         "*                                                           *\n"
+         "*   7        Sort the list by GPA                           *\n"
+         "*                                                           *\n"
+         "*   8        Display the number of students in the list     *\n"
+         "*                                                           *\n"
+         "*   9        Exit                                           *\n"
+         "*                                                           *\n"
+         "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
 
 
     List students;
     create_empty_list(&students);
+
     Item temp_item;
 
 
@@ -50,22 +51,27 @@ int main(void)
         if (choice == 1)
         {
             printf("\nEnter the student's roll number: ");
-            scanf("%u", &temp_item.rollNumber);
+            scanf("%u", &temp_item.roll_number);
 
             printf("Enter their GPA: ");
             scanf("%lf", &temp_item.gpa);
 
             size_t position;
-            printf("Enter the position in the list (0 for last position): ");
-            scanf("%zu", &position);
+            while (true)
+            {
+                printf("Enter the position (0 to insert at the end): ");
+                scanf("%zu", &position);
+                if (position <= number_of_items_in_list(&students) + 1)
+                    break;
+                printf("Invalid position!\n");
+            }
 
-            size_t index_of_inserted_item =
-                insert_item_in_list(&students, &temp_item, position - 1);
+            size_t index_where_inserted =
+                insert_item_into_list(&students, &temp_item, position - 1);
 
             printf("\nStudent details inserted successfully!\n");
 
-            apply_function_to_item(&students, index_of_inserted_item,
-                                   print_item);
+            print_items_from_list(&students, index_where_inserted);
         }
 
         else if (choice == 2)
@@ -78,10 +84,16 @@ int main(void)
             else
             {
                 size_t position;
-                printf("Enter the position in the list (0 for entire list): ");
-                scanf("%zu", &position);
+                while (true)
+                {
+                    printf("Enter the position (0 to print the entire list): ");
+                    scanf("%zu", &position);
+                    if (position <= number_of_items_in_list(&students))
+                        break;
+                    printf("Invalid position!\n");
+                }
 
-                apply_function_to_item(&students, position - 1, print_item);
+                print_items_from_list(&students, position - 1);
             }
         }
 
@@ -95,25 +107,31 @@ int main(void)
             else
             {
                 size_t position;
-                printf("Enter the position in the list: ");
-                scanf("%zu", &position);
+                while (true)
+                {
+                    printf("Enter the position: ");
+                    scanf("%zu", &position);
+                    if ((1 <= position) &&
+                            (position <= number_of_items_in_list(&students)))
+                        break;
+                    printf("Invalid position!\n");
+                }
 
-                remove_item_from_list(&students, position - 1);
+                delete_item_from_list(&students, position - 1);
 
-                printf("\nStudent details removed successfully!\n");
+                printf("\nStudent details deleted successfully!\n");
             }
         }
 
         else if (choice == 4)
         {
-            unsigned rollNumber;
+            unsigned roll_number;
 
             printf("Enter the roll number: ");
-            scanf("%u", &rollNumber);
+            scanf("%u", &roll_number);
 
             bool matchFound =
-                search_by_rollNumber_and_apply_function(&students, rollNumber,
-                                                        print_item);
+                search_list_by_roll_number_and_print(&students, roll_number);
 
             if (!(matchFound))
                 printf("\nNo match found!\n");
@@ -130,8 +148,7 @@ int main(void)
             scanf("%lf", &upper);
 
             bool matchFound =
-                search_by_gpa_range_and_apply_function(&students, lower, upper,
-                                                       print_item);
+                search_list_by_gpa_range_and_print(&students, lower, upper);
 
             if (!(matchFound))
                 printf("\nNo match found!\n");
@@ -146,7 +163,7 @@ int main(void)
 
             else
             {
-                bubble_sort(&students, true);
+                sort_list(&students, true);
                 printf("\nSorted by Roll Number successfully!\n");
             }
         }
@@ -160,14 +177,14 @@ int main(void)
 
             else
             {
-                bubble_sort(&students, false);
+                sort_list(&students, false);
                 printf("\nSorted by GPA successfully!\n");
             }
         }
 
         else if (choice == 8)
         {
-            printf("%zu\n", number_of_items_in_list(&students));
+            printf("\nNo. of items: %zu\n", number_of_items_in_list(&students));
         }
 
         else if (choice == 9)
@@ -214,16 +231,15 @@ int main(void)
    Each item consists of the roll number and GPA of a student.
 
  * The following operations can be performed on such a list :-
-   (01) Creating an empty list.
-   (02) Inserting an item at any index in a list.
-   (03) Operating on 'all items' / 'an item at any index' in a list.
-   (04) Removing an item at any index from a list.
-   (05) Searching for an item by roll number in a list and operating on it.
-   (06) Searching for an item by gpa range in a list and operating on it.
-   (07) Sorting a list by roll number.
-   (08) Sorting a list by gpa.
-   (09) Determining how many items are there in a list.
-   (10) Emptying a list.
+   (1) Creating an empty list.
+   (2) Inserting an item into a list 'at the end' / 'at any index'.
+   (3) Printing 'all items' / 'an item at any index' from a list.
+   (4) Deleting an item from a list at any index.
+   (5) Searching by roll number in a list.
+   (6) Searching by gpa range in a list.
+   (7) Sorting a list by roll number / gpa.
+   (8) Determining the number of items in a list.
+   (9) Emptying a list.
 
  * A static array (not recommended because of a fixed number of items) and a
    dynamic array (using realloc()) can also be used to implement a list ADT.
@@ -237,6 +253,7 @@ int main(void)
 
  * In this program, const is avoided completely.
    Later, modify this program by using const wherever required.
-   [See 111.c's Trivia (points (a), (b) and (c)]
+   [See 111.c's Trivia (points (a), (b) and (c) to know what kind of problems
+    might arise when using const in this program]
 
  * End of Trivia */

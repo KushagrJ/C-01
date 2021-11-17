@@ -4,53 +4,14 @@
 #include "123.h"
 
 
-void print_item(Item* ptr_item, size_t index)
-{
-    printf("\n%2zu", index + 1);
-    printf("     Roll No. - %u\n", ptr_item->rollNumber);
-    printf("       GPA - %.1f/10\n", ptr_item->gpa);
-}
-
-
 void create_empty_list(Node** ptr_head)
 {
     *ptr_head = NULL;
 }
 
 
-size_t insert_item_in_list(Node** ptr_head, Item* ptr_item, ssize_t index)
+size_t insert_item_into_list(Node** ptr_head, Item* ptr_item, ssize_t index)
 {
-
-    size_t index_of_inserted_item;
-
-    Node* current = *ptr_head;
-    Node* previous = NULL;
-
-    size_t i = 0;
-
-    if (index == -1)
-    {
-        while (current)
-        {
-            previous = current;
-            current = current->next;
-            i++;
-        }
-    }
-
-    else
-    {
-        while (i != (size_t) index)
-        {
-            previous = current;
-            current = current->next;
-            i++;
-        }
-    }
-
-    index_of_inserted_item = i;
-
-    // new is to be inserted in between previous and current.
 
     Node* new = (Node*) malloc(sizeof (Node));
     if (new == NULL)
@@ -60,19 +21,62 @@ size_t insert_item_in_list(Node** ptr_head, Item* ptr_item, ssize_t index)
     }
     memmove(&(new->item), ptr_item, sizeof (Item));
 
-    if (previous == NULL)   // i.e. new points to the zeroth node.
-        *ptr_head = new;
-    else
-        previous->next = new;
-    new->next = current;
+    size_t index_where_inserted;
 
-    return index_of_inserted_item;
+    if (*ptr_head == NULL) // i.e. index must be either -1 or 0.
+    {
+        *ptr_head = new;
+        new->next = NULL;
+
+        index_where_inserted = (size_t) 0;
+    }
+
+    else
+    {
+        if (index == -1)
+        {
+            Node* current = *ptr_head;
+
+            index_where_inserted = (size_t) 1;
+
+            while (current->next)
+            {
+                current = current->next;
+                (index_where_inserted)++;
+            }
+
+            current->next = new;
+            new->next = NULL;
+        }
+
+        else if (index == 0)
+        {
+            new->next = *ptr_head;
+            *ptr_head = new;
+
+            index_where_inserted = (size_t) 0;
+        }
+
+        else
+        {
+            Node* current = *ptr_head;
+
+            for (ssize_t i = 1; i < index; i++)
+                current = current->next;
+
+            new->next = current->next;
+            current->next = new;
+
+            index_where_inserted = (size_t) index;
+        }
+    }
+
+    return index_where_inserted;
 
 }
 
 
-void apply_function_to_item(Node** ptr_head, ssize_t index,
-                            void (* func)(Item*, size_t))
+void print_items_from_list(Node** ptr_head, ssize_t index)
 {
 
     Node* current = *ptr_head;
@@ -81,72 +85,81 @@ void apply_function_to_item(Node** ptr_head, ssize_t index,
     {
         for (size_t i = 0; current; i++)
         {
-            (*func)(&(current->item), i);
+            printf("\nStudent No. %zu\n", i+1);
+            printf("Roll No.: %u\n", current->item.roll_number);
+            printf("GPA: %.1f\n", current->item.gpa);
             current = current->next;
         }
     }
 
     else
     {
-        for (size_t i = 0; i != (size_t) index; i++)
+        ssize_t i;
+        for (i = 0; i < index; i++)
             current = current->next;
-        (*func)(&(current->item), index);
+        printf("\nStudent No. %zu\n", i+1);
+        printf("Roll No.: %u\n", current->item.roll_number);
+        printf("GPA: %.1f\n", current->item.gpa);
     }
 
 }
 
 
-void remove_item_from_list(Node** ptr_head, size_t index)
+void delete_item_from_list(Node** ptr_head, size_t index)
 {
 
-    Node* current = *ptr_head;
-    Node* previous = NULL;
-
-    for (size_t i = 0; i != index; i++)
+    if (index == 0)
     {
-        previous = current;
-        current = current->next;
+        Node* temp = *ptr_head;
+        *ptr_head = (*ptr_head)->next;
+        free(temp);
     }
 
-    if (previous == NULL)   // i.e. the zeroth node is to be removed.
-        *ptr_head = current->next;
     else
-        previous->next = current->next;
-    free(current);
+    {
+        Node* current = *ptr_head;
+
+        for (size_t i = 1; i < index; i++)
+            current = current->next;
+
+        Node* temp = current->next;
+        current->next = (current->next)->next;
+        free(temp);
+    }
 
 }
 
 
-bool search_by_rollNumber_and_apply_function(Node** ptr_head,
-                                             unsigned rollNumber,
-                                             void (* func)(Item*, size_t))
+bool search_list_by_roll_number_and_print(Node** ptr_head, unsigned roll_number)
 {
 
-    bool matchFound = false;
+    bool match_found = false;
 
     Node* current = *ptr_head;
 
     for (size_t i = 0; current; i++)
     {
-        if (rollNumber == current->item.rollNumber)
+        if (roll_number == current->item.roll_number)
         {
-            matchFound = true;
-            (*func)(&(current->item), i);
+            match_found = true;
+            printf("\nStudent No. %zu\n", i+1);
+            printf("Roll No.: %u\n", current->item.roll_number);
+            printf("GPA: %.1f\n", current->item.gpa);
         }
+
         current = current->next;
     }
 
-    return matchFound;
+    return match_found;
 
 }
 
 
-bool search_by_gpa_range_and_apply_function(Node** ptr_head, double lower,
-                                            double upper,
-                                            void (* func)(Item*, size_t))
+bool search_list_by_gpa_range_and_print(Node** ptr_head, double lower,
+                                        double upper)
 {
 
-    bool matchFound = false;
+    bool match_found = false;
 
     Node* current = *ptr_head;
 
@@ -154,18 +167,21 @@ bool search_by_gpa_range_and_apply_function(Node** ptr_head, double lower,
     {
         if ((lower < current->item.gpa) && (current->item.gpa < upper))
         {
-            matchFound = true;
-            (*func)(&(current->item), i);
+            match_found = true;
+            printf("\nStudent No. %zu\n", i+1);
+            printf("Roll No.: %u\n", current->item.roll_number);
+            printf("GPA: %.1f\n", current->item.gpa);
         }
+
         current = current->next;
     }
 
-    return matchFound;
+    return match_found;
 
 }
 
 
-void bubble_sort(Node** ptr_head, bool rollNumber)
+void sort_list(Node** ptr_head, bool sort_list_by_roll_number)
 {
 
     Node* current;
@@ -174,7 +190,7 @@ void bubble_sort(Node** ptr_head, bool rollNumber)
 
     Node* end_of_current_iteration = NULL;
 
-    if (rollNumber)
+    if (sort_list_by_roll_number)
     {
         while (end_of_current_iteration != (*ptr_head)->next)
         {
@@ -184,7 +200,7 @@ void bubble_sort(Node** ptr_head, bool rollNumber)
 
             while (next != end_of_current_iteration)
             {
-                if (current->item.rollNumber > next->item.rollNumber)
+                if (current->item.roll_number > next->item.roll_number)
                 {
                     if (previous == NULL)
                         *ptr_head = next;
@@ -244,14 +260,12 @@ void bubble_sort(Node** ptr_head, bool rollNumber)
 size_t number_of_items_in_list(Node** ptr_head)
 {
 
-    Node * current = *ptr_head;
+    Node* current = *ptr_head;
 
-    size_t i = 0;
-    while (current)
-    {
+    size_t i;
+
+    for (i = (size_t) 0; current; i++)
         current = current->next;
-        i++;
-    }
 
     return i;
 
@@ -265,9 +279,9 @@ void empty_list(Node** ptr_head)
 
     while (current)
     {
-        Node* temp = current->next;
-        free(current);
-        current = temp;
+        Node* temp = current;
+        current = current->next;
+        free(temp);
     }
 
 }

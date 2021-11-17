@@ -2,13 +2,13 @@
 #include <stdbool.h>
 
 
-struct student_rollNumber_and_gpa
+struct student_roll_number_and_gpa
 {
-    unsigned rollNumber;
+    unsigned roll_number;
     double gpa;
 };
 
-typedef struct student_rollNumber_and_gpa Item;
+typedef struct student_roll_number_and_gpa Item;
 
 
 struct node
@@ -23,55 +23,59 @@ typedef struct node Node;
 typedef Node* List;
 
 
-// Argument 1: Address of the item which is to be printed.
-// Argument 2: Index of the item which is to be printed.
-void print_item(Item*, size_t);
-
 // Argument 1: Address of a List variable.
 void create_empty_list(Node**);
 
 // Argument 1: Address of a List variable.
 // Argument 2: Address of the item which is to be inserted.
 // Argument 3: Index where the item is to be inserted.
-// Return Value: Index of the inserted item.
-// If the index is -1, then the item will be inserted at the end of the list.
+// Return Value: Index where the item is inserted.
+// If the index is -1, then the item will be inserted at the end.
 // Else, the item will be inserted at the given index.
-size_t insert_item_in_list(Node**, Item*, ssize_t);
+size_t insert_item_into_list(Node**, Item*, ssize_t);
 
 // Argument 1: Address of a List variable.
-// Argument 2: Index of the item on which the function is to be applied.
-// Argument 3: Address of the function which is to be applied to the item.
-// If the index is -1, then the function will be applied to all items sequentially.
-// Else, the function will be applied to the item at the given index.
-void apply_function_to_item(Node**, ssize_t index, void (*)(Item*, size_t));
+// Argument 2: Index of the item which is to be printed.
+// If the index is -1, then all items will be printed sequentially.
+// Else, the item at the given index will be printed.
+// Note: The items will be printed in the following manner :-
+//       Student No. 1
+//       Roll No.: 22
+//       GPA: 10.0
+// (the student number is the same as the position in the list, i.e. index + 1)
+void print_items_from_list(Node**, ssize_t);
 
 // Argument 1: Address of a List variable.
-// Argument 2: Index of the item which is to be removed.
-void remove_item_from_list(Node**, size_t index);
+// Argument 2: Index of the item which is to be deleted.
+void delete_item_from_list(Node**, size_t);
 
 // Argument 1: Address of a List variable.
-// Argument 2: rollNumber which is to be searched.
-// Argument 3: Address of the function which is to be to be applied to the
-//             matched item(s).
+// Argument 2: Roll number which is to be searched.
 // Return Value: Bool value depicting whether matches were found.
-bool search_by_rollNumber_and_apply_function(Node**, unsigned,
-                                             void (*)(Item*, size_t));
+// Note: All matched items will be printed in the following manner :-
+//       Student No. 1
+//       Roll No.: 22
+//       GPA: 10.0
+// (the student number is the same as the position in the list, i.e. index + 1)
+bool search_list_by_roll_number_and_print(Node**, unsigned);
 
 // Argument 1: Address of a List variable.
 // Argument 2: Lower limit of the gpa range which is to be searched.
 // Argument 3: Upper limit of the gpa range which is to be searched.
-// Argument 4: Address of the function which is to be to be applied to the
-//             matched item(s).
 // Return Value: Bool value depicting whether matches were found.
-bool search_by_gpa_range_and_apply_function(Node**, double, double,
-                                            void (*)(Item*, size_t));
+// Note: All matched items will be printed in the following manner :-
+//       Student No. 1
+//       Roll No.: 22
+//       GPA: 10.0
+// (the student number is the same as the position in the list, i.e. index + 1)
+bool search_list_by_gpa_range_and_print(Node**, double, double);
 
 // Argument 1: Address of a List variable.
 // Argument 2: Bool value depicting whether the list is to be sorted by
-//             rollNumber or by gpa.
-// If the bool value is true, then the list will be sorted by rollNumber.
+//             roll_number or by gpa.
+// If the bool value is true, then the list will be sorted by roll_number.
 // Else, the list will be sorted by gpa.
-void bubble_sort(Node**, bool);
+void sort_list(Node**, bool);
 
 // Argument 1: Address of a List variable.
 // Return Value: Number of items in the list.
