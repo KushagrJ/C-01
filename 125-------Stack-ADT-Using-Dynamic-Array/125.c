@@ -11,13 +11,13 @@
 #define ASSUMED_STACK_SIZE 10
 
 
-struct student_rollNumber_and_gpa
+struct student_roll_number_and_gpa
 {
-    unsigned rollNumber;
+    unsigned roll_number;
     double gpa;
 };
 
-typedef struct student_rollNumber_and_gpa Item;
+typedef struct student_roll_number_and_gpa Item;
 
 
 struct stack
@@ -95,16 +95,16 @@ int main(void)
         if (choice == 1)
         {
             printf("\nEnter the student's roll number: ");
-            scanf("%u", &temp_item.rollNumber);
+            scanf("%u", &temp_item.roll_number);
 
             printf("Enter their GPA: ");
             scanf("%lf", &temp_item.gpa);
 
             push(&students, &temp_item);
 
-            printf("\nStudent details inserted successfully!\n");
-
             print_item(&temp_item);
+
+            printf("\nStudent details inserted successfully!\n");
         }
 
         else if (choice == 2)
@@ -176,8 +176,8 @@ int main(void)
 
 void print_item(Item* ptr_item)
 {
-    printf("\nRoll No. - %u\n", ptr_item->rollNumber);
-    printf("GPA - %.1f/10\n", ptr_item->gpa);
+    printf("\nRoll No.: %u\n", ptr_item->roll_number);
+    printf("GPA: %.1f/10\n", ptr_item->gpa);
 }
 
 
