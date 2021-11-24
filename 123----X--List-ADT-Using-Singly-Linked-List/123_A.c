@@ -66,12 +66,9 @@ int main(void)
                 printf("Invalid position!\n");
             }
 
-            size_t index_where_inserted =
-                insert_item_into_list(&students, &temp_item, position - 1);
+            insert_into_list_and_print(&students, &temp_item, position - 1);
 
             printf("\nStudent details inserted successfully!\n");
-
-            print_items_from_list(&students, index_where_inserted);
         }
 
         else if (choice == 2)
@@ -93,7 +90,7 @@ int main(void)
                     printf("Invalid position!\n");
                 }
 
-                print_items_from_list(&students, position - 1);
+                print_from_list(&students, position - 1);
             }
         }
 
@@ -117,7 +114,7 @@ int main(void)
                     printf("Invalid position!\n");
                 }
 
-                delete_item_from_list(&students, position - 1);
+                delete_from_list(&students, position - 1);
 
                 printf("\nStudent details deleted successfully!\n");
             }
@@ -130,10 +127,10 @@ int main(void)
             printf("Enter the roll number: ");
             scanf("%u", &roll_number);
 
-            bool matchFound =
+            bool match_found =
                 search_list_by_roll_number_and_print(&students, roll_number);
 
-            if (!(matchFound))
+            if (!(match_found))
                 printf("\nNo match found!\n");
         }
 
@@ -147,10 +144,10 @@ int main(void)
             printf("Enter the upper limit: ");
             scanf("%lf", &upper);
 
-            bool matchFound =
+            bool match_found =
                 search_list_by_gpa_range_and_print(&students, lower, upper);
 
-            if (!(matchFound))
+            if (!(match_found))
                 printf("\nNo match found!\n");
         }
 
@@ -184,7 +181,8 @@ int main(void)
 
         else if (choice == 8)
         {
-            printf("\nNo. of items: %zu\n", number_of_items_in_list(&students));
+            printf("\nNo. of students: %zu\n",
+                   number_of_items_in_list(&students));
         }
 
         else if (choice == 9)

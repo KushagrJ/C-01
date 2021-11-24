@@ -29,10 +29,14 @@ void create_empty_list(Node**);
 // Argument 1: Address of a List variable.
 // Argument 2: Address of the item which is to be inserted.
 // Argument 3: Index where the item is to be inserted.
-// Return Value: Index where the item is inserted.
 // If the index is -1, then the item will be inserted at the end.
 // Else, the item will be inserted at the given index.
-size_t insert_item_into_list(Node**, Item*, ssize_t);
+// Note: The item will be printed in the following manner :-
+//       Student No. 1
+//       Roll No.: 22
+//       GPA: 10.0
+// (the student number is the same as the position in the list, i.e. index + 1)
+void insert_into_list_and_print(Node**, Item*, ssize_t);
 
 // Argument 1: Address of a List variable.
 // Argument 2: Index of the item which is to be printed.
@@ -43,11 +47,11 @@ size_t insert_item_into_list(Node**, Item*, ssize_t);
 //       Roll No.: 22
 //       GPA: 10.0
 // (the student number is the same as the position in the list, i.e. index + 1)
-void print_items_from_list(Node**, ssize_t);
+void print_from_list(Node**, ssize_t);
 
 // Argument 1: Address of a List variable.
 // Argument 2: Index of the item which is to be deleted.
-void delete_item_from_list(Node**, size_t);
+void delete_from_list(Node**, size_t);
 
 // Argument 1: Address of a List variable.
 // Argument 2: Roll number which is to be searched.

@@ -10,7 +10,7 @@ void create_empty_list(Node** ptr_head)
 }
 
 
-size_t insert_item_into_list(Node** ptr_head, Item* ptr_item, ssize_t index)
+void insert_into_list_and_print(Node** ptr_head, Item* ptr_item, ssize_t index)
 {
 
     Node* new = (Node*) malloc(sizeof (Node));
@@ -71,12 +71,14 @@ size_t insert_item_into_list(Node** ptr_head, Item* ptr_item, ssize_t index)
         }
     }
 
-    return index_where_inserted;
+    printf("\nStudent No. %zu\n", index_where_inserted + 1);
+    printf("Roll No.: %u\n", new->item.roll_number);
+    printf("GPA: %.1f\n", new->item.gpa);
 
 }
 
 
-void print_items_from_list(Node** ptr_head, ssize_t index)
+void print_from_list(Node** ptr_head, ssize_t index)
 {
 
     Node* current = *ptr_head;
@@ -105,7 +107,7 @@ void print_items_from_list(Node** ptr_head, ssize_t index)
 }
 
 
-void delete_item_from_list(Node** ptr_head, size_t index)
+void delete_from_list(Node** ptr_head, size_t index)
 {
 
     if (index == 0)
