@@ -341,13 +341,10 @@ void get_string_from_user(char** ptr_string,
    (Checking for out-of-range indices/positions is necessary)
 
    Cases for insertion into a singly linked list :-
-   1. The SLL is currently empty (i.e. head == NULL) and then insertion is done
-      (the head changes).
+   1. The SLL is currently empty / non-empty (i.e. head == NULL / head != NULL)
+      and then insertion is done at the beginning (the head changes).
    2. The SLL is currently non-empty (i.e. head != NULL) and then insertion is
-      done at the beginning (the head changes).
-   3. The SLL is currently non-empty (i.e. head != NULL) and then insertion is
       done after a node (the head does not change).
-   [Generally, the same function can be used for cases 1 and 2]
 
    Cases for deletion from a singly linked list :-
    1. The SLL is currently non-empty (i.e. head != NULL) and then deletion is
