@@ -352,6 +352,9 @@ void delete_after_node(Node* current)
 
 /* Trivia -
 
+ * In this program, a doubly circular linked list has been implemented
+   maintaining only a tail pointer.
+
  * In a circular linked list, maintaining a head pointer in addition to a tail
    pointer is unnecessary, as head == tail->next.
 

@@ -329,6 +329,9 @@ void delete_after_node(Node* current)
 
 /* Trivia -
 
+ * In this program, a singly circular linked list has been implemented
+   maintaining only a tail pointer.
+
  * In a (linear) linked list, the head is important, whereas in a circular
    linked list, the tail is important.
 
