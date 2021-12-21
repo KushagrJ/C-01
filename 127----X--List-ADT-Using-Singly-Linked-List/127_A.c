@@ -2,7 +2,7 @@
 // This program doesn't include input validation.
 
 #include <stdio.h>
-#include "123.h"
+#include "127.h"
 
 
 int main(void)
@@ -56,12 +56,14 @@ int main(void)
             printf("Enter their GPA: ");
             scanf("%lf", &temp_item.gpa);
 
+            size_t num_of_items = number_of_items_in_list(&students);
+
             size_t position;
             while (true)
             {
                 printf("Enter the position (0 to insert at the end): ");
                 scanf("%zu", &position);
-                if (position <= number_of_items_in_list(&students) + 1)
+                if (position <= num_of_items + 1)
                     break;
                 printf("Invalid position!\n");
             }
@@ -73,7 +75,9 @@ int main(void)
 
         else if (choice == 2)
         {
-            if (number_of_items_in_list(&students) == 0)
+            size_t num_of_items = number_of_items_in_list(&students);
+
+            if (num_of_items == 0)
             {
                 printf("\nThe list is currently empty!\n");
             }
@@ -85,7 +89,7 @@ int main(void)
                 {
                     printf("Enter the position (0 to print the entire list): ");
                     scanf("%zu", &position);
-                    if (position <= number_of_items_in_list(&students))
+                    if (position <= num_of_items)
                         break;
                     printf("Invalid position!\n");
                 }
@@ -96,7 +100,9 @@ int main(void)
 
         else if (choice == 3)
         {
-            if (number_of_items_in_list(&students) == 0)
+            size_t num_of_items = number_of_items_in_list(&students);
+
+            if (num_of_items == 0)
             {
                 printf("\nThe list is currently empty!\n");
             }
@@ -108,8 +114,7 @@ int main(void)
                 {
                     printf("Enter the position: ");
                     scanf("%zu", &position);
-                    if ((1 <= position) &&
-                            (position <= number_of_items_in_list(&students)))
+                    if ((1 <= position) && (position <= num_of_items))
                         break;
                     printf("Invalid position!\n");
                 }

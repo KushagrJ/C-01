@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "123.h"
+#include "127.h"
 
 
 void create_empty_list(Node** ptr_head)
@@ -23,52 +23,39 @@ void insert_into_list_and_print(Node** ptr_head, Item* ptr_item, ssize_t index)
 
     size_t index_where_inserted;
 
-    if (*ptr_head == NULL) // i.e. index must be either -1 or 0.
+    if ((index == 0) || ((*ptr_head == NULL) && (index == -1)))
     {
-        *ptr_head = new;
-        new->next = NULL;
-
         index_where_inserted = (size_t) 0;
+
+        new->next = *ptr_head;
+        *ptr_head = new;
     }
 
     else
     {
+        Node* current = *ptr_head;
+        index_where_inserted = (size_t) 1;
+
         if (index == -1)
         {
-            Node* current = *ptr_head;
-
-            index_where_inserted = (size_t) 1;
-
             while (current->next)
             {
                 current = current->next;
                 (index_where_inserted)++;
             }
-
-            current->next = new;
-            new->next = NULL;
-        }
-
-        else if (index == 0)
-        {
-            new->next = *ptr_head;
-            *ptr_head = new;
-
-            index_where_inserted = (size_t) 0;
         }
 
         else
         {
-            Node* current = *ptr_head;
-
-            for (ssize_t i = 1; i < index; i++)
+            while (index_where_inserted < (size_t) index)
+            {
                 current = current->next;
-
-            new->next = current->next;
-            current->next = new;
-
-            index_where_inserted = (size_t) index;
+                (index_where_inserted)++;
+            }
         }
+
+        new->next = current->next;
+        current->next = new;
     }
 
     printf("\nStudent No. %zu\n", index_where_inserted + 1);
@@ -125,7 +112,7 @@ void delete_from_list(Node** ptr_head, size_t index)
             current = current->next;
 
         Node* temp = current->next;
-        current->next = (current->next)->next;
+        current->next = temp->next;
         free(temp);
     }
 
