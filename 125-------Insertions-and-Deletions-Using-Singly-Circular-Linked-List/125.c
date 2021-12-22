@@ -229,6 +229,7 @@ int main(void)
 
 }
 
+
 int number_of_nodes(Node* tail)
 {
 
@@ -247,6 +248,7 @@ int number_of_nodes(Node* tail)
     return number_of_nodes;
 
 }
+
 
 void insert_at_end(Node** ptr_tail, int num)
 {
@@ -274,6 +276,7 @@ void insert_at_end(Node** ptr_tail, int num)
 
 }
 
+
 void insert_after_node(Node* current, int num)
 {
 
@@ -289,6 +292,7 @@ void insert_after_node(Node* current, int num)
     current->next = new;
 
 }
+
 
 void delete_at_end(Node** ptr_tail)
 {
@@ -313,6 +317,7 @@ void delete_at_end(Node** ptr_tail)
     }
 
 }
+
 
 void delete_after_node(Node* current)
 {

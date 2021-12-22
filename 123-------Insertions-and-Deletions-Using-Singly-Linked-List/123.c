@@ -231,6 +231,7 @@ int main(void)
 
 }
 
+
 int number_of_nodes(Node* head)
 {
 
@@ -245,6 +246,7 @@ int number_of_nodes(Node* head)
     return number_of_nodes;
 
 }
+
 
 void insert_at_beginning(Node** ptr_head, int num)
 {
@@ -263,6 +265,7 @@ void insert_at_beginning(Node** ptr_head, int num)
 
 }
 
+
 void insert_after_node(Node* current, int num)
 {
 
@@ -279,20 +282,26 @@ void insert_after_node(Node* current, int num)
 
 }
 
+
 void delete_at_beginning(Node** ptr_head)
 {
 
     Node* temp_node = *ptr_head;
+
     *ptr_head = (*ptr_head)->next;
+
     free(temp_node);
 
 }
+
 
 void delete_after_node(Node* current)
 {
 
     Node* temp_node = current->next;
+
     current->next = temp_node->next;
+
     free(temp_node);
 
 }
@@ -324,7 +333,7 @@ void delete_after_node(Node* current)
       done at the beginning (the head changes).
    2. The SLL is currently non-empty (i.e. head != NULL) and then deletion is
       done after a node (the head does not change).
-   [When the SLL contains only one node (i.e. head->next == NULL), then deletion
-    at end is the same as deletion at beginning]
+   [When the SLL consists of only one node (i.e. head->next == NULL), then
+    deletion at end is the same as deletion at beginning]
 
  * End of Trivia */
