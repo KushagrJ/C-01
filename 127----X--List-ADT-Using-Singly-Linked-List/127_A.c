@@ -1,6 +1,9 @@
 // C17 Standard
 // This program doesn't include input validation.
 
+// ptr_next_node, ptr_current_node, ptr_previous_node, etc. are better names
+// than next, current, previous, etc.
+
 #include <stdio.h>
 #include "127.h"
 
@@ -207,7 +210,7 @@ int main(void)
 
 
 
-/* Trivia - 123_A.c
+/* Trivia - 127_A.c
 
  * A type specifies two kinds of information: a set of properties and a set of
    operations.
@@ -254,9 +257,8 @@ int main(void)
    students being declared of the type List.
 
 
- * In this program, const is avoided completely.
+ * In this program, const is avoided completely, as hiding pointers behind
+   typedefs creates problems with const.
    Later, modify this program by using const wherever required.
-   [See 111.c's Trivia (points (a), (b) and (c) to know what kind of problems
-    might arise when using const in this program]
 
  * End of Trivia */

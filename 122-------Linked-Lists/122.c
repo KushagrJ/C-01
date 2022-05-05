@@ -1,6 +1,9 @@
 // C17 Standard
 // This program doesn't include input validation.
 
+// ptr_next_node, ptr_current_node, ptr_previous_node, etc. are better names
+// than next, current, previous, etc.
+
 #include <stdio.h>
 #include <stdlib.h>
 

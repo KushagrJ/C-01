@@ -130,7 +130,7 @@ int precedence(char operator)
 
 
 
-/* Trivia - 126.c
+/* Trivia - 130.c
 
  * Algorithm :-
 

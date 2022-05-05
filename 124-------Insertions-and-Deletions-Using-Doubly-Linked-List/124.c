@@ -1,6 +1,9 @@
 // C17 Standard
 // This program doesn't include input validation.
 
+// ptr_next_node, ptr_current_node, ptr_previous_node, etc. are better names
+// than next, current, previous, etc.
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -425,7 +428,7 @@ void delete_from_multi_node_non_empty_dll_after_node(Node* current)
 
 
 
-/* Trivia -
+/* Trivia - 124.c
 
  * In this program, a doubly linked list has been implemented maintaining a tail
    pointer in addition to a head pointer.

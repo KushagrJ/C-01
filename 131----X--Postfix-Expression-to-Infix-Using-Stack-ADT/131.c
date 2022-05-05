@@ -91,7 +91,7 @@ bool is_empty(void)
 
 
 
-/* Trivia - 127.c
+/* Trivia - 131.c
 
  * This program focusses on the demonstration of the postfix to infix expression
    conversion, and not on the stack ADT.

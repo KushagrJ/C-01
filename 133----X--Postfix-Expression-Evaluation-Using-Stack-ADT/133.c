@@ -105,7 +105,7 @@ int result(int operand_1, int operand_2, char operator)
 
 
 
-/* Trivia -
+/* Trivia - 133.c
 
  * This program focusses on the demonstration of the postfix expression
    evaluation, and not on the stack ADT.

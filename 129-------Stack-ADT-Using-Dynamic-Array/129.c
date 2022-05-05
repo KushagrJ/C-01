@@ -254,7 +254,7 @@ void empty_stack(struct stack* ptr_stack)
 
 
 
-/* Trivia - 125.c
+/* Trivia - 129.c
 
  * In this program, a stack ADT is implemented using a dynamic array which can
    contain a variable number of items.
@@ -273,8 +273,5 @@ void empty_stack(struct stack* ptr_stack)
  * Since a dynamic array is used, therefore there is no operation available to
    determine whether a stack is full, as items can be added to the stack as long
    as the computer doesn't run out of memory.
-
-
- * In this program, const is avoided completely.
 
  * End of Trivia */

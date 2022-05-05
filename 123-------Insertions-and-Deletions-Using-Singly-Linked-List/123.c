@@ -1,6 +1,9 @@
 // C17 Standard
 // This program doesn't include input validation.
 
+// ptr_next_node, ptr_current_node, ptr_previous_node, etc. are better names
+// than next, current, previous, etc.
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -310,7 +313,7 @@ void delete_after_node(Node* current)
 
 
 
-/* Trivia -
+/* Trivia - 123.c
 
  * In this program, a singly linked list has been implemented maintaining only
    a head pointer.

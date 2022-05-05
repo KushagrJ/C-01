@@ -256,7 +256,7 @@ bool is_full(struct queue* ptr_queue)
 
 
 
-/* Trivia -
+/* Trivia - 137.c
 
  * In this program, a queue ADT is implemented using a static array which can
    contain a fixed number of items.
@@ -285,8 +285,5 @@ bool is_full(struct queue* ptr_queue)
  * Note that the procedure used in this program to display a queue re-creates
    the queue, thereby storing the items starting with index 0, no matter their
    previous indices.
-
-
- * In this program, const is avoided completely.
 
  * End of Trivia */
