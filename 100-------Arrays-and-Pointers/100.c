@@ -180,19 +180,6 @@ int sum(const int * integers, int size)
    int * (i.e. when arr is just an array), then arr is simply the name of the
    space set aside for 5 contiguous integers.
    In this context, an array is different from a pointer.
- * Another difference between arrays and pointers :-
-   When the compiler sees arr[3] (no implicit conversion of array), it emits
-   code to start at the location "arr", move three past it, and fetch the item
-   there.
-   When the compiler sees p[3] (i.e. a pointer), it emits code to start at the
-   location "p", fetch the pointer value there, add three to the pointer, and
-   finally fetch the item pointed to.
-   Although the net effect is the same in both the cases, the compiler gets
-   there differently.
-
- * In statements like arr[3] = 25;, arr[x] < y;, etc., there is no implicit
-   conversion as the data type of arr[3] is int (if arr is an array of
-   integers). Thus, arr is an array, but arr[3] is not.
 
 
  * In most cases, a variable name (which is an identifier) is an abstraction
