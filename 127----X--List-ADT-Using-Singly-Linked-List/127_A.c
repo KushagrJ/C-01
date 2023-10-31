@@ -219,7 +219,7 @@ int main(void)
    sign of an int value, adding two int values, etc.
 
  * Defining a new type involves three steps :-
-   (1) Providing an abstract desciption of the type's properties and of the
+   (1) Providing an abstract description of the type's properties and of the
        operations that can be performed on the type.
        This description shouldn't be tied to any particular implementation or
        programming language.
